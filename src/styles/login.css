@@ -12,7 +12,7 @@ header {
   grid-area: header;
 }
 
-.image {
+.image-Login {
   width: 167px;
   height: 59px;
 }
@@ -32,7 +32,7 @@ header {
 
 }
 
-.logo{
+.logo-Login{
   height: 40px;
   align-items: center;
   justify-content: center;

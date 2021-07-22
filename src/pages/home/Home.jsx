@@ -2,7 +2,7 @@ import React from 'react';
 import alterstateLogo from '../../assets/alterstate_logo.png'
 
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import { alpha, makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -17,10 +17,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import SearchIcon from '@material-ui/icons/Search';
+import { InputBase } from '@material-ui/core';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   list: {
     width: 250,
   },
@@ -40,14 +42,55 @@ const useStyles = makeStyles({
   img: {
     width: "120px",
     height: "30px",
-    marginTop: "6px",
     alignItems: "center",
     justifyContent: "center",
-  }
-});
+    display: "flex"
+  },
+
+  search: {
+    position: 'relative',
+    borderRadius: 5,
+    backgroundColor: alpha('#D6D6D6', 0.3),
+    '&:hover': {
+      backgroundColor: alpha('#D6D6D6', 0.5),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(3),
+      width: 'auto',
+    },
+  },
+
+  searchIcon: {
+    color: 'secondary',
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 10),
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+}));
 
 export default function TemporaryDrawer() {
   const classes = useStyles();
+  const theme = useTheme();
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -94,14 +137,31 @@ export default function TemporaryDrawer() {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" noWrap>
-                <img src={alterstateLogo} className={classes.img}/>
+                <img src={alterstateLogo} className={classes.img} />
               </Typography>
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder="Buscar membros"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+              </div>
             </Toolbar>
           </AppBar>
           <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
             <List className={classes.list}>
-              <p>AlterState</p> 
+              <h2 style={{
+                display: "flex",
+                justifyContent: "center",
+
+              }}>Criar Sala </h2>
               <Divider />
               {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                 <ListItem button key={text}>
@@ -115,7 +175,8 @@ export default function TemporaryDrawer() {
               <ListItem
                 style={{
                   display: "flex",
-                  justifyContent: "center"
+                  justifyContent: "center",
+                  fontFamily: "Poppins",
                 }}
               >
                 <Button>Logout</Button>

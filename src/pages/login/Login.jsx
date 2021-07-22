@@ -16,10 +16,10 @@ function Login() {
   return (
     <div className="container">
       <header>
-        <img src={alterdataLogo} className="image"/>
+        <img src={alterdataLogo} className="image-Login"/>
       </header>
       <div className="box">
-        <img src={alterstateLogo} className="logo" />
+        <img src={alterstateLogo} className="logo-Login" />
         <form className="form" onClick={handleSubmit}>
           <Paper className="input" ><TextField
             className="field"
