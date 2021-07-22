@@ -3,8 +3,6 @@ import alterdataLogo from '../../assets/alterdata-logo.svg'
 import alterstateLogo from '../../assets/alterstate_logo.png'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import Alert from '@material-ui/lab/Alert';
-import AlertTitle from '@material-ui/lab/AlertTitle';
 import { Link } from 'react-router-dom';
 
 import '../../styles/login.css'
@@ -18,7 +16,7 @@ function Login() {
   return (
     <div className="container">
       <header>
-        <img src={alterdataLogo} />
+        <img src={alterdataLogo} className="image"/>
       </header>
       <div className="box">
         <img src={alterstateLogo} className="logo" />
