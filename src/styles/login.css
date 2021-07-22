@@ -28,6 +28,7 @@ img {
   background: #FFF;
   transition: 1s;
   box-shadow: 0px 3px 0.5px 0.5px rgba(22, 80, 145, 0.3);
+  position: fixed;
 
 }
 
@@ -51,6 +52,10 @@ img {
 
 .field {
   width: 230px;
+}
+
+.link{
+  text-decoration: none;
 }
 
 .button {

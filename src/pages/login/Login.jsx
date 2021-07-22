@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Alert from '@material-ui/lab/Alert';
 import AlertTitle from '@material-ui/lab/AlertTitle';
+import { Link } from 'react-router-dom';
 
 import '../../styles/login.css'
 
@@ -12,41 +13,38 @@ import '../../styles/login.css'
 function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
-    <Alert severity="success">
-    <AlertTitle>Success</AlertTitle>
-      This is a success alert — <strong>check it out!</strong>
-    </Alert>
   }
 
   return (
     <div className="container">
       <header>
-        <img src={alterdataLogo}/>
+        <img src={alterdataLogo} />
       </header>
       <div className="box">
         <img src={alterstateLogo} className="logo" />
         <form className="form" onClick={handleSubmit}>
-          <Paper className="input" ><TextField 
+          <Paper className="input" ><TextField
             className="field"
             name="Login"
             label="Login"
-            variant="outlined" 
+            variant="outlined"
             size="small"
           /></Paper>
 
-          <Paper className="input"><TextField 
+          <Paper className="input"><TextField
             className="field"
             id="standard-password-input"
             name="Password"
             label="Password"
-            variant="outlined" 
+            variant="outlined"
             type="password"
             size="small"
           /></Paper>
-
-          <button className="button" type="submit" >
-            Entrar
-          </button>
+          <Link to="/home" className="link">
+            <button className="button" type="submit" >
+              Entrar
+            </button>
+          </Link>
         </form>
       </div>
     </div>
