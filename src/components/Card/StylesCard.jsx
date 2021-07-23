@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Membros = styled.div`
 
+    flex: 1;
     background-color: #D6D6D6;
     margin-top: 2px;
     width: 250px;
@@ -9,19 +10,24 @@ export const Membros = styled.div`
     margin-bottom: 40px;
     margin-top: 0.3rem;
     padding-top: 0.2px;
+    padding-left: 0px;
+    padding-right: 0px;
     padding-bottom: 5px;
     border-radius: 3px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    box-shadow: 0px 0.5px 0.5px 0.5px rgba(00, 00, 25, 0.3);
 
-    h1{
-      text-align: center;
+    .cards{
+      align-items: center;
+      justify-content: center;
     }
 
     .info{
     display: block;
     text-align: center;
-    align-items: center;
-    justify-content: center;
-    max-width:250px;
+    max-width:260px;
     height: 260px;
 
       .avatar{
@@ -30,8 +36,13 @@ export const Membros = styled.div`
       justify-content: center;
       background-color: #094B89;
       clip-path: circle();
-      padding: 1.5rem;
+      padding: 0.6rem;
 
+      }
+      
+      .user{
+        width: 50px;
+        height: 30px,
       }
 
       .nome{

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import alterstateLogo from '../../assets/alterstate_logo.png'
 import Card from '../../components/Card/Card'
+import equipe from '../../assets/equipe.svg'
 
 import clsx from 'clsx';
-import { alpha, makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -16,10 +17,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import SearchIcon from '@material-ui/icons/Search';
-import { InputBase } from '@material-ui/core';
+import Icon from '@material-ui/core/Icon';
 
 const drawerWidth = 240;
 
@@ -32,6 +30,12 @@ const useStyles = makeStyles((theme) => ({
     width: 'auto',
   },
 
+  equipes: {
+    marginBottom: 5, 
+    marginTop: 5, 
+    backgroundColor: "#094B89"
+  },
+
   logoutContainer: {
     marginTop: "auto",
     paddingBottom: "0",
@@ -41,13 +45,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   title: {
-    width: "115px",
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
     fontSize: "25px",
     color: "#094B89",
-    textShadow: "0 0 2.2px #000"
   },
 
   img: {
@@ -56,7 +58,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
-    marginLeft: 60
+    marginLeft: 68,
+    paddingBottom: 10,
+  },
+
+  createSquad: {
+    alignItems: "center",
+    flex: 1,
+    display: "flex",
+    marginLeft: 10,
   },
 
   input: {
@@ -76,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: "center",
     padding: theme.spacing(3),
   },
 
@@ -100,24 +111,13 @@ export default function Appbar() {
     setState({ ...state, [anchor]: open });
   };
 
-  const list = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-    </div>
-  );
-
   return (
     <div className={classes.root}>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <AppBar
             position="fixed"
+            elevation={2}
           >
             <Toolbar>
               <IconButton
@@ -135,30 +135,24 @@ export default function Appbar() {
               </Typography>
             </Toolbar>
           </AppBar>
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} >
             <List className={classes.list}>
-              
               <img src={alterstateLogo} className={classes.img} />
               <Divider />
-              <h2>Criar sala</h2>
+              <h3 className={classes.createSquad}>
+                Criar sala 
+                <Icon color="secondary" style={{ fontSize: 28, marginLeft: 120, }}>
+                  add_circle
+                </Icon>
+              </h3>
+              
               <Divider />
-              {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon >{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              {['Pack', 'NFStock', 'Bimer', 'Shop'].map((text, index) => (
+                <ListItem button key={text} className={classes.equipes}>
+                  <ListItemIcon >{index % 2 === 0 ? <img src={equipe} /> : <img src={equipe} />}</ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItem>
               ))}
-            </List>
-            <List className={classes.logoutContainer}>
-              <Divider />
-              <ListItem
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <Button>Logout</Button>
-              </ListItem>
             </List>
             <Divider />
           </Drawer>
