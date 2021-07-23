@@ -17,7 +17,12 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import SearchIcon from '@material-ui/icons/Search';
+import { InputBase } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
+import '../../fonts/Fonts.css';
 
 const drawerWidth = 240;
 
@@ -93,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(0),
-  }
+  },
 }));
 
 export default function Appbar() {
