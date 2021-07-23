@@ -1,0 +1,71 @@
+.icone{
+   border-radius: 50%;
+}
+
+.usuario{
+  font-size: medium;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: -15px;
+}
+
+.editarUsuario{
+  height:17px;
+  width: 17px;
+}
+
+.cargo{
+  font-size: small;
+  align-content: center;
+  justify-content: center;
+}
+
+.editarCargo{
+  height:13px;
+  width: 13px;
+}
+
+.status{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.confirmarStatus{
+  margin-left: 5px;
+  height:20px;
+  width: 20px;
+
+}
+
+.deslogar{
+  height:20px;
+  width: 20px;
+  justify-self: flex-end;
+  margin-left: 255px;
+  margin-top:5px;
+}
+
+.fechar{
+  height:20px;
+  width: 20px;
+  margin-right: 200px;
+  margin-top:5px;
+}
+
+.button {
+  margin-top: 16px;
+  width: 170px;
+  height: 30px;
+  border-radius: 8px;
+  background: #094B89;
+  color: #FFF;
+  font-size: 15px;
+  margin-left: -13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 0;
+  transition: filter 0.2s;
+}
