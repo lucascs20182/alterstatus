@@ -20,6 +20,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import SearchIcon from '@material-ui/icons/Search';
 import { InputBase } from '@material-ui/core';
+import '../../fonts/Fonts.css';
 
 const drawerWidth = 240;
 
@@ -47,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     fontSize: "25px",
     color: "#094B89",
-    textShadow: "0 0 2.2px #000"
   },
 
   img: {
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(0),
-  }
+  },
 }));
 
 export default function Appbar() {
