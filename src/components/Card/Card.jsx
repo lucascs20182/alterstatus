@@ -19,14 +19,15 @@ const useStyles = makeStyles((theme) => ({
   }, 
 
   root: {
-    marginTop: 10,
+    display: 'table',
     textAlign: "center",
-    margin: 20,
+    marginRight: 10,
+    marginTop: 10,
     backgroundColor: "#D6D6D6",
     width: "170px",
     height: "180px",
     borderRadius: "2px",
-    boxShadow: "0px 0.5px 0.5px 0.5px rgba(00, 00, 25, 0.3)",
+    boxShadow: "0px 1px 1px 1px rgba(00, 00, 25, 0.3)",
   },
 
   info: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
   avatar: {
     backgroundColor: "#094B89",
-    clipPath: "circle()",
+    clipPath: 'circle(26%)',
     padding: "7px",
     margin: 10,
   },
@@ -52,23 +53,23 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 2,
     marginTop: 2,
     wordBreak: "break-word",
-    fontSize: 15,
+    fontSize: 13,
   },
 
   cargo: {
     textAlign: "center",
     marginBottom: 2,
-    marginTop: 2,
+    marginTop: 3,
     wordBreak: "break-word",
-    fontSize: 14,
+    fontSize: 13,
   },
 
   status: {
     textAlign: "center",
     marginBottom: 2,
-    marginTop: 2,
+    marginTop: 3,
     wordBreak: "break-word",
-    fontSize: 14,
+    fontSize: 13,
   },
 
   Button: {
@@ -97,7 +98,7 @@ export default function CardMembros(props) {
             }}
           />
         </IconButton>
-        Projeto-aplicado-Alterdata-grupo-4</h3>
+        Projeto-aplicado-Alterdata-grupo-4-Front-Back</h3>
       <div className={classes.container}>
         <div className={classes.root}>
           <div className={classes.info}>
@@ -105,130 +106,64 @@ export default function CardMembros(props) {
               <ButtonCard/>
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
+            <h3 className={classes.nome}>André Ricardo Adami </h3>
+            <p className={classes.cargo}>Jogador de CS</p>
+            <p className={classes.status}>Usando Hack</p>
           </div>
         </div>
         <div className={classes.root}>
           <div className={classes.info}>
             <div>
-              <ButtonCard />
+              <ButtonCard/>
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
+            <h3 className={classes.nome}>Sthephanie Soares Nogueira</h3>
+            <p className={classes.cargo}>Estranha</p>
+            <p className={classes.status}>Jogando zeldinha</p>
           </div>
         </div>
         <div className={classes.root}>
           <div className={classes.info}>
             <div>
-              <ButtonCard />
+              <ButtonCard/>
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
+            <h3 className={classes.nome}>Gabriel Esteves</h3>
+            <p className={classes.cargo}> Não está mais</p>
+            <p className={classes.status}>Mexendo no Front</p>
           </div>
         </div>
         <div className={classes.root}>
           <div className={classes.info}>
             <div>
-              <ButtonCard />
+              <ButtonCard/>
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
+            <h3 className={classes.nome}>Larissa</h3>
+            <p className={classes.cargo}>Saiu</p>
+            <p className={classes.status}>Foi beber vinho no Soberbo</p>
           </div>
         </div>
         <div className={classes.root}>
           <div className={classes.info}>
             <div>
-              <ButtonCard />
+              <ButtonCard/>
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
+            <h3 className={classes.nome}>Lucas Cruz</h3>
+            <p className={classes.cargo}>Discord</p>
+            <p className={classes.status}>Falando de Squad</p>
           </div>
         </div>
         <div className={classes.root}>
           <div className={classes.info}>
             <div>
-              <ButtonCard />
+              <ButtonCard/>
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
+            <h3 className={classes.nome}>Bernard Muniz</h3>
+            <p className={classes.cargo}>Discord</p>
+            <p className={classes.status}>Indignado com as regras de negócio</p>
           </div>
         </div>
       </div>

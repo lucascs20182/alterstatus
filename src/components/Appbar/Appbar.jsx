@@ -1,31 +1,29 @@
 import React from 'react';
+import CardMembros from '../Card/Card'
 import alterstateLogo from '../../assets/alterstate_logo.png'
 
-import GroupIcon from '@material-ui/icons/Group';
 import { alpha, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import List from '@material-ui/core/List';
-import Button from '@material-ui/core/Button';
-import Drawer from '@material-ui/core/Drawer';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Divider from '@material-ui/core/Divider';
-import Icon from '@material-ui/core/Icon';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import CardMembros from '../Card/Card'
+import MenuItem from '@material-ui/core/MenuItem';
+import GroupIcon from '@material-ui/icons/Group';
+import Divider from '@material-ui/core/Divider';
+import Toolbar from '@material-ui/core/Toolbar';
+import MenuIcon from '@material-ui/icons/Menu';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Badge from '@material-ui/core/Badge';
+import Menu from '@material-ui/core/Menu';
+import List from '@material-ui/core/List';
+import Icon from '@material-ui/core/Icon';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -75,7 +73,11 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>Perfil</MenuItem>
-      <MenuItem onClick={handleMenuClose} style={{ width: "100px" }}>Sair</MenuItem>
+      <Link to="/" className="link" style={{color: "#000"}}>
+        <MenuItem onClick={handleMenuClose} style={{ width: "100px", textDecoration: "none" }}>
+          Sair
+        </MenuItem>
+      </Link>
     </Menu>
   );
 
@@ -151,7 +153,7 @@ export default function PrimarySearchAppBar() {
               </h3>
 
               <Divider />
-              {['Pack', 'NFStock', 'Bimer', 'Shop'].map((text, index) => (
+              {['Pack', 'NFStock', 'Bimer', 'Shop'].map((text) => (
                 <ListItem button key={text} className={classes.equipes} >
                   <ListItemIcon className={classes.iconSquad}><GroupIcon/></ListItemIcon>
                   <ListItemText primary={text} />
@@ -259,6 +261,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: alpha('#094B89', 0.90),
       color: alpha('#FFF', 1)
     },
+    left: 10,
+    width: 230,
   },
 
   iconSquad: {
