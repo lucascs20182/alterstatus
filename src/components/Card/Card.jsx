@@ -12,7 +12,7 @@ export default function CardMembros(props) {
       <h1 className="title">Squad aleatório</h1>
       <Membros >
         <div className="info">
-          <h3 className="avatar"><img className="user" src={user} /></h3>
+          <h3 className="avatar"><img className="user" src={user}/></h3>
           <h2 className="nome">nome</h2>
           <h3 className="cargo">cargo</h3>
           <h3 className="status">status</h3>
@@ -21,3 +21,4 @@ export default function CardMembros(props) {
     </div>
   );
 }
+

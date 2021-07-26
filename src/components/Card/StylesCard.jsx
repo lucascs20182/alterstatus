@@ -2,7 +2,12 @@ import styled from 'styled-components';
 
 export const Membros = styled.div`
 
-    flex: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
     background-color: #D6D6D6;
     margin-top: 2px;
     width: 250px;
@@ -19,9 +24,13 @@ export const Membros = styled.div`
     display: flex;
     box-shadow: 0px 0.5px 0.5px 0.5px rgba(00, 00, 25, 0.3);
 
-    .cards{
-      align-items: center;
+    h1{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
       justify-content: center;
+      align-items: center;
+      margin: auto;
     }
 
     .info{
