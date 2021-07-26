@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-import usuarioService from '../services/usuario-api'
+import usuarioService from '../services/usuario-api';
+
+import loadingImg from '../assets/loading.gif';
 
 import './anyStyle.css';
 
@@ -11,77 +13,86 @@ const Home = () => {
     const [nome, setNome] = useState('');
     const [status, setStatus] = useState('');
 
-    // const cadastrarUsuarioComFoto = () => {
+    const [loading, setLoading] = useState(false);
 
-    // }
+    const cadastrarUsuarioComFoto = (usuario) => {
+        setLoading(true);
 
-    // const cadastrarUsuarioSemFoto = () => {
-        
-    // }
+        const usuarioJSON = JSON.stringify(usuario);
+        const formData = new FormData();
+
+        const blob = new Blob([usuarioJSON], {
+            type: 'application/json'
+        })
+
+        formData.append('file', imagem);
+        formData.append('usuario', blob);
+
+        console.log('usuarioJSON' + usuarioJSON);
+
+        usuarioService.cadastrar(formData)
+            .then((resposta) => {
+                console.log(resposta);
+                alert("Usuário cadastrado!");
+                setLoading(false);
+                window.open("/login", "_self");
+            })
+            .catch((erro) => {
+                alert("Erro! Verifique o console.");
+                console.error(erro);
+            });
+    }
+
+    const cadastrarUsuarioSemFoto = (usuario) => {
+        setLoading(true);
+
+        console.log('usuario' + usuario);
+
+        usuarioService.cadastrarSemFoto(usuario)
+            .then((resposta) => {
+                console.log(resposta);
+                alert("Usuário cadastrado!");
+                setLoading(false);
+                window.open("/login", "_self");
+            })
+            .catch((erro) => {
+                alert("Erro! Verifique o console.");
+                console.error(erro);
+
+                return;
+            });
+    }
 
     const cadastrarUsuario = (e) => {
         e.preventDefault();
 
         const usuario = {}
 
-        if(username != "") {
+        if (username != "") {
             usuario.username = username;
         }
 
-        if(senha != "") {
+        if (senha != "") {
             usuario.senha = senha;
         }
 
-        if(nome != "") {
+        if (nome != "") {
             usuario.nome = nome;
         }
 
-        if(status != "") {
+        if (status != "") {
             usuario.status = status;
         }
 
-        if(imagem == null) {
-            console.log('usuario' + usuario);
+        if (imagem == null) {
+            cadastrarUsuarioSemFoto(usuario);
 
-            usuarioService.cadastrarSemFoto(usuario)
-                .then((resposta) => {
-                    console.log(resposta);
-                    alert("Usuário cadastrado!");
-                    
-                    window.open("/login", "_self");
-                })
-                .catch((erro) => {
-                    alert("Erro! Verifique o console.");
-                    console.error(erro);
-
-                    return;
-                });
-        } else {
-            const usuarioJSON = JSON.stringify(usuario);
-            const formData = new FormData();
-
-            const blob = new Blob([usuarioJSON], {
-                type: 'application/json'
-            })
-
-            formData.append('file', imagem);
-            formData.append('usuario', blob);
-
-            console.log('usuarioJSON' + usuarioJSON);
-
-            usuarioService.cadastrar(formData)
-                .then((resposta) => {
-                    console.log(resposta);
-                    alert("Usuário cadastrado!");
-                    window.open("/login", "_self");
-                })
-                .catch((erro) => {
-                    alert("Erro! Verifique o console.");
-                    console.error(erro);
-                });
+            return;
         }
+        
+        cadastrarUsuarioComFoto(usuario);        
     };
-    
+
     return (
         <form>
 
@@ -91,7 +102,7 @@ const Home = () => {
                     id="file"
                     type="file"
                     onChange={(e) => setImagem(e.target.files[0])}
-                />                
+                />
             </div>
 
             <div>
@@ -134,7 +145,11 @@ const Home = () => {
                 />
             </div>
 
-            <button onClick={cadastrarUsuario}>Criar usuário</button>
+            { loading? 
+                <img src={loadingImg} width={100} style={{alignSelf: 'center'}} alt="loading..." />
+            :
+                <button onClick={cadastrarUsuario}>Criar usuário</button>
+            }
         </form>
     );
 };
