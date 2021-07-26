@@ -27,6 +27,7 @@ public class CargoController {
 	@Autowired
 	CargoService servicoCargo;
 
+	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping
 	public List<Cargo> obterTodos() {
 		return servicoCargo.obterTodos();

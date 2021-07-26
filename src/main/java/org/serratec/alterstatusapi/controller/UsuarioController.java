@@ -93,11 +93,22 @@ public class UsuarioController {
 		return new ResponseEntity<>(imagem.getData(), header, HttpStatus.OK);
 	}
 
+//	/signup?picture=no
+// 	multipart opcional?
 	@PostMapping("/signup")
 	public ResponseEntity<String> create(@RequestParam MultipartFile file, @RequestPart UsuarioDTORequest usuario)
 			throws ResourceNotFoundException, IOException {
 
 		servicoUsuario.create(usuario, file);
+
+		return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.CREATED);
+	}
+
+	@PostMapping("/signup/nopic")
+	public ResponseEntity<String> create(@RequestBody UsuarioDTORequest usuario)
+			throws ResourceNotFoundException, IOException {
+
+		servicoUsuario.create(usuario);
 
 		return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.CREATED);
 	}

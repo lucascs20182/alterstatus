@@ -111,6 +111,24 @@ public class UsuarioService {
 
 		return clienteRepository.save(getImagem(entity, false));
 	}
+	
+	public Usuario create(UsuarioDTORequest dto) throws ResourceNotFoundException {
+		Usuario entity = clienteMapper.toEntity(dto);
+
+		entity.setDataCadastro(LocalDate.now());
+
+		if (dto.getStatus() == null) {
+
+			entity.setStatus("Disponível");
+
+		}
+
+		entity.setSenha(bCrypt.encode(dto.getSenha()));
+
+		entity = clienteRepository.save(entity);
+
+		return clienteRepository.save(getImagem(entity, true));
+	}
 
 	public Usuario update(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException {
