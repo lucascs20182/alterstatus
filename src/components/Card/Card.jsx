@@ -8,13 +8,20 @@ import IconButton from '@material-ui/core/IconButton';
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexDirection: "row",
+  container: {
+    flex: 1,
+    display: 'flex',
     flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
     margin: "auto",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "90%",
+  }, 
+
+  root: {
+    marginTop: 10,
+    textAlign: "center",
+    margin: 20,
     backgroundColor: "#D6D6D6",
     width: "170px",
     height: "180px",
@@ -23,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   info: {
-    display: "block",
+    display: 'block',
     maxWidth: "200px",
     height: "200px",
   },
@@ -91,17 +98,142 @@ export default function CardMembros(props) {
           />
         </IconButton>
         Projeto-aplicado-Alterdata-grupo-4</h3>
-
-      <div className={classes.root}>
-        <div>
-          <ButtonCard/>
-          <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+      <div className={classes.container}>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard/>
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
         </div>
-        <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
-        <p className={classes.cargo}>cargo</p>
-        <p className={classes.status}>status</p>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard />
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
+        </div>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard />
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
+        </div>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard />
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
+        </div>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard />
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
+        </div>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard />
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
+        </div>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard />
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
+        </div>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard />
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
+        </div>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard />
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
+        </div>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard />
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
+        </div>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard />
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
+        </div>
+        <div className={classes.root}>
+          <div className={classes.info}>
+            <div>
+              <ButtonCard />
+              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+            </div>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <p className={classes.cargo}>cargo</p>
+            <p className={classes.status}>status</p>
+          </div>
+        </div>
       </div>
     </div>
+
   );
 }
 

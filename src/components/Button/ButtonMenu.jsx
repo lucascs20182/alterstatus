@@ -8,8 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles({
-  root: {
-    width: 310,
+  pontinhos: { 
     marginBottom: -40
   },
 });
@@ -36,10 +35,10 @@ export default function PositionedTooltips() {
   };
 
   return (
-    <div className={classes.root}>
-      <Grid container justifyContent="center">
+    <div className={classes.pontinhos}>
+      <Grid container justifyContent="flex-end">
         <Grid item>
-          <Tooltip title="menu" placement="top-end">
+          <Tooltip title="menu">
             <IconButton
               aria-label="more"
               aria-controls="long-menu"
