@@ -1,7 +1,7 @@
 import React from 'react';
 import alterstateLogo from '../../assets/alterstate_logo.png'
-import equipe from '../../assets/equipe.svg'
 
+import GroupIcon from '@material-ui/icons/Group';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -97,7 +97,7 @@ export default function PrimarySearchAppBar() {
                 <MenuIcon />
               </IconButton>
               <Typography className={classes.title}>
-                AlterState
+                Alterstate
               </Typography>
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
@@ -152,8 +152,8 @@ export default function PrimarySearchAppBar() {
 
               <Divider />
               {['Pack', 'NFStock', 'Bimer', 'Shop'].map((text, index) => (
-                <ListItem button key={text} className={classes.equipes}>
-                  <ListItemIcon >{index % 2 === 0 ? <img src={equipe} /> : <img src={equipe} />}</ListItemIcon>
+                <ListItem button key={text} className={classes.equipes} >
+                  <ListItemIcon className={classes.iconSquad}><GroupIcon/></ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItem>
               ))}
@@ -253,7 +253,17 @@ const useStyles = makeStyles((theme) => ({
   equipes: {
     marginBottom: 5,
     marginTop: 5,
-    backgroundColor: "#094B89"
+    backgroundColor: "#094B89",
+    color: "#FFF",
+    backgroundColor: alpha('#094B89', 1),
+    '&:hover': {
+      backgroundColor: alpha('#094B89', 0.90),
+      color: alpha('#FFF', 1)
+    },
+  },
+
+  iconSquad: {
+    color: '#FFF',
   },
 
   logoutContainer: {
@@ -278,7 +288,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flex: 1,
     display: "flex",
-    marginLeft: 10,
   },
 
   input: {
