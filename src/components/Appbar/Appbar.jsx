@@ -26,6 +26,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import CardMembros from '../Card/Card'
+import { AddCircle } from '@material-ui/icons';
 
 const drawerWidth = 240;
 
@@ -43,12 +44,6 @@ export default function PrimarySearchAppBar() {
     }
 
     setState({ ...state, [anchor]: open });
-  };
-
-
-
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
   };
 
   const isMenuOpen = Boolean(anchorEl);
@@ -114,6 +109,7 @@ export default function PrimarySearchAppBar() {
               </div>
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
+              <h3>Olá, Guilherme</h3>
                 <IconButton
                   edge="end"
                   aria-label="user"
@@ -145,9 +141,11 @@ export default function PrimarySearchAppBar() {
               <Divider />
               <h3 className={classes.createSquad}>
                 Criar sala
-                <Icon color="secondary" style={{ fontSize: 28, marginLeft: 120, }}>
-                  add_circle
-                </Icon>
+                <AddCircle 
+                    color="secondary"
+                    style={{ fontSize: 28, 
+                    marginLeft: 120, }}>
+                  </AddCircle>
               </h3>
 
               <Divider />
@@ -220,7 +218,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -275,7 +272,7 @@ const useStyles = makeStyles((theme) => ({
 
   img: {
     width: "100px",
-    height: "30px",
+    height: "25px",
     alignItems: "center",
     justifyContent: "center",
     display: "flex",

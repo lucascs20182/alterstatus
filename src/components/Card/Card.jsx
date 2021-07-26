@@ -1,4 +1,8 @@
 import React from 'react'
+import Online from '../../components/Status/StatusOnline';
+import Offline from '../../components/Status/StatusOffline';
+import Ausente from '../../components/Status/StatusAusente';
+import Ocupado from '../../components/Status/StatusOcupado';
 import ButtonCard from '../Button/ButtonMenu'
 import user from '../../assets/user.svg'
 import fonts from '../../fonts/Fonts.css'
@@ -105,7 +109,7 @@ export default function CardMembros(props) {
               <ButtonCard/>
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
@@ -116,7 +120,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Offline />Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
@@ -127,7 +131,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Ausente />Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
@@ -138,7 +142,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Ocupado />Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
@@ -149,7 +153,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
@@ -160,7 +164,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Ausente/>Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
@@ -171,7 +175,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Ocupado />Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
@@ -182,7 +186,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Offline />Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
@@ -193,7 +197,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Ocupado />Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
@@ -204,7 +208,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
@@ -215,7 +219,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
@@ -226,7 +230,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
