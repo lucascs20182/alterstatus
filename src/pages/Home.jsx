@@ -1,63 +1,87 @@
 import { useState } from "react";
-import axios from "axios";
-
-import storage from "../storage";
 
 import usuarioService from '../services/usuario-api'
-
-import { DropzoneDialogBase } from 'material-ui-dropzone';
-
-// import api from '../services/api';
 
 import './anyStyle.css';
 
 const Home = () => {
     const [imagem, setImagem] = useState(null);
-    // const [openUpload, setOpenUpload] = useState(false);
     const [username, setUsername] = useState('');
     const [senha, setSenha] = useState('');
     const [nome, setNome] = useState('');
     const [status, setStatus] = useState('');
 
+    // const cadastrarUsuarioComFoto = () => {
+
+    // }
+
+    // const cadastrarUsuarioSemFoto = () => {
+        
+    // }
+
     const cadastrarUsuario = (e) => {
         e.preventDefault();
 
-        const formData = new FormData();
+        const usuario = {}
 
-        // caso esteja usando dropzonedialogbase
-        // const imageFile = imagem[0].file;
+        if(username != "") {
+            usuario.username = username;
+        }
 
-        const usuario = JSON.stringify({
-            "nome": nome,
-            "username": username,
-            "senha": senha
-        });
+        if(senha != "") {
+            usuario.senha = senha;
+        }
 
-        const blob = new Blob([usuario], {
-            type: 'application/json'
-        })
+        if(nome != "") {
+            usuario.nome = nome;
+        }
 
-        console.log(imagem)
+        if(status != "") {
+            usuario.status = status;
+        }
 
-        // quando nenhum arquivo é selecionado
-        // erro 400
-        // verificar o que o post envia quando select files == null
-        formData.append('file', imagem);
+        if(imagem == null) {
+            console.log('usuario' + usuario);
 
-        formData.append('usuario', blob);        
+            usuarioService.cadastrarSemFoto(usuario)
+                .then((resposta) => {
+                    console.log(resposta);
+                    alert("Usuário cadastrado!");
+                    
+                    window.open("/login", "_self");
+                })
+                .catch((erro) => {
+                    alert("Erro! Verifique o console.");
+                    console.error(erro);
 
-        usuarioService.cadastrar(formData)
-            .then((resposta) => {
-                console.log(resposta);
-                alert("Usuário cadastrado!");
-                // window.open("/login", "_self");
+                    return;
+                });
+        } else {
+            const usuarioJSON = JSON.stringify(usuario);
+            const formData = new FormData();
+
+            const blob = new Blob([usuarioJSON], {
+                type: 'application/json'
             })
-            .catch((erro) => {
-                alert("Erro! Verifique o console.");
-                console.error(erro);
-            });
-    };
 
+            formData.append('file', imagem);
+            formData.append('usuario', blob);
+
+            console.log('usuarioJSON' + usuarioJSON);
+
+            usuarioService.cadastrar(formData)
+                .then((resposta) => {
+                    console.log(resposta);
+                    alert("Usuário cadastrado!");
+                    window.open("/login", "_self");
+                })
+                .catch((erro) => {
+                    alert("Erro! Verifique o console.");
+                    console.error(erro);
+                });
+        }
+    };
+    
     return (
         <form>
 
@@ -67,35 +91,7 @@ const Home = () => {
                     id="file"
                     type="file"
                     onChange={(e) => setImagem(e.target.files[0])}
-                />
-
-                {/* <button onClick={() => setOpenUpload(true)}>Open me</button> */}
-
-                {/* <DropzoneDialogBase
-                    dialogTitle="Inserir imagem"
-                    acceptedFiles={["image/*"]}
-                    fileObjects={imagem}
-                    cancelButtonText={"Cancelar"}
-                    submitButtonText={"Enviar"}
-                    maxFileSize={5000000}
-                    open={true}
-                    onAdd={(arquivo) => {
-                        console.log("onAdd", arquivo);
-                        setImagem([].concat(imagem, arquivo));
-                    }}
-                    onDelete={(deleteFileObj) => {
-                        console.log("onDelete", deleteFileObj);
-                    }}
-                    onClose={() => setOpenUpload(false)}
-                    onSave={() => {
-                        console.log("onSave", imagem);
-                        cadastrarUsuario();
-                        setOpenUpload(false);
-                    }}
-                    showPreviews={true}
-                    showFileNamesInPreview={true}
-                /> */}
-
+                />                
             </div>
 
             <div>

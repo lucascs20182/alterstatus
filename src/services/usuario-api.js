@@ -12,6 +12,14 @@ function cadastrar(formData) {
     });
 }
 
+function cadastrarSemFoto(usuario) {    
+  return new Promise((resolve, reject) => {
+      return api.post('/usuario/signup/nopic', usuario)
+          .then(response => resolve(response))
+          .catch(error => reject(error))
+  });
+}
+
 // function cadastrar(formData) {    
 //     return new Promise((resolve, reject) => {
 //         return api.post('/usuario/signup', formData)
@@ -38,6 +46,6 @@ function cadastrar(formData) {
 
 export default {
     cadastrar,
-    // logar,
+    cadastrarSemFoto
     // obterCliente
 }
