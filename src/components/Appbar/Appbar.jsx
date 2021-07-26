@@ -168,7 +168,7 @@ export default function PrimarySearchAppBar() {
           {renderMenu}
         </React.Fragment>
 
-      ))};
+      ))}
     </div>
   )
 }
