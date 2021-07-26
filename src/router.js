@@ -6,16 +6,16 @@ import Login from './pages/Login';
 const Routes = () => (
     <BrowserRouter>
         <Switch>
-            <Route exact path="/">
-                <Home />
-            </Route>
-
             <Route exact path="/login">
                 <Login />
             </Route>
+            
+            <Route exact path="/home">
+                <Home />
+            </Route>
 
             {/* Redireciona erros 404s para Home */}
-            <Redirect to='/' />
+            <Redirect to='/login' />
         </Switch>
     </BrowserRouter>
 );

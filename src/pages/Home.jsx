@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import usuarioService from '../services/usuario-api';
+import storage from '../storage';
 
 import loadingImg from '../assets/loading.gif';
 
@@ -14,6 +15,25 @@ const Home = () => {
     const [status, setStatus] = useState('');
 
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        let [token, ] = storage.obterTokenDaStorage();
+
+        // requisição teste token
+        usuarioService.obterClientes()
+            .then((resposta) => {
+                console.log(resposta);
+            })
+            .catch((erro) => {
+                alert("Erro! Verifique o console.");
+                console.error(erro);
+            });
+
+        if(token == null) {
+            alert('Faça login!');
+            window.open("/login", "_self");
+        }        
+    }, []);
 
     const cadastrarUsuarioComFoto = (usuario) => {
         setLoading(true);
@@ -40,6 +60,7 @@ const Home = () => {
             .catch((erro) => {
                 alert("Erro! Verifique o console.");
                 console.error(erro);
+                setLoading(false);
             });
     }
 
@@ -58,6 +79,7 @@ const Home = () => {
             .catch((erro) => {
                 alert("Erro! Verifique o console.");
                 console.error(erro);
+                setLoading(false);
 
                 return;
             });
@@ -69,7 +91,7 @@ const Home = () => {
         const usuario = {}
 
         if (username != "") {
-            usuario.username = username;
+            usuario.username = username;            
         }
 
         if (senha != "") {
