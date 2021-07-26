@@ -253,7 +253,6 @@ const useStyles = makeStyles((theme) => ({
   equipes: {
     marginBottom: 5,
     marginTop: 5,
-    backgroundColor: "#094B89",
     color: "#FFF",
     backgroundColor: alpha('#094B89', 1),
     '&:hover': {
