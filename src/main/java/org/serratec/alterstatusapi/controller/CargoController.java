@@ -52,15 +52,15 @@ public class CargoController {
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletar(@PathVariable(value = "id") Long id) {
-		return servicoCargo.deletar(id);
+	@DeleteMapping
+	public ResponseEntity<?> deletar(@RequestBody Cargo cargo) {
+		return servicoCargo.deletar(cargo.getId_cargo());
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
-	@PutMapping("/{id}")
-	public ResponseEntity<Optional<Cargo>> atualizar(@PathVariable(value = "id") Long id, @RequestBody Cargo cargo) {
-		return servicoCargo.atualizar(id, cargo);
+	@PutMapping
+	public ResponseEntity<Optional<Cargo>> atualizar(@RequestBody Cargo cargo) {
+		return servicoCargo.atualizar(cargo.getId_cargo(), cargo);
 	}
 
 }

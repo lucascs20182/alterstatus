@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 				.antMatchers(AUTH_WHITLIST).permitAll()
 
-				.antMatchers(HttpMethod.POST, "/usuario/signup/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/usuario").permitAll()
 
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
 

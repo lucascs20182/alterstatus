@@ -54,9 +54,15 @@ public class Usuario {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "squad_id", referencedColumnName = "id")
 	private Squad squad;
+	
+	private Long id_usuario;
+	
+	private Long id_cargo;
+	
+	private Long id_squad;
 
 	public Usuario(Long id, String nome, String username, String senha, String status, LocalDate dataCadastro,
-			String urlImagem, Imagem imagem, Cargo cargo, Squad squad) {
+			String urlImagem, Imagem imagem, Cargo cargo, Squad squad, Long id_usuario, Long id_squad, Long id_cargo) {
 		this.id = id;
 		this.nome = nome;
 		this.username = username;
@@ -67,6 +73,9 @@ public class Usuario {
 		this.cargo = cargo;
 		this.squad = squad;
 		this.status = status;
+		this.id_usuario = id_usuario;
+		this.id_cargo = id_cargo;
+		this.id_squad = id_squad;
 	}
 
 	public Usuario() {
@@ -160,5 +169,31 @@ public class Usuario {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public Long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(Long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+	public Long getId_cargo() {
+		return id_cargo;
+	}
+
+	public void setId_cargo(Long id_cargo) {
+		this.id_cargo = id_cargo;
+	}
+
+	public Long getId_squad() {
+		return id_squad;
+	}
+
+	public void setId_squad(Long id_squad) {
+		this.id_squad = id_squad;
+	}
+	
+	
 
 }

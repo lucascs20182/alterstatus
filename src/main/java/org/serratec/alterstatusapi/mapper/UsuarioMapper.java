@@ -28,6 +28,9 @@ public class UsuarioMapper {
 		entity.setSenha(dto.getSenha());
 		entity.setNome(dto.getNome());
 		entity.setStatus(dto.getStatus());
+		entity.setId_usuario(dto.getId_usuario());
+		entity.setId_cargo(dto.getId_cargo());
+		entity.setId_squad(dto.getId_squad());
 
 		return entity;
 	}

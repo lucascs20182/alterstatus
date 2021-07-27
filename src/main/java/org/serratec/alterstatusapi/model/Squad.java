@@ -38,13 +38,16 @@ public class Squad {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "squad")
 	private List<Cargo> cargos;
 
+	private Long id_squad;
+	
 	// --------------------------------------
 
-	public Squad(Long id, String nome, List<Cargo> cargos, List<Usuario> usuarios) {
+	public Squad(Long id, String nome, List<Cargo> cargos, List<Usuario> usuarios, Long id_squad) {
 		this.id = id;
 		this.nome = nome;
 		this.usuarios = usuarios;
 		this.cargos = cargos;
+		this.id_squad = id_squad;
 	}
 
 	public Squad() {
@@ -85,4 +88,14 @@ public class Squad {
 		this.cargos = cargos;
 	}
 
+	public Long getId_squad() {
+		return id_squad;
+	}
+
+	public void setId_squad(Long id_squad) {
+		this.id_squad = id_squad;
+	}
+
+	
+	
 }

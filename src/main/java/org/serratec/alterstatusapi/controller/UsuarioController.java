@@ -93,59 +93,70 @@ public class UsuarioController {
 		return new ResponseEntity<>(imagem.getData(), header, HttpStatus.OK);
 	}
 
-//	/signup?picture=no
-// 	multipart opcional?
-	@PostMapping("/signup")
-	public ResponseEntity<String> create(@RequestParam MultipartFile file, @RequestPart UsuarioDTORequest usuario)
+	@PostMapping
+	public ResponseEntity<String> create(@RequestParam(required=false) MultipartFile file, @RequestPart UsuarioDTORequest usuario)
 			throws ResourceNotFoundException, IOException {
 
-		servicoUsuario.create(usuario, file);
-
+		if(file==null) {
+			servicoUsuario.create(usuario);
+			return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.CREATED);
+		}
+		
+			servicoUsuario.createFile(usuario, file);
+			 
 		return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.CREATED);
 	}
-
-	@PostMapping("/signup/nopic")
-	public ResponseEntity<String> create(@RequestBody UsuarioDTORequest usuario)
-			throws ResourceNotFoundException, IOException {
-
-		servicoUsuario.create(usuario);
-
-		return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.CREATED);
+	
+	@SecurityRequirement(name = "bearerAuth")
+	@PostMapping("/squad")
+	public Usuario cadastrarUsuarioNoSquad(@RequestBody Usuario usuario) {
+		return servicoUsuario.relacionarUsuarioComSquad(usuario.getId_usuario(), usuario.getId_squad());
+	}
+	
+	@SecurityRequirement(name = "bearerAuth")
+	@PutMapping("/squad")
+	public Usuario relacionarUsuarioComSquad(@RequestBody Usuario usuario) {
+		return servicoUsuario.relacionarUsuarioComSquad(usuario.getId_usuario(), usuario.getId_squad());
+	}
+	
+	@SecurityRequirement(name = "bearerAuth")
+	@PostMapping("/cargo")
+	public Usuario cadastrarUsuarioNoCargo(@RequestBody Usuario usuario) {
+		return servicoUsuario.relacionarUsuarioComCargo(usuario.getId_usuario(), usuario.getId_cargo());
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
-	@PutMapping("/{usuario_id}/squad/{squad_id}")
-	public Usuario relacionarUsuarioComSquad(@PathVariable Long usuario_id, @PathVariable Long squad_id) {
-		return servicoUsuario.relacionarUsuarioComSquad(usuario_id, squad_id);
+	@PutMapping("/cargo")
+	public Usuario relacionarUsuarioComCargo(@RequestBody Usuario usuario) {
+		return servicoUsuario.relacionarUsuarioComCargo(usuario.getId_usuario(), usuario.getId_cargo());
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
-	@PutMapping("/{usuario_id}/cargo/{cargo_id}")
-	public Usuario relacionarUsuarioComCargo(@PathVariable Long usuario_id, @PathVariable Long cargo_id) {
-		return servicoUsuario.relacionarUsuarioComCargo(usuario_id, cargo_id);
-	}
-
-	@SecurityRequirement(name = "bearerAuth")
-	@PutMapping("/{id}")
-	public ResponseEntity<String> update(@RequestParam MultipartFile file, @PathVariable Long id,
+	@PutMapping
+	public ResponseEntity<String> update(@RequestParam MultipartFile file,
 			@RequestPart UsuarioDTORequest usuario) throws ResourceNotFoundException, IOException {
-		servicoUsuario.update(id, usuario, file);
+		servicoUsuario.update(usuario.getId_usuario(), usuario, file);
 
 		return new ResponseEntity<String>("Usuário editado com sucesso", HttpStatus.OK);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
-	@DeleteMapping("/{id}")
-	public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
-		servicoUsuario.delete(id);
+	@DeleteMapping
+	public ResponseEntity<String> delete(@RequestBody UsuarioDTORequest usuario) throws ResourceNotFoundException {
+		servicoUsuario.delete(usuario.getId_usuario());
 
 		return new ResponseEntity<String>("Usuário deletado com sucesso", HttpStatus.OK);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
 	@PatchMapping("/{id}")
-	public ResponseEntity<Optional<Usuario>> atualizarEspecifico(@PathVariable Long id,
+	public ResponseEntity<Optional<Usuario>> atualizarEspecifico(@PathVariable("id")Long id,
 			@RequestBody Map<Object, Object> fields) {
+		Map<Object,Object> campos = fields;
+		for(Object campo: campos.entrySet()) {
+			 System.out.println(campo.equals("status")); 
+		 }
+			
 		return servicoUsuario.atualizarEspecifico(id, fields);
 	}
 }

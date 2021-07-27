@@ -39,14 +39,17 @@ public class Cargo {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "squad_id", referencedColumnName = "id")
 	private Squad squad;
+	
+	private Long id_cargo;
 
 	// ----------------------
 
-	public Cargo(Long id, String nome, Squad squad, List<Usuario> usuario) {
+	public Cargo(Long id, String nome, Squad squad, List<Usuario> usuario, Long id_cargo) {
 		this.id = id;
 		this.nome = nome;
 		this.squad = squad;
 		this.usuario = usuario;
+		this.id_cargo = id_cargo;
 	}
 
 	public Cargo() {
@@ -86,4 +89,14 @@ public class Cargo {
 		this.squad = squad;
 	}
 
+	public Long getId_cargo() {
+		return id_cargo;
+	}
+
+	public void setId_cargo(Long id_cargo) {
+		this.id_cargo = id_cargo;
+	}
+
+	
+	
 }

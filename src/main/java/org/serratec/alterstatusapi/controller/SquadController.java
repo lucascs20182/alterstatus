@@ -52,15 +52,15 @@ public class SquadController {
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletar(@PathVariable(value = "id") Long id) {
-		return servicoSquad.deletar(id);
+	@DeleteMapping
+	public ResponseEntity<?> deletar(@RequestBody Squad squad) {
+		return servicoSquad.deletar(squad.getId_squad());
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
-	@PutMapping("/{id}")
-	public ResponseEntity<Optional<Squad>> atualizar(@PathVariable(value = "id") Long id, @RequestBody Squad squad) {
-		return servicoSquad.atualizar(id, squad);
+	@PutMapping
+	public ResponseEntity<Optional<Squad>> atualizar(@RequestBody Squad squad) {
+		return servicoSquad.atualizar(squad.getId_squad(), squad);
 	}
 
 }
