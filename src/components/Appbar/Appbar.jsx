@@ -12,6 +12,7 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
+import ListItem from '@material-ui/core/ListItem';
 import GroupIcon from '@material-ui/icons/Group';
 import Divider from '@material-ui/core/Divider';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -119,7 +120,8 @@ export default function PrimarySearchAppBar() {
                 >
                   <AccountCircle style={{
                     width: "30px",
-                    height: "30px"
+                    height: "30px",
+                    color: '#094B89'
                   }} />
                 </IconButton>
               </div>
