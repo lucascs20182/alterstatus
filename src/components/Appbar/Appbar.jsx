@@ -84,7 +84,6 @@ export default function PrimarySearchAppBar() {
             <Toolbar>
               <IconButton
                 edge="start"
-                className={classes.menuButton}
                 color="secondary"
                 aria-label="open drawer"
                 onClick={toggleDrawer(anchor, true)}
@@ -120,8 +119,8 @@ export default function PrimarySearchAppBar() {
                   color="secondary"
                 >
                   <AccountCircle style={{
-                    width: "35px",
-                    height: "35px"
+                    width: "30px",
+                    height: "30px"
                   }} />
                 </IconButton>
               </div>
@@ -142,11 +141,18 @@ export default function PrimarySearchAppBar() {
               <Divider />
               <h3 className={classes.createSquad}>
                 Criar sala
-                <AddCircle 
-                    color="secondary"
-                    style={{ fontSize: 28, 
-                    marginLeft: 120, }}>
-                  </AddCircle>
+                <IconButton
+                  aria-label="show more"
+                  aria-haspopup="true"
+                  color="secondary"
+                >
+                  <AddCircle
+                    style={{
+                      height: 28,
+                      width: 28,
+                    }}
+                  />
+                </IconButton>
               </h3>
 
               <Divider />
@@ -166,7 +172,6 @@ export default function PrimarySearchAppBar() {
 
           {renderMenu}
         </React.Fragment>
-
       ))}
     </div>
   )
@@ -177,17 +182,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   title: {
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    fontFamily: 'Poppins',
+    fontWeight: '700',
     color: "#094B89",
     fontSize: "25px",
-    fontStyle: "bold",
-    textShadow: "0px 0px 2px #094B89"
   },
 
   search: {
@@ -284,6 +286,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   createSquad: {
+    justifyContent: 'space-between',
+    marginLeft: 15,
     alignItems: "center",
     flex: 1,
     display: "flex",
