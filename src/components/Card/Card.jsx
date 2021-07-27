@@ -10,6 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import IconButton from '@material-ui/core/IconButton';
 import Modal from '../Modal/Modal'
+import { PostAdd } from '@material-ui/icons';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -69,6 +71,26 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 13,
   },
 
+  addPessoa: {
+    height: 35,
+    width: 35,
+    paddingTop: 6,
+    paddingLeft: 6,
+    paddingRight: 10,
+    paddingBottom: 6,
+    alignSelf: 'center',
+  },
+
+  addCargo: {
+    height: 35,
+    width: 35,
+    paddingTop: 6,
+    paddingLeft: 6,
+    paddingRight: 6,
+    paddingBottom: 6,
+    alignSelf: 'center',
+  },
+
   status: {
     textAlign: "center",
     marginBottom: 2,
@@ -91,20 +113,22 @@ export default function CardMembros(props) {
   return (
     <div>
       <h3 style={{ textAlign: 'center' }}>
-        <IconButton
+      <IconButton className={classes.addCargo}
           aria-label="show more"
           aria-haspopup="true"
           color="secondary"
         >
-          <Modal><PersonAddIcon
-            style={{
-              height: 35,
-              width: 35,
-              color: "#094B89",
-            }}
-          /></Modal>
+          <PostAdd />
         </IconButton>
-        Projeto-aplicado-Alterdata-grupo-4-Front-Back</h3>
+        <IconButton className={classes.addPessoa}
+          aria-label="show more"
+          aria-haspopup="true"
+          color="secondary"
+        >
+          <Modal><PersonAddIcon /></Modal>
+        </IconButton>
+        Projeto-aplicado-Alterdata-grupo-4-Front-Back
+      </h3>
       <div className={classes.container}>
         <div className={classes.root}>
           <div className={classes.info}>
@@ -119,7 +143,6 @@ export default function CardMembros(props) {
         </div>
       </div>
     </div>
-
   );
 }
 
