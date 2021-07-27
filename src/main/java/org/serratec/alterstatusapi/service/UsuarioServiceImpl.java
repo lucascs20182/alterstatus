@@ -49,12 +49,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	ImagemService imagemService;
 
 	@Override
-	public List<Usuario> getAll() {
+	public List<Usuario> obterTodos() {
 		return clienteRepository.findAll();
 	}
 
 	@Override
-	public Usuario getById(Long id) throws ResourceNotFoundException {
+	public Usuario obterPorId(Long id) throws ResourceNotFoundException {
 		Optional<Usuario> cliente = clienteRepository.findById(id);
 		if (cliente.isEmpty()) {
 			throw new ResourceNotFoundException("Não existe cliente com esse Id.");
@@ -74,7 +74,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario getImagem(Usuario usuario, Boolean isAvatarDefault) {
+	public Usuario obterImagem(Usuario usuario, Boolean isAvatarDefault) {
 
 		if (isAvatarDefault) {
 			usuario.setUrlImagem(
@@ -92,7 +92,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario createFile(UsuarioDTORequest dto, MultipartFile multipartFile)
+	public Usuario cadastrarArquivo(UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException {
 		Usuario entity = clienteMapper.toEntity(dto);
 
@@ -108,13 +108,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		entity = clienteRepository.save(entity);
 
-		imagemService.create(entity, multipartFile);
+		imagemService.cadastrar(entity, multipartFile);
 
-		return clienteRepository.save(getImagem(entity, false));
+		return clienteRepository.save(obterImagem(entity, false));
 	}
 	
 	@Override
-	public Usuario create(UsuarioDTORequest dto) throws ResourceNotFoundException {
+	public Usuario cadastrar(UsuarioDTORequest dto) throws ResourceNotFoundException {
 		Usuario entity = clienteMapper.toEntity(dto);
 
 		entity.setDataCadastro(LocalDate.now());
@@ -129,15 +129,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		entity = clienteRepository.save(entity);
 
-		return clienteRepository.save(getImagem(entity, true));
+		return clienteRepository.save(obterImagem(entity, true));
 	}
 
 	@Override
-	public Usuario update(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
+	public Usuario atualizar(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException {
-		Usuario entity = this.getById(id);
+		Usuario entity = this.obterPorId(id);
 
-		for (Usuario cliente : this.getAll()) {
+		for (Usuario cliente : this.obterTodos()) {
 			if (cliente.getUsername().equals(dto.getUsername())) {
 				throw new ResourceNotFoundException("Uma conta já foi cadastrada utilizando este username.");
 			}
@@ -159,18 +159,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 			entity.setStatus(dto.getStatus());
 		}
 
-		imagemService.removeImagem(entity.getId());
+		imagemService.removerImagem(entity.getId());
 
-		imagemService.create(entity, multipartFile);
+		imagemService.cadastrar(entity, multipartFile);
 
-		return clienteRepository.save(getImagem(entity, false));
+		return clienteRepository.save(obterImagem(entity, false));
 	}
 
 	@Override
-	public void delete(Long id) throws ResourceNotFoundException {
-		this.getById(id); // verifica se o usuário existe antes de deletar
+	public void deletar(Long id) throws ResourceNotFoundException {
+		this.obterPorId(id); // verifica se o usuário existe antes de deletar
 
-		imagemService.removeImagem(id);
+		imagemService.removerImagem(id);
 
 		clienteRepository.deleteById(id);
 	}

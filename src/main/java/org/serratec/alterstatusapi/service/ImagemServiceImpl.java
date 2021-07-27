@@ -20,7 +20,7 @@ public class ImagemServiceImpl implements ImagemService {
 
 	@Transactional
 	@Override
-	public Imagem create(Usuario produtoEntity, MultipartFile multipartFile) throws IOException {
+	public Imagem cadastrar(Usuario produtoEntity, MultipartFile multipartFile) throws IOException {
 		Imagem imageProduto = new Imagem();
 		imageProduto.setUsuario(produtoEntity);
 		imageProduto.setData(multipartFile.getBytes());
@@ -32,7 +32,7 @@ public class ImagemServiceImpl implements ImagemService {
 	// verificar se os findbyusuarioid podem estourar erro na auth
 	@Transactional
 	@Override
-	public Imagem getImagem(Long id) {
+	public Imagem obterImagem(Long id) {
 		Imagem image = repositoryImagem.findByUsuarioId(id);
 
 		if (image == null) {
@@ -45,7 +45,7 @@ public class ImagemServiceImpl implements ImagemService {
 
 	@Transactional
 	@Override
-	public Imagem removeImagem(Long id) {
+	public Imagem removerImagem(Long id) {
 		Imagem image = repositoryImagem.findByUsuarioId(id);
 		repositoryImagem.delete(repositoryImagem.findByUsuarioId(id));
 		return image;

@@ -17,7 +17,7 @@ public class UsuarioMapper {
 	public Usuario toEntity(UsuarioDTORequest dto) throws ResourceNotFoundException {
 		Usuario entity = new Usuario();
 
-		for (Usuario cliente : service.getAll()) {
+		for (Usuario cliente : service.obterTodos()) {
 
 			if (cliente.getUsername().equals(dto.getUsername())) {
 				throw new ResourceNotFoundException("Uma conta já foi cadastrada utilizando este username.");

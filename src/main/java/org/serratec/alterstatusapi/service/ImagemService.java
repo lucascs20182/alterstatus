@@ -15,9 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 public interface ImagemService {
 
 	@Transactional
-	public Imagem create(Usuario produtoEntity, MultipartFile multipartFile) throws IOException;
+	public Imagem cadastrar(Usuario produtoEntity, MultipartFile multipartFile) throws IOException;
 	@Transactional
-	public Imagem getImagem(Long id);
+	public Imagem obterImagem(Long id);
 	@Transactional
-	public Imagem removeImagem(Long id);
+	public Imagem removerImagem(Long id);
 }

@@ -50,10 +50,10 @@ public class UsuarioController {
 
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping
-	public ResponseEntity<List<UsuarioDTOResponse>> getAll() {
+	public ResponseEntity<List<UsuarioDTOResponse>> obterTodos() {
 		List<UsuarioDTOResponse> listaUsuariosResponse = new ArrayList<UsuarioDTOResponse>();
 
-		for (Usuario usuario : servicoUsuario.getAll()) {
+		for (Usuario usuario : servicoUsuario.obterTodos()) {
 			listaUsuariosResponse.add(mapper.toDto(usuario));
 		}
 
@@ -62,8 +62,8 @@ public class UsuarioController {
 
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping("/{id}")
-	public ResponseEntity<UsuarioDTOResponse> getById(@PathVariable Long id) throws ResourceNotFoundException {
-		UsuarioDTOResponse usuarioResponse = mapper.toDto(servicoUsuario.getById(id));
+	public ResponseEntity<UsuarioDTOResponse> obterPorId(@PathVariable Long id) throws ResourceNotFoundException {
+		UsuarioDTOResponse usuarioResponse = mapper.toDto(servicoUsuario.obterPorId(id));
 
 		return new ResponseEntity<UsuarioDTOResponse>(usuarioResponse, HttpStatus.OK);
 	}
@@ -83,8 +83,8 @@ public class UsuarioController {
 
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping("{usuarioId}/avatar")
-	public ResponseEntity<byte[]> getImagem(@PathVariable Long usuarioId) {
-		Imagem imagem = servicoImagem.getImagem(usuarioId);
+	public ResponseEntity<byte[]> obterImagem(@PathVariable Long usuarioId) {
+		Imagem imagem = servicoImagem.obterImagem(usuarioId);
 
 		HttpHeaders header = new HttpHeaders();
 		header.add("content-length", String.valueOf(imagem.getData().length));
@@ -93,18 +93,19 @@ public class UsuarioController {
 		return new ResponseEntity<>(imagem.getData(), header, HttpStatus.OK);
 	}
 
+	@SecurityRequirement(name = "bearerAuth")
 	@PostMapping
-	public ResponseEntity<String> create(@RequestParam(required=false) MultipartFile file, @RequestPart UsuarioDTORequest usuario)
+	public ResponseEntity<String> cadastrar(@RequestParam(required=false) MultipartFile file, @RequestPart UsuarioDTORequest usuario)
 			throws ResourceNotFoundException, IOException {
 
 		if(file==null) {
-			servicoUsuario.create(usuario);
-			return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.CREATED);
+			servicoUsuario.cadastrar(usuario);
+			return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.OK);
 		}
 		
-			servicoUsuario.createFile(usuario, file);
+			servicoUsuario.cadastrarArquivo(usuario, file);
 			 
-		return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.CREATED);
+		return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.OK);
 	}
 	
 	@SecurityRequirement(name = "bearerAuth")
@@ -133,17 +134,17 @@ public class UsuarioController {
 
 	@SecurityRequirement(name = "bearerAuth")
 	@PutMapping
-	public ResponseEntity<String> update(@RequestParam MultipartFile file,
+	public ResponseEntity<String> atualizar(@RequestParam MultipartFile file,
 			@RequestPart UsuarioDTORequest usuario) throws ResourceNotFoundException, IOException {
-		servicoUsuario.update(usuario.getId_usuario(), usuario, file);
+		servicoUsuario.atualizar(usuario.getId_usuario(), usuario, file);
 
 		return new ResponseEntity<String>("Usuário editado com sucesso", HttpStatus.OK);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
 	@DeleteMapping
-	public ResponseEntity<String> delete(@RequestBody UsuarioDTORequest usuario) throws ResourceNotFoundException {
-		servicoUsuario.delete(usuario.getId_usuario());
+	public ResponseEntity<String> deletar(@RequestBody UsuarioDTORequest usuario) throws ResourceNotFoundException {
+		servicoUsuario.deletar(usuario.getId_usuario());
 
 		return new ResponseEntity<String>("Usuário deletado com sucesso", HttpStatus.OK);
 	}

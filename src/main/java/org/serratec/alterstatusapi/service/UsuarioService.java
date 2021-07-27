@@ -30,16 +30,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @Service
 public interface UsuarioService {
 
-	public List<Usuario> getAll();
-	public Usuario getById(Long id) throws ResourceNotFoundException;
+	public List<Usuario> obterTodos();
+	public Usuario obterPorId(Long id) throws ResourceNotFoundException;
 	public List<Usuario> obterPorUsername(String username);
-	public Usuario getImagem(Usuario usuario, Boolean isAvatarDefault);
-	public Usuario createFile(UsuarioDTORequest dto, MultipartFile multipartFile)
+	public Usuario obterImagem(Usuario usuario, Boolean isAvatarDefault);
+	public Usuario cadastrarArquivo(UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException;
-	public Usuario create(UsuarioDTORequest dto) throws ResourceNotFoundException;
-	public Usuario update(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
+	public Usuario cadastrar(UsuarioDTORequest dto) throws ResourceNotFoundException;
+	public Usuario atualizar(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException;
-	public void delete(Long id) throws ResourceNotFoundException;
+	public void deletar(Long id) throws ResourceNotFoundException;
 	public Usuario relacionarUsuarioComSquad(Long usuario_id, Long squad_id);
 	public Usuario relacionarUsuarioComCargo(Long usuario_id, Long cargo_id);
 	public @ResponseBody ResponseEntity<Optional<Usuario>> atualizarEspecifico(@PathVariable Long id,
