@@ -1,12 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import lapis from '../assets/lapis.png'
-import desligar from '../assets/desligar.png'
-import icon from '../assets/icon.png'
-import confirm from '../assets/confirm.png'
-import fechar from '../assets/fechar.png'
-import '../components/Modal.css'
+import lapis from '../../assets/lapis.png';
+import desligar from '../../assets/desligar.png';
+import icon from '../../assets/icon.png';
+import confirm from '../../assets/confirm.png';
+import fechar from '../../assets/fechar.png';
+import '../Modal/Modal.css';
 
 
 function rand() {
