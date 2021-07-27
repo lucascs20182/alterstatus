@@ -9,6 +9,7 @@ import fonts from '../../fonts/Fonts.css'
 import { makeStyles } from '@material-ui/core/styles';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import IconButton from '@material-ui/core/IconButton';
+import Modal from '../Modal/Modal'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -95,136 +96,16 @@ export default function CardMembros(props) {
           aria-haspopup="true"
           color="secondary"
         >
-          <PersonAddIcon
+          <Modal><PersonAddIcon
             style={{
               height: 35,
               width: 35,
+              color: "#094B89",
             }}
-          />
+          /></Modal>
         </IconButton>
         Projeto-aplicado-Alterdata-grupo-4-Front-Back</h3>
       <div className={classes.container}>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard/>
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Offline />Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Ausente />Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Ocupado />Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Ausente/>Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Ocupado />Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard />
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Offline />Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard/>
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Ocupado />Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard/>
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard/>
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
-          </div>
-        </div>
         <div className={classes.root}>
           <div className={classes.info}>
             <div>
