@@ -5,6 +5,9 @@ import alterstateLogo from '../../assets/alterstate_logo.png'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
+import { logar } from '../../services/ApiUsuario';
+import { salvarTokenNaStorage } from '../../utils/Storage';
+
 import '../../styles/login.css'
 import loadingImg from '../../assets/loading.gif';
 
@@ -17,10 +20,20 @@ function Login() {
 
   const handleEntrar = (e) => {
     e.preventDefault();
+    setCarregar(true);
 
-    console.log(username, senha);
-
-    history.push('/home');
+    logar(username, senha)
+      .then((resposta) => {
+          const {Authorization, idUsuario} = resposta.data;
+          salvarTokenNaStorage(Authorization, idUsuario);                
+          setCarregar(false);
+          history.push('/home');
+      })
+      .catch((erro) => {
+          alert("Erro! Verifique o console.");
+          console.error(erro);
+          setCarregar(false);
+      });
   }
 
   return (

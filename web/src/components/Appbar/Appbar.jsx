@@ -25,8 +25,9 @@ import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
 
-const drawerWidth = 240;
+import { removerAutenticacao } from '../../utils/Storage';
 
+const drawerWidth = 240;
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
@@ -53,6 +54,11 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(null);
   };
 
+  const handleSair = () => {
+    removerAutenticacao();
+
+    handleMenuClose();
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -68,7 +74,7 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>Perfil</MenuItem>
       <Link to="/" className="link" style={{color: "#000"}}>
-        <MenuItem onClick={handleMenuClose} style={{ width: "100px", textDecoration: "none" }}>
+        <MenuItem onClick={handleSair} style={{ width: "100px", textDecoration: "none" }}>
           Sair
         </MenuItem>
       </Link>
