@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Modal from '../Modal/Modal'
 
 const useStyles = makeStyles({
   pontinhos: { 
@@ -63,11 +64,15 @@ export default function PositionedTooltips() {
                 },
               }}
             >
-              {options.map((option) => (
-                <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-                  {option}
+                <MenuItem  onClick={handleClose}>
+                <Modal>Editar status</Modal>
                 </MenuItem>
-              ))}
+                <MenuItem  onClick={handleClose}>
+                Editar status
+                </MenuItem>
+                <MenuItem  onClick={handleClose}>
+                Editar status
+                </MenuItem>
             </Menu>
         </Grid>
       </Grid>

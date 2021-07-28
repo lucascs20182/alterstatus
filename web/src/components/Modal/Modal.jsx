@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import "../Modal/styles.css"
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
+  paperModal: {
     width: 500,
     height: 250,
     backgroundColor: theme.palette.background.paper,
@@ -29,12 +29,10 @@ export default function SimpleModal({ children }) {
   };
 
   return (
-    <div>
-        { /* Verificar Warning: validateDOMNesting(...): 
-        <button> cannot appear as a descendant of <button>. */ }
-        <Button className="buttonModal" type="submit" onClick={handleOpen}>
+    <div> 
+        <button className="buttonModal" type="submit" onClick={handleOpen}>
           {children}
-        </Button>
+        </button>
 
       <Modal
         open={open}
@@ -42,7 +40,7 @@ export default function SimpleModal({ children }) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <div className={classes.paper}>
+        <div className={classes.paperModal}>
           <center>
             <div className="usuario">
               <h3>Fulano</h3>

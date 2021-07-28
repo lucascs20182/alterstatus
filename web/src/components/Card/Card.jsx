@@ -23,7 +23,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
     alignItems: "center",
     width: "90%",
-  }, 
+  },
+
+  title: {
+    display: 'flex',
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
   root: {
     display: 'table',
@@ -50,10 +56,12 @@ const useStyles = makeStyles((theme) => ({
     margin: 10,
   },
 
+
   user: {
     width: "40px",
     height: "38px",
   },
+
 
   nome: {
     textAlign: "center",
@@ -69,26 +77,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 3,
     wordBreak: "break-word",
     fontSize: 13,
-  },
-
-  addPessoa: {
-    height: 35,
-    width: 35,
-    paddingTop: 6,
-    paddingLeft: 6,
-    paddingRight: 10,
-    paddingBottom: 6,
-    alignSelf: 'center',
-  },
-
-  addCargo: {
-    height: 35,
-    width: 35,
-    paddingTop: 6,
-    paddingLeft: 6,
-    paddingRight: 6,
-    paddingBottom: 6,
-    alignSelf: 'center',
   },
 
   status: {
@@ -112,30 +100,23 @@ export default function CardMembros(props) {
 
   return (
     <div>
-      <h3 style={{ textAlign: 'center' }}>
-      <IconButton className={classes.addCargo}
-          aria-label="show more"
-          aria-haspopup="true"
-          color="secondary"
-        >
-          <PostAdd />
-        </IconButton>
-        <IconButton className={classes.addPessoa}
-          aria-label="show more"
-          aria-haspopup="true"
-          color="secondary"
-        >
-          {/* passar PersonAddIcon como child
-          gera o bug/warning: validateDOMNesting(...) */}
-          <Modal><PersonAddIcon /></Modal>
-        </IconButton>
-        Projeto-aplicado-Alterdata-grupo-4-Front-Back
-      </h3>
+      <div className={classes.title}>
+        <Modal>
+          <PostAdd color="secondary"/>
+        </Modal>
+
+        <Modal>
+          <PersonAddIcon color="secondary" style={{marginRight: 6}}/>
+        </Modal>
+        <h2 >
+          Pack-Alterdata
+        </h2>
+      </div>
       <div className={classes.container}>
         <div className={classes.root}>
           <div className={classes.info}>
             <div>
-              <ButtonCard/>
+              <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
             <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
