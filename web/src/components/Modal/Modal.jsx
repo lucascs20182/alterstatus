@@ -30,6 +30,8 @@ export default function SimpleModal({ children }) {
 
   return (
     <div>
+        { /* Verificar Warning: validateDOMNesting(...): 
+        <button> cannot appear as a descendant of <button>. */ }
         <Button className="buttonModal" type="submit" onClick={handleOpen}>
           {children}
         </Button>

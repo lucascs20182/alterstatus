@@ -125,6 +125,8 @@ export default function CardMembros(props) {
           aria-haspopup="true"
           color="secondary"
         >
+          {/* passar PersonAddIcon como child
+          gera o bug/warning: validateDOMNesting(...) */}
           <Modal><PersonAddIcon /></Modal>
         </IconButton>
         Projeto-aplicado-Alterdata-grupo-4-Front-Back
