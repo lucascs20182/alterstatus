@@ -50,7 +50,7 @@ public class CargoServiceImpl implements CargoService {
 	public ResponseEntity<Cargo> adicionar(@RequestBody Cargo cargo) {
 		cargo.setId(null);
 
-		var novoCargo = repositorioCargo.save(cargo);
+		Cargo novoCargo = repositorioCargo.save(cargo);
 		return new ResponseEntity<>(novoCargo, HttpStatus.CREATED);
 
 	}
@@ -59,7 +59,7 @@ public class CargoServiceImpl implements CargoService {
 	public ResponseEntity<Optional<Cargo>> atualizar(@PathVariable("id") Long id, @RequestBody Cargo cargo) {
 		cargo.setId(id);
 
-		var CargoAtualizado = repositorioCargo.findById(id);
+		Optional<Cargo> CargoAtualizado = repositorioCargo.findById(id);
 
 		if (CargoAtualizado.isEmpty()) {
 
@@ -73,7 +73,7 @@ public class CargoServiceImpl implements CargoService {
 
 	@Override
 	public ResponseEntity<?> deletar(@PathVariable("id") Long id) {
-		var existe = repositorioCargo.findById(id);
+		Optional<Cargo> existe = repositorioCargo.findById(id);
 
 		if (existe.isEmpty()) {
 			throw new ResourceNotFoundException("Não existe cargo para o id informado: " + id);

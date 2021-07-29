@@ -47,10 +47,10 @@ public class SquadServiceImpl implements SquadService {
 	}
 
     @Override
-	public ResponseEntity<Squad> adicionar(Squad Squad) {
-		Squad.setId(null);
-
-		var novoSquad = repositorioSquad.save(Squad);
+	public ResponseEntity<Squad> adicionar(Squad squad) {
+		squad.setId(null);
+		Squad novoSquad = repositorioSquad.save(squad);
+		
 		return new ResponseEntity<>(novoSquad, HttpStatus.CREATED);
 
 	}
@@ -59,7 +59,7 @@ public class SquadServiceImpl implements SquadService {
 	public ResponseEntity<Optional<Squad>> atualizar(Long id, Squad squad) {
 		squad.setId(id);
 
-		var SquadAtualizado = repositorioSquad.findById(id);
+		Optional<Squad> SquadAtualizado = repositorioSquad.findById(id);
 
 		if (SquadAtualizado.isEmpty()) {
 
@@ -73,12 +73,13 @@ public class SquadServiceImpl implements SquadService {
 
     @Override
 	public ResponseEntity<?> deletar(Long id) {
-		var existe = repositorioSquad.findById(id);
-
+		Optional<Squad> existe = repositorioSquad.findById(id);
+		existe.get().getUsuarios().forEach(u -> u.relacionarComSquad(null));
+		
 		if (existe.isEmpty()) {
 			throw new ResourceNotFoundException("Não existe categoria para o id informado: " + id);
 		}
-
+		
 		this.repositorioSquad.deleteById(id);
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}

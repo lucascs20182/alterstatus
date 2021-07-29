@@ -11,6 +11,8 @@ import java.util.Optional;
 import org.serratec.alterstatusapi.dto.UsuarioDTORequest;
 import org.serratec.alterstatusapi.exception.ResourceNotFoundException;
 import org.serratec.alterstatusapi.mapper.UsuarioMapper;
+import org.serratec.alterstatusapi.model.Cargo;
+import org.serratec.alterstatusapi.model.Squad;
 import org.serratec.alterstatusapi.model.Usuario;
 import org.serratec.alterstatusapi.repository.CargoRepository;
 import org.serratec.alterstatusapi.repository.SquadRepository;
@@ -107,6 +109,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		entity.setSenha(bCrypt.encode(dto.getSenha()));
 
 		entity = clienteRepository.save(entity);
+		entity.setId_usuario(entity.getId());
 
 		imagemService.cadastrar(entity, multipartFile);
 
@@ -126,6 +129,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 
 		entity.setSenha(bCrypt.encode(dto.getSenha()));
+		entity.setId_usuario(entity.getId());
 
 		entity = clienteRepository.save(entity);
 
@@ -177,9 +181,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario relacionarUsuarioComSquad(Long usuario_id, Long squad_id) {
-		var usuario = clienteRepository.findById(usuario_id).get();
-		var squad = repositorioSquad.findById(squad_id).get();
-
+		Usuario usuario = clienteRepository.findById(usuario_id).get();
+		Squad squad = repositorioSquad.findById(squad_id).get();
+		usuario.setId_squad(squad_id);
 		usuario.relacionarComSquad(squad);
 
 		return clienteRepository.save(usuario);
@@ -187,18 +191,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario relacionarUsuarioComCargo(Long usuario_id, Long cargo_id) {
-		var usuario = clienteRepository.findById(usuario_id).get();
-		var cargo = repositorioCargo.findById(cargo_id).get();
-
+		Usuario usuario = clienteRepository.findById(usuario_id).get();
+		Cargo cargo = repositorioCargo.findById(cargo_id).get();
+		usuario.setId_cargo(cargo_id);
 		usuario.relacionarComCargo(cargo);
 
 		return clienteRepository.save(usuario);
 	}
 
 	@Override
-	public @ResponseBody ResponseEntity<Optional<Usuario>> atualizarEspecifico(@PathVariable Long id,
-			@RequestBody Map<Object, Object> campos) {
-		var UsuarioAtualizado = clienteRepository.findById(id);
+	public ResponseEntity<Optional<Usuario>> atualizarEspecifico(Long id, Map<Object, Object> campos) {
+		Optional<Usuario> UsuarioAtualizado = clienteRepository.findById(id);
 		// Map key is field name, v is value
 		campos.forEach((chave, valor) -> {
 			// use reflection to get field k on manager and set it to value k
