@@ -74,8 +74,8 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>Perfil</MenuItem>
-      <Link to="/" className="link" style={{color: "#000"}}>
-        <MenuItem onClick={handleSair} style={{ width: "100px", textDecoration: "none" }}>
+      <Link to="/" className="link" style={{color: "#000", textDecoration: "none" }}>
+        <MenuItem onClick={handleSair} style={{ width: "100px" }}>
           Sair
         </MenuItem>
       </Link>
