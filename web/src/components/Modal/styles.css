@@ -6,7 +6,8 @@
   font-size: medium;
   align-content: center;
   justify-content: center;
-  margin-bottom: -15px;
+  border-radius: 60%;
+  margin-top: -30px;
 }
 
 .editarUsuario {
@@ -26,9 +27,11 @@
 }
 
 .status {
-  display: flex;
+  display: medium;
   align-content: center;
   justify-content: center;
+  border-radius: 50%;
+
 }
 
 .confirmarStatus {
@@ -39,8 +42,33 @@
 }
 
 .buttonModal {
+<<<<<<< Updated upstream
     height: 30px; 
     background-color: transparent;
     border-color: transparent;
     font-size: 16px;
+=======
+    width: 10px; 
+    height: 60px; 
+    border-radius: 100%;
+}
+
+.buttonModalClose {
+  margin-top: 16px;
+  width: 100px;
+  height: 35px;
+  border-radius: 8px;
+  background: #094B89;
+  color: #FFF;
+  font-size: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  cursor: pointer;
+  border: 0;
+
+  transition: filter 0.2s;
+>>>>>>> Stashed changes
 }

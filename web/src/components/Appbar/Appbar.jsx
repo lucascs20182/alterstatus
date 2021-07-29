@@ -24,6 +24,7 @@ import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
+import ModalSquad from '../Modal/ModalSquad';
 
 import { removerAutenticacao } from '../../utils/Storage';
 
@@ -115,7 +116,8 @@ export default function PrimarySearchAppBar() {
               </div>
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-              <h3>Olá, Guilherme</h3>
+              <h3>"Olá, Guilherme"</h3>
+
                 <IconButton
                   edge="end"
                   aria-label="user"
@@ -148,7 +150,8 @@ export default function PrimarySearchAppBar() {
               <Divider />
               <h3 className={classes.createSquad}>
                 Criar sala
-                <IconButton
+                <ModalSquad>
+               <IconButton
                   aria-label="show more"
                   aria-haspopup="true"
                   color="secondary"
@@ -159,7 +162,9 @@ export default function PrimarySearchAppBar() {
                       width: 28,
                     }}
                   />
-                </IconButton>
+                  
+                </IconButton> 
+                </ModalSquad> 
               </h3>
 
               <Divider />

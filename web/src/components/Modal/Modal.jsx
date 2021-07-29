@@ -2,19 +2,30 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
+import fecharJanela from '../../assets/fecharJanela.png';
 import "../Modal/styles.css"
 
 const useStyles = makeStyles((theme) => ({
   paperModal: {
-    width: 500,
-    height: 250,
-    backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
+    backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
+    width: 350,
+    height: 220,
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    marginLeft: -150,
+    marginTop: -150, 
   },
 
-
-}));
+    fecharJanela: {
+      width: 20,
+      height: 20,
+      marginLeft: 315,
+      marginTop: 7
+    }
+  }));
 
 export default function SimpleModal({ children }) {
   const classes = useStyles();
@@ -39,22 +50,23 @@ export default function SimpleModal({ children }) {
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-      >
+       >
         <div className={classes.paperModal}>
           <center>
+          <img className={classes.fecharJanela} src={fecharJanela} onClick={handleClose}/>
             <div className="usuario">
-              <h3>Fulano</h3>
-            </div>
-            <div className="cargo">
-              <p>Bombeiro</p>
-            </div>
+              <p>Nome:</p>
+            <input type="text" name="name" />
+             </div>
+            
             <div className="status">
+              <p>Status:</p>
               <input type="text" name="name" />
             </div>
           </center>
           <center>
-          <button className="button" type="submit" onClick={handleClose}>
-            fechar
+          <button className="buttonModalClose" type="submit" onClick={handleClose}>
+            Cadastrar
           </button>
           </center>
         </div>
