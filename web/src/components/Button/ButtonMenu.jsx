@@ -6,7 +6,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Modal from '../Modal/Modal'
+import ModalCargo from '../Modal/ModalCargo/ModalCargo';
+import ModalStatus from '../Modal/ModalStatus/ModalStatus';
+import ModalDeletar from '../Modal/ModalDeletar/ModalDeletar';
 
 const useStyles = makeStyles({
   pontinhos: { 
@@ -16,11 +18,6 @@ const useStyles = makeStyles({
 
 const ITEM_HEIGHT = 48;
 
-const options = [
-  'Editar status',
-  'Editar cargo',
-  'Excluir membro',
-];
 
 export default function PositionedTooltips() {
   const classes = useStyles();
@@ -65,13 +62,13 @@ export default function PositionedTooltips() {
               }}
             >
                 <MenuItem  onClick={handleClose}>
-                <Modal>Editar status</Modal>
+                <ModalCargo>Editar cargo</ModalCargo>
                 </MenuItem>
                 <MenuItem  onClick={handleClose}>
-                Editar status
+                <ModalStatus>Editar status</ModalStatus> 
                 </MenuItem>
                 <MenuItem  onClick={handleClose}>
-                Editar status
+                 <ModalDeletar>Deletar</ModalDeletar>
                 </MenuItem>
             </Menu>
         </Grid>

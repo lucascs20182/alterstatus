@@ -1,9 +1,8 @@
 import React from 'react';
+import fecharJanela from '../../../assets/fecharJanela.png';
 import { makeStyles } from '@material-ui/core/styles';
 import ModalSquad from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-import fecharJanela from '../../../assets/fecharJanela.png';
-import '../styles.css';
 
   const useStyles = makeStyles((theme) => ({
     paper: {
@@ -15,7 +14,7 @@ import '../styles.css';
       left: '50%',
       top: '50%',
       marginLeft: -150,
-      marginTop: -250, 
+      marginTop: -150, 
     },
 
     fechar: {
@@ -53,20 +52,7 @@ import '../styles.css';
       height: 20,
       marginLeft: 270,
       marginTop: 5
-    },
-
-    user: {
-      width: "100px",
-      height: "100px",
-      marginBottom: -10,
-    },
-
-    avatar: {
-      backgroundColor: "#094B89",
-      clipPath: 'circle(25%)',
-      padding: "7px",
-      margin: 10,
-    },
+    }
   }));
 
 export default function SimpleModal({ children }) {
@@ -96,10 +82,10 @@ export default function SimpleModal({ children }) {
         <div className={classes.paper}>
           <center>
           <img className={classes.fecharJanela} src={fecharJanela} onClick={handleClose}/>
-            <p className={classes.titulo}>Criar Squad: </p>
+            <p className={classes.titulo}>Nome do Squad: </p>
           <input className={classes.barra} type="text" name="name" />
           <Button className= {classes.buttonCriarSquad} type="submit" onClick={handleClose}>
-           <p>Criar</p>
+           <p>Cadastrar</p>
           </Button>
 
 

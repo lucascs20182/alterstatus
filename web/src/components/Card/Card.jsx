@@ -9,9 +9,9 @@ import fonts from '../../fonts/Fonts.css'
 import { makeStyles } from '@material-ui/core/styles';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import IconButton from '@material-ui/core/IconButton';
-import Modal from '../Modal/Modal'
+import Modal from '../Modal/Modal/Modal';
 import { PostAdd } from '@material-ui/icons';
-
+import ModalCriarSquad from '../Modal/ModalCriarSquad/ModalCriarSquad';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -101,9 +101,9 @@ export default function CardMembros(props) {
   return (
     <div>
       <div className={classes.title}>
-        <Modal>
+        <ModalCriarSquad>
           <PostAdd color="secondary"/>
-        </Modal>
+        </ModalCriarSquad>
 
         <Modal>
           <PersonAddIcon color="secondary" style={{marginRight: 6}}/>

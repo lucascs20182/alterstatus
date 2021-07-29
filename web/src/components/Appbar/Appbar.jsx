@@ -24,7 +24,8 @@ import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
-import ModalSquad from '../Modal/ModalSquad';
+import ModalSquad from '../Modal/ModalCargo/ModalCargo';
+import ModalPerfil from '../Modal/ModalPerfil/ModalPerfil';
 
 import { removerAutenticacao } from '../../utils/Storage';
 
@@ -73,9 +74,15 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+<<<<<<< Updated upstream
       <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>Perfil</MenuItem>
       <Link to="/" className="link" style={{color: "#000", textDecoration: "none" }}>
         <MenuItem onClick={handleSair} style={{ width: "100px" }}>
+=======
+     <ModalPerfil> <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>Perfil</MenuItem> </ModalPerfil>
+      <Link to="/" className="link" style={{color: "#000"}}>
+        <MenuItem onClick={handleSair} style={{ width: "100px", textDecoration: "none" }}>
+>>>>>>> Stashed changes
           Sair
         </MenuItem>
       </Link>
@@ -116,7 +123,7 @@ export default function PrimarySearchAppBar() {
               </div>
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-              <h3>"Olá, Guilherme"</h3>
+              <h3>Olá, Guilherme</h3>
 
                 <IconButton
                   edge="end"
