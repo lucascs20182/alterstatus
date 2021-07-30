@@ -1,6 +1,7 @@
 import React from 'react';
 import CardMembros from '../Card/Card'
 import alterstateLogo from '../../assets/alterstate_logo.png'
+import { useStyles } from './styles'
 
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -24,11 +25,10 @@ import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
-import ModalSquad from '../Modal/ModalSquad';
+import ModalSquad from '../Modal/ModalCargo/ModalCargo';
+import ModalPerfil from '../Modal/ModalPerfil/ModalPerfil';
 
 import { removerAutenticacao } from '../../utils/Storage';
-
-const drawerWidth = 240;
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
@@ -73,9 +73,9 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>Perfil</MenuItem>
-      <Link to="/" className="link" style={{color: "#000", textDecoration: "none" }}>
-        <MenuItem onClick={handleSair} style={{ width: "100px" }}>
+      <ModalPerfil><MenuItem style={{ width: "100px" }}>Perfil</MenuItem> </ModalPerfil>
+      <Link to="/" className="link" style={{ color: "#000", textDecoration: "none" }}>
+        <MenuItem onClick={handleSair} style={{ width: "100px", }}>
           Sair
         </MenuItem>
       </Link>
@@ -116,7 +116,7 @@ export default function PrimarySearchAppBar() {
               </div>
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-              <h3>"Olá, Guilherme"</h3>
+                <h3>Olá, Guilherme</h3>
 
                 <IconButton
                   edge="end"
@@ -146,36 +146,45 @@ export default function PrimarySearchAppBar() {
           </AppBar>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} >
             <List className={classes.list}>
-              <img src={alterstateLogo} className={classes.img} />
+              <Typography className={classes.subtitle}>
+                Alterstate
+              </Typography>
               <Divider />
               <h3 className={classes.createSquad}>
                 Criar sala
                 <ModalSquad>
-               <IconButton
-                  aria-label="show more"
-                  aria-haspopup="true"
-                  color="secondary"
-                >
-                  <AddCircle
-                    style={{
-                      height: 28,
-                      width: 28,
-                    }}
-                  />
-                  
-                </IconButton> 
-                </ModalSquad> 
+                  <IconButton
+                    aria-label="show more"
+                    aria-haspopup="true"
+                    color="secondary"
+                  >
+                    <AddCircle
+                      style={{
+                        height: 28,
+                        width: 28,
+                        marginBottom: 30
+                      }}
+                    />
+
+                  </IconButton>
+                </ModalSquad>
               </h3>
 
               <Divider />
               {['Pack', 'NFStock', 'Bimer', 'Shop'].map((text) => (
                 <ListItem button key={text} className={classes.equipes} >
-                  <ListItemIcon className={classes.iconSquad}><GroupIcon/></ListItemIcon>
+                  <ListItemIcon ><GroupIcon color="primary" /></ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItem>
               ))}
             </List>
             <Divider />
+            <List>
+              <h3 className={classes.createSquad}>
+                Membros
+              </h3>
+            </List>
+
           </Drawer>
           <main>
             <div className={classes.drawerHeader} />
@@ -188,146 +197,3 @@ export default function PrimarySearchAppBar() {
     </div>
   )
 }
-
-const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
-
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-    fontFamily: 'Poppins',
-    fontWeight: '700',
-    color: "#094B89",
-    fontSize: "25px",
-  },
-
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha('#D6D6D6', 0.40),
-    '&:hover': {
-      backgroundColor: alpha('#D6D6D6', 0.70),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '35ch',
-    },
-
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
-
-  list: {
-    width: 250,
-  },
-
-  fullList: {
-    width: 'auto',
-  },
-
-  equipes: {
-    marginBottom: 5,
-    marginTop: 5,
-    color: "#FFF",
-    backgroundColor: alpha('#094B89', 1),
-    '&:hover': {
-      backgroundColor: alpha('#094B89', 0.90),
-      color: alpha('#FFF', 1)
-    },
-    left: 10,
-    width: 230,
-  },
-
-  iconSquad: {
-    color: '#FFF',
-  },
-
-  logoutContainer: {
-    marginTop: "auto",
-    paddingBottom: "0",
-    position: "fixed",
-    width: drawerWidth,
-    bottom: 0
-  },
-
-  img: {
-    width: "100px",
-    height: "25px",
-    alignItems: "center",
-    justifyContent: "center",
-    display: "flex",
-    marginLeft: 68,
-    paddingBottom: 10,
-  },
-
-  createSquad: {
-    justifyContent: 'space-between',
-    marginLeft: 15,
-    alignItems: "center",
-    flex: 1,
-    display: "flex",
-  },
-
-  input: {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    marginLeft: theme.spacing(1),
-    width: 150,
-    backgroundColor: '#D6D6D6',
-    padding: '2px 6px',
-  },
-
-  iconButton: {
-    padding: 5,
-  },
-
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: "center",
-    padding: theme.spacing(3),
-  },
-
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(0),
-  },
-}));

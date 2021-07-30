@@ -9,9 +9,9 @@ import fonts from '../../fonts/Fonts.css'
 import { makeStyles } from '@material-ui/core/styles';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import IconButton from '@material-ui/core/IconButton';
-import Modal from '../Modal/Modal'
+import ModalCadastrar from '../Modal/ModalCadastrar/ModalCadastrar';
 import { PostAdd } from '@material-ui/icons';
-
+import ModalCriarSquad from '../Modal/ModalPapel/ModalPapel';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -101,15 +101,15 @@ export default function CardMembros(props) {
   return (
     <div>
       <div className={classes.title}>
-        <Modal>
+        <ModalCriarSquad >
           <PostAdd color="secondary"/>
-        </Modal>
+        </ModalCriarSquad>
 
-        <Modal>
-          <PersonAddIcon color="secondary" style={{marginRight: 6}}/>
-        </Modal>
-        <h2 >
-          Pack-Alterdata
+        <ModalCadastrar>
+          <PersonAddIcon color="secondary" style={{marginRight: 5,}}/>
+        </ModalCadastrar>
+        <h2 style={{marginRight: 5,}} >
+          Pack
         </h2>
       </div>
       <div className={classes.container}>
@@ -119,7 +119,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}>Guilherme.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>
