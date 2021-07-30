@@ -26,6 +26,7 @@ import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
 import ModalSquad from '../Modal/ModalCargo/ModalCargo';
 import ModalPerfil from '../Modal/ModalPerfil/ModalPerfil';
+import TreeView from '../TreeView/TreeView.jsx';
 
 import { removerAutenticacao } from '../../utils/Storage';
 
@@ -74,15 +75,9 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-<<<<<<< Updated upstream
-      <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>Perfil</MenuItem>
-      <Link to="/" className="link" style={{color: "#000", textDecoration: "none" }}>
-        <MenuItem onClick={handleSair} style={{ width: "100px" }}>
-=======
      <ModalPerfil> <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>Perfil</MenuItem> </ModalPerfil>
       <Link to="/" className="link" style={{color: "#000"}}>
         <MenuItem onClick={handleSair} style={{ width: "100px", textDecoration: "none" }}>
->>>>>>> Stashed changes
           Sair
         </MenuItem>
       </Link>
@@ -175,14 +170,9 @@ export default function PrimarySearchAppBar() {
               </h3>
 
               <Divider />
-              {['Pack', 'NFStock', 'Bimer', 'Shop'].map((text) => (
-                <ListItem button key={text} className={classes.equipes} >
-                  <ListItemIcon className={classes.iconSquad}><GroupIcon/></ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
             </List>
             <Divider />
+            <TreeView />
           </Drawer>
           <main>
             <div className={classes.drawerHeader} />
