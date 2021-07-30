@@ -101,17 +101,25 @@ export default function CardMembros(props) {
   return (
     <div>
       <div className={classes.title}>
+        
+         {/* icone de adicionar squad */}
         <ModalCriarSquad>
           <PostAdd color="secondary"/>
         </ModalCriarSquad>
 
+          {/* icone de adicionar usuario */}
         <Modal>
           <PersonAddIcon color="secondary" style={{marginRight: 6}}/>
         </Modal>
+
         <h2 >
           Pack-Alterdata
         </h2>
+
       </div>
+
+      {/* Campo onde vão ficar os usuarios da squad */}
+      
       <div className={classes.container}>
         <div className={classes.root}>
           <div className={classes.info}>
@@ -119,7 +127,7 @@ export default function CardMembros(props) {
               <ButtonCard />
               <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
             </div>
-            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
+            <h3 className={classes.nome}><Online />JailsonMendes.dsn.pack</h3>
             <p className={classes.cargo}>cargo</p>
             <p className={classes.status}>status</p>
           </div>

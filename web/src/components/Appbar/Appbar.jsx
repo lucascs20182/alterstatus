@@ -74,15 +74,9 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-<<<<<<< Updated upstream
-      <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>Perfil</MenuItem>
-      <Link to="/" className="link" style={{color: "#000", textDecoration: "none" }}>
-        <MenuItem onClick={handleSair} style={{ width: "100px" }}>
-=======
      <ModalPerfil> <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>Perfil</MenuItem> </ModalPerfil>
       <Link to="/" className="link" style={{color: "#000"}}>
         <MenuItem onClick={handleSair} style={{ width: "100px", textDecoration: "none" }}>
->>>>>>> Stashed changes
           Sair
         </MenuItem>
       </Link>
