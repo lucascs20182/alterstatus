@@ -3,6 +3,8 @@ package org.serratec.alterstatusapi.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.serratec.alterstatusapi.exception.ResourceBadRequestException;
+import org.serratec.alterstatusapi.exception.ResourceInternalServerErrorException;
 import org.serratec.alterstatusapi.exception.ResourceNotFoundException;
 import org.serratec.alterstatusapi.model.Squad;
 import org.serratec.alterstatusapi.repository.SquadRepository;
@@ -30,8 +32,8 @@ public class SquadServiceImpl implements SquadService {
 
 		if (Squad.isEmpty()) {
 			throw new ResourceNotFoundException("Não foi localizado nenhuma Squad!");
-
 		}
+		
 		return new ResponseEntity<>(Squad, HttpStatus.OK);
 	}
 
@@ -74,13 +76,19 @@ public class SquadServiceImpl implements SquadService {
     @Override
 	public ResponseEntity<?> deletar(Long id) {
 		Optional<Squad> existe = repositorioSquad.findById(id);
-		existe.get().getUsuarios().forEach(u -> u.relacionarComSquad(null));
-		
+
 		if (existe.isEmpty()) {
 			throw new ResourceNotFoundException("Não existe categoria para o id informado: " + id);
 		}
 		
+		if(existe.get().getUsuarios().isEmpty()) {
+			
 		this.repositorioSquad.deleteById(id);
+		
+		} else {
+			throw new ResourceBadRequestException("O squad não pôde ser deletado, pois ainda há usuários nele");
+		}
+		
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 
