@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.serratec.alterstatusapi.model.Cargo;
+import org.serratec.alterstatusapi.model.Squad;
 import org.serratec.alterstatusapi.service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,16 @@ public class CargoController {
 	public List<Cargo> obterTodos() {
 		return servicoCargo.obterTodos();
 	}
+	
+	@SecurityRequirement(name = "bearerAuth")
+	@GetMapping("/pagina/{pagina}/qtde/{qtdRegistros}")
+    public ResponseEntity<List<Cargo>> obterPaginado(
+            @PathVariable("pagina") Integer pagina,
+            @PathVariable("qtdRegistros") Integer qtdRegistros)
+            throws Exception {
+
+		return servicoCargo.obterPaginado(pagina, qtdRegistros);
+    }
 
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping("/{id}")

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface SquadService {
 	
 	 List<Squad> obterTodos();
+	 ResponseEntity<List<Squad>> obterPaginado(Integer pagina, Integer qtdRegistros) throws Exception;
 	 ResponseEntity<Optional<Squad>> obterPorId(Long id);
 	 ResponseEntity<List<Squad>> obterPorNome(String nome);
 	 ResponseEntity<Squad> adicionar(Squad Squad);

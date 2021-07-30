@@ -11,6 +11,7 @@ import org.serratec.alterstatusapi.dto.UsuarioDTOResponse;
 import org.serratec.alterstatusapi.exception.ResourceNotFoundException;
 import org.serratec.alterstatusapi.mapper.UsuarioMapper;
 import org.serratec.alterstatusapi.model.Imagem;
+import org.serratec.alterstatusapi.model.Squad;
 import org.serratec.alterstatusapi.model.Usuario;
 import org.serratec.alterstatusapi.service.ImagemService;
 import org.serratec.alterstatusapi.service.UsuarioService;
@@ -60,6 +61,24 @@ public class UsuarioController {
 
 		return new ResponseEntity<List<UsuarioDTOResponse>>(listaUsuariosResponse, HttpStatus.OK);
 	}
+	
+	@SecurityRequirement(name = "bearerAuth")
+	@GetMapping("/pagina/{pagina}/qtde/{qtdRegistros}")
+    public ResponseEntity<List<UsuarioDTOResponse>> obterPaginado(
+            @PathVariable("pagina") Integer pagina,
+            @PathVariable("qtdRegistros") Integer qtdRegistros)
+            throws Exception {
+		
+		List<UsuarioDTOResponse> listUsuariosResponse = new ArrayList<UsuarioDTOResponse>();
+		
+		for(Usuario usuario : servicoUsuario.obterPaginado(pagina, qtdRegistros)) {
+			listUsuariosResponse.add(mapper.toDto(usuario));
+		}
+
+        HttpHeaders headers = new HttpHeaders();
+        
+        return new ResponseEntity<List<UsuarioDTOResponse>>(listUsuariosResponse, headers, HttpStatus.OK);
+    }
 
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping("/{id}")

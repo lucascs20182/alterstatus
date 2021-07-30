@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface CargoService {
 
 	List<Cargo> obterTodos();
+	ResponseEntity<List<Cargo>> obterPaginado(Integer pagina, Integer qtdRegistros) throws Exception;
 	ResponseEntity<Optional<Cargo>> obterPorId(Long id);
 	ResponseEntity<List<Cargo>> obterPorNome(String nome);
 	ResponseEntity<Cargo> adicionar(Cargo cargo);

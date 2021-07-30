@@ -30,19 +30,20 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @Service
 public interface UsuarioService {
 
-	public List<Usuario> obterTodos();
-	public Usuario obterPorId(Long id) throws ResourceNotFoundException;
-	public List<Usuario> obterPorUsername(String username);
-	public Usuario obterImagem(Usuario usuario, Boolean isAvatarDefault);
-	public Usuario cadastrarArquivo(UsuarioDTORequest dto, MultipartFile multipartFile)
+	List<Usuario> obterTodos();
+	List<Usuario> obterPaginado(Integer pagina, Integer qtdRegistros) throws Exception;
+	Usuario obterPorId(Long id) throws ResourceNotFoundException;
+	List<Usuario> obterPorUsername(String username);
+	Usuario obterImagem(Usuario usuario, Boolean isAvatarDefault);
+	Usuario cadastrarArquivo(UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException;
-	public Usuario cadastrar(UsuarioDTORequest dto) throws ResourceNotFoundException;
-	public Usuario atualizar(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
+	Usuario cadastrar(UsuarioDTORequest dto) throws ResourceNotFoundException;
+	Usuario atualizar(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException;
-	public void deletar(Long id) throws ResourceNotFoundException;
-	public Usuario relacionarUsuarioComSquad(Long usuario_id, Long squad_id);
-	public Usuario relacionarUsuarioComCargo(Long usuario_id, Long cargo_id);
-	public @ResponseBody ResponseEntity<Optional<Usuario>> atualizarEspecifico(@PathVariable Long id,
+	void deletar(Long id) throws ResourceNotFoundException;
+	Usuario relacionarUsuarioComSquad(Long usuario_id, Long squad_id);
+	Usuario relacionarUsuarioComCargo(Long usuario_id, Long cargo_id);
+	@ResponseBody ResponseEntity<Optional<Usuario>> atualizarEspecifico(@PathVariable Long id,
 			@RequestBody Map<Object, Object> campos);
 
 
