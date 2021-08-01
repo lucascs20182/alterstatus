@@ -9,11 +9,11 @@ public class UsuarioDTORequest {
 	private String nome;
 
 	private String status;
-	
+
 	private Long id_usuario;
-	
+
 	private Long id_squad;
-	
+
 	private Long id_cargo;
 
 	public String getUsername() {
@@ -71,7 +71,5 @@ public class UsuarioDTORequest {
 	public void setId_cargo(Long id_cargo) {
 		this.id_cargo = id_cargo;
 	}
-	
-	
 
 }

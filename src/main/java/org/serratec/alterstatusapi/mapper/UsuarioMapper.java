@@ -44,6 +44,7 @@ public class UsuarioMapper {
 		dto.setDataCadastro(entity.getDataCadastro());
 		dto.setUrl(entity.getUrlImagem());
 		dto.setStatus(entity.getStatus());
+		dto.setIdSquad(entity.getId_squad());
 
 		return dto;
 	}

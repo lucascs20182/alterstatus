@@ -15,6 +15,8 @@ public class UsuarioDTOResponse {
 	private String url;
 
 	private String status;
+	
+	private Long idSquad;
 
 	public Long getId() {
 		return id;
@@ -64,4 +66,11 @@ public class UsuarioDTOResponse {
 		this.status = status;
 	}
 
+	public Long getIdSquad() {
+		return idSquad;
+	}
+
+	public void setIdSquad(Long idSquad) {
+		this.idSquad = idSquad;
+	}
 }

@@ -11,7 +11,6 @@ import org.serratec.alterstatusapi.dto.UsuarioDTOResponse;
 import org.serratec.alterstatusapi.exception.ResourceNotFoundException;
 import org.serratec.alterstatusapi.mapper.UsuarioMapper;
 import org.serratec.alterstatusapi.model.Imagem;
-import org.serratec.alterstatusapi.model.Squad;
 import org.serratec.alterstatusapi.model.Usuario;
 import org.serratec.alterstatusapi.service.ImagemService;
 import org.serratec.alterstatusapi.service.UsuarioService;
@@ -61,24 +60,22 @@ public class UsuarioController {
 
 		return new ResponseEntity<List<UsuarioDTOResponse>>(listaUsuariosResponse, HttpStatus.OK);
 	}
-	
+
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping("/pagina/{pagina}/qtde/{qtdRegistros}")
-    public ResponseEntity<List<UsuarioDTOResponse>> obterPaginado(
-            @PathVariable("pagina") Integer pagina,
-            @PathVariable("qtdRegistros") Integer qtdRegistros)
-            throws Exception {
-		
+	public ResponseEntity<List<UsuarioDTOResponse>> obterPaginado(@PathVariable("pagina") Integer pagina,
+			@PathVariable("qtdRegistros") Integer qtdRegistros) throws Exception {
+
 		List<UsuarioDTOResponse> listUsuariosResponse = new ArrayList<UsuarioDTOResponse>();
-		
-		for(Usuario usuario : servicoUsuario.obterPaginado(pagina, qtdRegistros)) {
+
+		for (Usuario usuario : servicoUsuario.obterPaginado(pagina, qtdRegistros)) {
 			listUsuariosResponse.add(mapper.toDto(usuario));
 		}
 
-        HttpHeaders headers = new HttpHeaders();
-        
-        return new ResponseEntity<List<UsuarioDTOResponse>>(listUsuariosResponse, headers, HttpStatus.OK);
-    }
+		HttpHeaders headers = new HttpHeaders();
+
+		return new ResponseEntity<List<UsuarioDTOResponse>>(listUsuariosResponse, headers, HttpStatus.OK);
+	}
 
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping("/{id}")
@@ -115,31 +112,31 @@ public class UsuarioController {
 
 	@SecurityRequirement(name = "bearerAuth")
 	@PostMapping
-	public ResponseEntity<String> cadastrar(@RequestParam(required=false) MultipartFile file, @RequestPart UsuarioDTORequest usuario)
-			throws ResourceNotFoundException, IOException {
+	public ResponseEntity<String> cadastrar(@RequestParam(required = false) MultipartFile file,
+			@RequestPart UsuarioDTORequest usuario) throws ResourceNotFoundException, IOException {
 
-		if(file==null) {
+		if (file == null) {
 			servicoUsuario.cadastrar(usuario);
 			return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.OK);
 		}
-		
-			servicoUsuario.cadastrarArquivo(usuario, file);
-			 
+
+		servicoUsuario.cadastrarArquivo(usuario, file);
+
 		return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.OK);
 	}
-	
+
 	@SecurityRequirement(name = "bearerAuth")
 	@PostMapping("/squad")
 	public Usuario cadastrarUsuarioNoSquad(@RequestBody Usuario usuario) {
 		return servicoUsuario.relacionarUsuarioComSquad(usuario.getId_usuario(), usuario.getId_squad());
 	}
-	
+
 	@SecurityRequirement(name = "bearerAuth")
 	@PutMapping("/squad")
 	public Usuario relacionarUsuarioComSquad(@RequestBody Usuario usuario) {
 		return servicoUsuario.relacionarUsuarioComSquad(usuario.getId_usuario(), usuario.getId_squad());
 	}
-	
+
 	@SecurityRequirement(name = "bearerAuth")
 	@PostMapping("/cargo")
 	public Usuario cadastrarUsuarioNoCargo(@RequestBody Usuario usuario) {
@@ -154,8 +151,8 @@ public class UsuarioController {
 
 	@SecurityRequirement(name = "bearerAuth")
 	@PutMapping
-	public ResponseEntity<String> atualizar(@RequestParam MultipartFile file,
-			@RequestPart UsuarioDTORequest usuario) throws ResourceNotFoundException, IOException {
+	public ResponseEntity<String> atualizar(@RequestParam MultipartFile file, @RequestPart UsuarioDTORequest usuario)
+			throws ResourceNotFoundException, IOException {
 		servicoUsuario.atualizar(usuario.getId_usuario(), usuario, file);
 
 		return new ResponseEntity<String>("Usuário editado com sucesso", HttpStatus.OK);
@@ -171,13 +168,13 @@ public class UsuarioController {
 
 	@SecurityRequirement(name = "bearerAuth")
 	@PatchMapping("/{id}")
-	public @ResponseBody ResponseEntity<Optional<Usuario>> atualizarEspecifico(@PathVariable("id")Long id,
+	public @ResponseBody ResponseEntity<Optional<Usuario>> atualizarEspecifico(@PathVariable("id") Long id,
 			@RequestBody Map<Object, Object> fields) {
-		Map<Object,Object> campos = fields;
-		for(Object campo: campos.entrySet()) {
-			 System.out.println(campo.equals("status")); 
-		 }
-			
+		Map<Object, Object> campos = fields;
+		for (Object campo : campos.entrySet()) {
+			System.out.println(campo.equals("status"));
+		}
+
 		return servicoUsuario.atualizarEspecifico(id, fields);
 	}
 }

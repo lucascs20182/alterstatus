@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -33,16 +32,14 @@ public class SquadController {
 	public List<Squad> obterTodos() {
 		return servicoSquad.obterTodos();
 	}
-	
+
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping("/pagina/{pagina}/qtde/{qtdRegistros}")
-    public ResponseEntity<List<Squad>> obterPaginado(
-            @PathVariable("pagina") Integer pagina,
-            @PathVariable("qtdRegistros") Integer qtdRegistros)
-            throws Exception {
+	public ResponseEntity<List<Squad>> obterPaginado(@PathVariable("pagina") Integer pagina,
+			@PathVariable("qtdRegistros") Integer qtdRegistros) throws Exception {
 
 		return servicoSquad.obterPaginado(pagina, qtdRegistros);
-    }
+	}
 
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping("/{id}")

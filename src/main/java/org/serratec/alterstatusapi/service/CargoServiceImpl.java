@@ -27,40 +27,39 @@ public class CargoServiceImpl implements CargoService {
 	public List<Cargo> obterTodos() {
 		return repositorioCargo.findAll();
 	}
-	
+
 	@Override
 	public ResponseEntity<List<Cargo>> obterPaginado(Integer pagina, Integer qtdRegistros) throws Exception {
-	        Pageable page = null;
-	        List<Cargo> listCargo = null;
-	        List<Cargo> listCargoComPaginacao = null;
-	        List<Cargo> listCargoFinal = new ArrayList<>();
+		Pageable page = null;
+		List<Cargo> listCargo = null;
+		List<Cargo> listCargoComPaginacao = null;
+		List<Cargo> listCargoFinal = new ArrayList<>();
 
-	        try {
-	            if (null != pagina && null != qtdRegistros) {
+		try {
+			if (null != pagina && null != qtdRegistros) {
 
-	                page = PageRequest.of(pagina, qtdRegistros);
-	                listCargoComPaginacao = repositorioCargo.findAll(page).getContent();
+				page = PageRequest.of(pagina, qtdRegistros);
+				listCargoComPaginacao = repositorioCargo.findAll(page).getContent();
 
-	                for (Cargo lCargo : listCargoComPaginacao) {
-	                    listCargoFinal.add(lCargo);
-	                }
+				for (Cargo lCargo : listCargoComPaginacao) {
+					listCargoFinal.add(lCargo);
+				}
 
-	            } else {
-	                listCargo = repositorioCargo.findAll();
+			} else {
+				listCargo = repositorioCargo.findAll();
 
-	                for (Cargo lCargo : listCargo) {
-	                    listCargoFinal.add(lCargo);
-	                }
-	            }
-	        } catch (Exception e) {
-	            throw new Exception("Não foi possível recuperar a lista de Cargos ::" + e.getMessage());
-	        }
+				for (Cargo lCargo : listCargo) {
+					listCargoFinal.add(lCargo);
+				}
+			}
+		} catch (Exception e) {
+			throw new Exception("Não foi possível recuperar a lista de Cargos ::" + e.getMessage());
+		}
 
-	        HttpHeaders headers = new HttpHeaders();
-	        
-	        return new ResponseEntity<List<Cargo>>(listCargoFinal, headers, HttpStatus.OK);
-	    }
+		HttpHeaders headers = new HttpHeaders();
 
+		return new ResponseEntity<List<Cargo>>(listCargoFinal, headers, HttpStatus.OK);
+	}
 
 	@Override
 	public ResponseEntity<Optional<Cargo>> obterPorId(@PathVariable("id") Long id) {

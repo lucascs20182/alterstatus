@@ -39,7 +39,7 @@ public class Squad {
 	private List<Cargo> cargos;
 
 	private Long id_squad;
-	
+
 	// --------------------------------------
 
 	public Squad(Long id, String nome, List<Cargo> cargos, List<Usuario> usuarios, Long id_squad) {
@@ -96,6 +96,4 @@ public class Squad {
 		this.id_squad = id_squad;
 	}
 
-	
-	
 }

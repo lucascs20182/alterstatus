@@ -39,7 +39,7 @@ public class Cargo {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "squad_id", referencedColumnName = "id")
 	private Squad squad;
-	
+
 	private Long id_cargo;
 
 	// ----------------------
@@ -97,6 +97,4 @@ public class Cargo {
 		this.id_cargo = id_cargo;
 	}
 
-	
-	
 }

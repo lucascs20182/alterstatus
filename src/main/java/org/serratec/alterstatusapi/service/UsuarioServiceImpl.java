@@ -13,23 +13,19 @@ import org.serratec.alterstatusapi.dto.UsuarioDTORequest;
 import org.serratec.alterstatusapi.exception.ResourceNotFoundException;
 import org.serratec.alterstatusapi.mapper.UsuarioMapper;
 import org.serratec.alterstatusapi.model.Cargo;
-import org.serratec.alterstatusapi.model.Usuario;
 import org.serratec.alterstatusapi.model.Squad;
+import org.serratec.alterstatusapi.model.Usuario;
 import org.serratec.alterstatusapi.repository.CargoRepository;
-import org.serratec.alterstatusapi.repository.UsuarioRepository;
 import org.serratec.alterstatusapi.repository.SquadRepository;
+import org.serratec.alterstatusapi.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -58,37 +54,37 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public List<Usuario> obterTodos() {
 		return clienteRepository.findAll();
 	}
-	
+
 	@Override
 	public List<Usuario> obterPaginado(Integer pagina, Integer qtdRegistros) throws Exception {
-	        Pageable page = null;
-	        List<Usuario> listUsuario = null;
-	        List<Usuario> listUsuarioComPaginacao = null;
-	        List<Usuario> listUsuarioVO = new ArrayList<>();
+		Pageable page = null;
+		List<Usuario> listUsuario = null;
+		List<Usuario> listUsuarioComPaginacao = null;
+		List<Usuario> listUsuarioVO = new ArrayList<>();
 
-	        try {
-	            if (null != pagina && null != qtdRegistros) {
+		try {
+			if (null != pagina && null != qtdRegistros) {
 
-	                page = PageRequest.of(pagina, qtdRegistros);
-	                listUsuarioComPaginacao = clienteRepository.findAll(page).getContent();
+				page = PageRequest.of(pagina, qtdRegistros);
+				listUsuarioComPaginacao = clienteRepository.findAll(page).getContent();
 
-	                for (Usuario lUsuario : listUsuarioComPaginacao) {
-	                    listUsuarioVO.add(lUsuario);
-	                }
+				for (Usuario lUsuario : listUsuarioComPaginacao) {
+					listUsuarioVO.add(lUsuario);
+				}
 
-	            } else {
-	                listUsuario = clienteRepository.findAll();
+			} else {
+				listUsuario = clienteRepository.findAll();
 
-	                for (Usuario lUsuario : listUsuario) {
-	                    listUsuarioVO.add(lUsuario);
-	                }
-	            }
-	        } catch (Exception e) {
-	            throw new Exception("Não foi possível recuperar a lista de Usuarios ::" + e.getMessage());
-	        }
+				for (Usuario lUsuario : listUsuario) {
+					listUsuarioVO.add(lUsuario);
+				}
+			}
+		} catch (Exception e) {
+			throw new Exception("Não foi possível recuperar a lista de Usuarios ::" + e.getMessage());
+		}
 
-	        return listUsuarioVO;
-	    }
+		return listUsuarioVO;
+	}
 
 	@Override
 	public Usuario obterPorId(Long id) throws ResourceNotFoundException {
@@ -150,7 +146,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		return clienteRepository.save(obterImagem(entity, false));
 	}
-	
+
 	@Override
 	public Usuario cadastrar(UsuarioDTORequest dto) throws ResourceNotFoundException {
 		Usuario entity = clienteMapper.toEntity(dto);
