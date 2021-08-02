@@ -178,13 +178,16 @@ export default function CardMembros(props) {
           props.pesquisa.length === 0 ?
             usuariosNaSquad.map(usuario => (
               <div className={classes.root} key={usuario.id}>
+                
                 <div className={classes.info}>
                   <div>
                     <ButtonCard />
-                    <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+                    <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} /></h3>
                   </div>
                   <h3 className={classes.nome}><Online />{usuario.username}</h3>
-                  <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                  {console.log(usuario)}
+                  {/* Objects are not valid as a React child */}
+                  <p className={classes.cargo}>Bug no cargo ehhe</p>
                   <p className={classes.status}>{usuario.status}</p>
                 </div>
               </div>
@@ -198,10 +201,12 @@ export default function CardMembros(props) {
                   <div className={classes.info}>
                     <div>
                       <ButtonCard />
-                      <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+                      <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} /></h3>
                     </div>
                     <h3 className={classes.nome}><Online />{usuario.username}</h3>
-                    <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                    {console.log(usuario)}
+                    {/* <p className={classes.cargo}>{usuario.cargo.nome}</p> */}
+                    <p className={classes.cargo}>Bug no cargo ehhe</p>
                     <p className={classes.status}>{usuario.status}</p>
                   </div>
                 </div>
