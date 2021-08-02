@@ -13,7 +13,11 @@ import Modal from '../Modal/Modal/Modal';
 import { PostAdd } from '@material-ui/icons';
 import ModalCriarSquad from '../Modal/ModalCriarSquad/ModalCriarSquad';
 
-import { obterTokenDaStorage } from '../../utils/Storage';
+import {
+  obterTokenDaStorage,
+  salvarNomeUsuarioNaStorage
+} from '../../utils/Storage';
+
 import { obterDadosUsuario } from '../../services/ApiUsuario';
 import { obterDadosSquad } from '../../services/ApiSquad';
 
@@ -100,6 +104,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CardMembros(props) {
   const classes = useStyles();
+  const [usuarioLogado, setUsuarioLogado] = useState({});
+  const [squadAtual, setSquadAtual] = useState({});
   const [usuariosNaSquad, setUsuariosNaSquad] = useState([]);
   const [carregar, setCarregar] = useState(true);
 
@@ -110,8 +116,13 @@ export default function CardMembros(props) {
       .then((resposta) => {
         const idSquad = resposta.data.idSquad;
 
+        setUsuarioLogado(resposta.data);
+
+        salvarNomeUsuarioNaStorage(resposta.data.nome);
+
         obterDadosSquad(idSquad)
           .then((resposta) => {
+            setSquadAtual(resposta.data);
             setUsuariosNaSquad(resposta.data.usuarios);
             setCarregar(false);
           })
@@ -129,30 +140,29 @@ export default function CardMembros(props) {
 
   return (
     <div>
-      <div className={classes.title}>
+      {carregar ?
+        ''
+        :
+        <div className={classes.title}>
 
-        {/* icone de adicionar squad */}
-        <ModalCriarSquad>
-          <PostAdd color="secondary" />
-        </ModalCriarSquad>
+          {/* icone de adicionar squad */}
+          <ModalCriarSquad>
+            <PostAdd color="secondary" />
+          </ModalCriarSquad>
 
-        {/* icone de adicionar usuario */}
-        <Modal>
-          <PersonAddIcon color="secondary" style={{ marginRight: 6 }} />
-        </Modal>
+          {/* icone de adicionar usuario */}
+          <Modal>
+            <PersonAddIcon color="secondary" style={{ marginRight: 6 }} />
+          </Modal>
 
-        <h2 >
-          Pack-Alterdata
-        </h2>
+          <h2 >
+            {squadAtual.nome}
+          </h2>
 
-      </div>
-
-      {/* Campo onde vão ficar os usuarios da squad */}
+        </div>
+      }
 
       <div className={classes.container}>
-        {/* interessante que o carregar não é meramente visual,
-        retira necessidade de fazer condição para ver se estado/array 
-        de usuários na squad é vazio */}
         {carregar ?
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <img src={loadingImg} width={100} alt="loading..." />
@@ -166,7 +176,7 @@ export default function CardMembros(props) {
                   <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
                 </div>
                 <h3 className={classes.nome}><Online />{usuario.username}</h3>
-                <p className={classes.cargo}>cargo</p>
+                <p className={classes.cargo}>{usuario.cargo.nome}</p>
                 <p className={classes.status}>{usuario.status}</p>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CardMembros from '../Card/Card'
 import alterstateLogo from '../../assets/alterstate_logo.png'
 
@@ -28,16 +28,21 @@ import ModalSquad from '../Modal/ModalCargo/ModalCargo';
 import ModalPerfil from '../Modal/ModalPerfil/ModalPerfil';
 import TreeView from '../TreeView/TreeView.jsx';
 
-import { removerAutenticacao } from '../../utils/Storage';
+import {
+  removerAutenticacao,
+  obterNomeUsuarioNaStorage
+} from '../../utils/Storage';
 
 const drawerWidth = 240;
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [state, setState] = React.useState({
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [state, setState] = useState({
     left: false,
   });
+
+  const [nomeUsuario, ] = useState(obterNomeUsuarioNaStorage());
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -132,7 +137,8 @@ export default function PrimarySearchAppBar() {
               </div>
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-                <h3>Olá, Guilherme</h3>
+                {console.log(obterNomeUsuarioNaStorage())}
+                <h3>{`Olá, ${nomeUsuario}`}</h3>
 
                 <IconButton
                   edge="end"
