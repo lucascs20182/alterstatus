@@ -11,7 +11,8 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import IconButton from '@material-ui/core/IconButton';
 import Modal from '../Modal/Modal/Modal';
 import { PostAdd } from '@material-ui/icons';
-import ModalCriarSquad from '../Modal/ModalCriarSquad/ModalCriarSquad';
+// import ModalCriarSquad from '../Modal/ModalCriarSquad/ModalCriarSquad';
+import ModalCargo from '../Modal/ModalCargo/ModalCargo';
 
 import {
   obterTokenDaStorage,
@@ -153,9 +154,14 @@ export default function CardMembros(props) {
         <div className={classes.title}>
 
           {/* icone de adicionar squad */}
-          <ModalCriarSquad>
+          {/* não seria de criar cargo e no menu toggle, aí sim squad? */}
+          {/* <ModalCriarSquad>
             <PostAdd color="secondary" />
-          </ModalCriarSquad>
+          </ModalCriarSquad> */}
+
+          <ModalCargo>
+            <PostAdd color="secondary" />
+          </ModalCargo>
 
           {/* icone de adicionar usuario */}
           <Modal>

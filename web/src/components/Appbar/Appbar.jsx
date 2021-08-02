@@ -24,7 +24,8 @@ import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
-import ModalSquad from '../Modal/ModalCargo/ModalCargo';
+// import ModalSquad from '../Modal/ModalCargo/ModalCargo';
+import ModalSquad from '../Modal/ModalCriarSquad/ModalCriarSquad';
 import ModalPerfil from '../Modal/ModalPerfil/ModalPerfil';
 import TreeView from '../TreeView/TreeView.jsx';
 

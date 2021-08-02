@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
@@ -10,6 +10,8 @@ import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+
+import { obterSquads } from '../../services/ApiSquad';
 
 const useTreeItemStyles = makeStyles((theme) => ({
   root: {
@@ -114,6 +116,17 @@ const useStyles = makeStyles({
 export default function GmailTreeView() {
   const classes = useStyles();
 
+  // useEffect(() => {
+  //   obterSquads
+  //     .then((resposta) => {
+  //       console.log(resposta);
+  //     })
+  //     .catch((erro) => {
+  //       alert("Erro! Verifique o console.");
+  //       console.error(erro);
+  //     });
+  // }, []);
+
   return (
     <TreeView
       className={classes.root}
@@ -181,21 +194,21 @@ export default function GmailTreeView() {
           color="#1a73e8"
           bgColor="#e8f0fe"
         />
-         <StyledTreeItem
+        <StyledTreeItem
           nodeId="13"
           labelText="larissa.dsn.pack"
           labelIcon={PersonIcon}
           color="#1a73e8"
           bgColor="#e8f0fe"
         />
-         <StyledTreeItem
+        <StyledTreeItem
           nodeId="14"
           labelText="andre.dsn.pack"
           labelIcon={PersonIcon}
           color="#1a73e8"
           bgColor="#e8f0fe"
         />
-      </StyledTreeItem>  
+      </StyledTreeItem>
     </TreeView>
   );
 }
