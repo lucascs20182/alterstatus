@@ -32,13 +32,11 @@ export const useStyles = makeStyles((theme) => ({
   info: {
     display: 'block',
     maxWidth: "200px",
-    height: "220px",
+    height: "215px",
   },
 
   avatar: {
-    // backgroundColor: "#094B89",
     clipPath: 'circle(26%)',
-    // padding: "7px",
     height: 70,
     marginBottom: 15
   },
@@ -46,7 +44,6 @@ export const useStyles = makeStyles((theme) => ({
 
   user: {
     height: 70
-    // height: "38px",
   },
 
 
