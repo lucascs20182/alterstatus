@@ -13,8 +13,7 @@ import ModalCriarPapel from '../Modal/ModalPapel/ModalPapel';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
-  obterTokenDaStorage,
-  salvarNomeUsuarioNaStorage
+  obterTokenDaStorage
 } from '../../utils/Storage';
 
 import { obterDadosUsuario } from '../../services/ApiUsuario';
@@ -27,9 +26,9 @@ export default function CardMembros(props) {
   const [usuariosNaSquad, setUsuariosNaSquad] = useState([]);
   const [carregar, setCarregar] = useState(true);
 
-  const usuariosFiltrados = usuariosNaSquad.filter(function(e) {
+  const usuariosFiltrados = usuariosNaSquad.filter(function (e) {
     return e.username.includes(props.pesquisa);
-    
+
     // const regexp = new RegExp(props.pesquisa, "gi");
     // return e.username.match(regexp) !== null;
   })
@@ -43,10 +42,9 @@ export default function CardMembros(props) {
 
         setUsuarioLogado(resposta.data);
 
-        salvarNomeUsuarioNaStorage(resposta.data.nome);
-
         obterDadosSquad(idSquad)
           .then((resposta) => {
+            // console.log(resposta.data);
             setSquadAtual(resposta.data);
             setUsuariosNaSquad(resposta.data.usuarios);
             setCarregar(false);
@@ -68,19 +66,19 @@ export default function CardMembros(props) {
       {carregar ?
         ''
         :
-      <div className={classes.title}>
-        {/* icone de adicionar squad */}
-        <ModalCriarPapel >
-          <PostAdd color="secondary"/>
-        </ModalCriarPapel>
+        <div className={classes.title}>
+          {/* icone de adicionar squad */}
+          <ModalCriarPapel >
+            <PostAdd color="secondary" />
+          </ModalCriarPapel>
 
-        {/* icone de adicionar usuario */}
-        <ModalCadastrar>
-          <PersonAddIcon color="secondary" style={{marginRight: 5,}}/>
-        </ModalCadastrar>
-        <h2 style={{marginRight: 5,}} >
-          Pack
-        </h2>
+          {/* icone de adicionar usuario */}
+          <ModalCadastrar>
+            <PersonAddIcon color="secondary" style={{ marginRight: 5, }} />
+          </ModalCadastrar>
+          <h2 style={{ marginRight: 5, }} >
+            Pack
+          </h2>
 
         </div>
       }
@@ -94,7 +92,7 @@ export default function CardMembros(props) {
           props.pesquisa.length === 0 ?
             usuariosNaSquad.map(usuario => (
               <div className={classes.root} key={usuario.id}>
-                
+
                 <div className={classes.info}>
                   <div>
                     <ButtonCard />
@@ -103,15 +101,21 @@ export default function CardMembros(props) {
                   <h3 className={classes.nome}>{usuario.username}</h3>
                   {/* {console.log(usuario)} */}
                   {/* Objects are not valid as a React child */}
-                  <p className={classes.cargo}>Bug no cargo ehhe</p>
+                  {usuario.cargo != null ?
+                    <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                    :
+                    <p className={classes.cargo}>Cargo indefinido</p>
+                  }
+
+                  {/* <p className={classes.cargo}>Bug no cargo ehhe</p> */}
                   <p className={classes.status}>{usuario.status}</p>
                 </div>
               </div>
             ))
-          :
+            :
             usuariosFiltrados.length === 0 ?
               'Nenhum usuário encontrado'
-            :
+              :
               usuariosFiltrados.map(usuario => (
                 <div className={classes.root} key={usuario.id}>
                   <div className={classes.info}>
@@ -121,8 +125,12 @@ export default function CardMembros(props) {
                     </div>
                     <h3 className={classes.nome}><Online />{usuario.username}</h3>
                     {/* {console.log(usuario)} */}
-                    {/* <p className={classes.cargo}>{usuario.cargo.nome}</p> */}
-                    <p className={classes.cargo}>Bug no cargo ehhe</p>
+                    {usuario.cargo != null ?
+                      <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                      :
+                      <p className={classes.cargo}>Cargo indefinido</p>
+                    }
+                    {/* <p className={classes.cargo}>Bug no cargo ehhe</p> */}
                     <p className={classes.status}>{usuario.status}</p>
                   </div>
                 </div>
