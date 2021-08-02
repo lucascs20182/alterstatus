@@ -14,6 +14,8 @@ import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import '../styles.css';
 import '../../../styles/login.css'
+import IconButton from '@material-ui/core/IconButton';
+import AddAPhoto from '@material-ui/icons/AddAPhoto';
 
 const useStyles = makeStyles((theme) => ({
   fecharJanela: {
@@ -34,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10
   },
 
+  input: {
+    display: 'none',
+  },
+
 }));
 
 export default function SimpleModal({ children }) {
@@ -43,10 +49,11 @@ export default function SimpleModal({ children }) {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  
   const handleClose = () => {
     setOpen(false);
   };
+  
 
   return (
     <div>
@@ -64,12 +71,27 @@ export default function SimpleModal({ children }) {
         style={{ width: "100%" }}
       >
 
+
+
         <form className="form" style={{ width: "270px", height: "450px" }} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 style={{ textAlign: 'center', marginTop: -5 }}>Perfil</h3>
             <h3 className={classes.avatar}><img className={classes.user} /></h3>
-            <p>*</p>
+
+            {/* --------Botão camera-------- */}
+              
+            <div className={classes.root}>
+              
+            <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+            <label htmlFor="icon-button-file">
+              <IconButton color="secondary" aria-label="upload picture" component="span">
+                <AddAPhoto />
+              </IconButton>
+            </label>
+            </div>
+            {/* -------------lembrar de reposicionar quando tiver a foto no menu-------------- */}
+
             <TextField
               className={classes.field}
               name="Nome"
@@ -79,6 +101,7 @@ export default function SimpleModal({ children }) {
               color="secondary"
               onChange={(e) => setUsername(e.target.value)}
             />
+
 
             <TextField
               className={classes.field}
