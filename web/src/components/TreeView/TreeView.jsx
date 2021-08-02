@@ -52,10 +52,10 @@ const useTreeItemStyles = makeStyles((theme) => ({
   labelRoot: {
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(0.5, 0),
+    padding: theme.spacing(0.50, 1),
   },
   labelIcon: {
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(2),
   },
   labelText: {
     fontWeight: 'inherit',
@@ -107,7 +107,7 @@ StyledTreeItem.propTypes = {
 
 const useStyles = makeStyles({
   root: {
-    height: 264,
+    height: 280,
     flexGrow: 1,
     maxWidth: 400,
   },
@@ -135,7 +135,7 @@ export default function GmailTreeView() {
       defaultExpandIcon={<ArrowRightIcon />}
       defaultEndIcon={<div style={{ width: 24 }} />}
     >
-      <StyledTreeItem nodeId="3" labelText="Squads" labelIcon={GroupOutlinedIcon}>
+      <StyledTreeItem nodeId="3" labelText="Squads" color="#1a73e8" labelIcon={GroupOutlinedIcon}>
         <StyledTreeItem
           nodeId="4"
           labelText="NFStock"
@@ -165,7 +165,7 @@ export default function GmailTreeView() {
           bgColor="#e8f0fe"
         />
       </StyledTreeItem>
-      <StyledTreeItem nodeId="8" labelText="Usuários" labelIcon={PersonOutlineIcon} >
+      <StyledTreeItem nodeId="8" labelText="Usuários" color="#1a73e8" labelIcon={PersonOutlineIcon} >
         <StyledTreeItem
           nodeId="9"
           labelText="gabriel.dsn.pack"

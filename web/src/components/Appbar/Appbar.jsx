@@ -109,7 +109,7 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
-
+// Menu de squad, usuarios e criar equipe do lado direito
   return (
     <div className={classes.grow}>
       {['left'].map((anchor) => (
@@ -132,6 +132,7 @@ export default function PrimarySearchAppBar() {
                 <div className={classes.searchIcon}>
                   <SearchIcon />
                 </div>
+                {/* menu de busca */}
                 <InputBase
                   placeholder="Buscar membros..."
                   onChange={e => setPesquisa(e.target.value)}
@@ -143,6 +144,7 @@ export default function PrimarySearchAppBar() {
                 />
               </div>
               <div className={classes.grow} />
+              
               <div className={classes.sectionDesktop}>
                 <h3>{`Olá, ${nomeUsuario}`}</h3>
 
