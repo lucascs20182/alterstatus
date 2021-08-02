@@ -150,13 +150,16 @@ export default function CardMembros(props) {
       {/* Campo onde vão ficar os usuarios da squad */}
 
       <div className={classes.container}>
+        {/* interessante que o carregar não é meramente visual,
+        retira necessidade de fazer condição para ver se estado/array 
+        de usuários na squad é vazio */}
         {carregar ?
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <img src={loadingImg} width={100} alt="loading..." />
           </div>
           :
           usuariosNaSquad.map(usuario => (
-            <div className={classes.root}>
+            <div className={classes.root} key={usuario.id}>
               <div className={classes.info}>
                 <div>
                   <ButtonCard />

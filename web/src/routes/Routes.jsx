@@ -1,23 +1,10 @@
 import React from 'react';
 import { Route, Switch, Redirect} from 'react-router-dom';
-import { createTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+
 import { obterTokenDaStorage } from '../utils/Storage';
 
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#fff',
-    },
-    secondary: {
-      main: '#094B89',
-    },
-  },
-
-});
 
 const isAuthenticated = () => {
   let [token, ] = obterTokenDaStorage();
@@ -38,13 +25,21 @@ const RotaPrivada = ({ component: Component, ...rest}) => (
 const Rotas = () => (
     <Switch>
       <Route exact path="/" component={Login}/>
-
-      <ThemeProvider theme={theme}>
+      
+      {/**
+       * ThemeProvider não é reconhecido pelo Switch
+       * gera warning de Failed prop type
+       * 
+       * Adicionei o ThemeProvider diretamente na Home
+       * antes das divs que exportavam o AppBar
+       * por isso não deve afetar nada
+       * 
+       * Mas verificar se algum bug foi gerado
+       */}
       <RotaPrivada path="/home" component={Home}/>
 
       {/* Redireciona erros 404s para Home */}
       <Redirect to='/home' />
-      </ThemeProvider>
     </Switch>
 );
 

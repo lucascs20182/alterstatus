@@ -75,8 +75,22 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-     <ModalPerfil> <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>Perfil</MenuItem> </ModalPerfil>
-      <Link to="/" className="link" style={{color: "#000"}}>
+      {/**
+       * ModalPerfil disparando warning "Function components cannot be given refs aqui"
+       * componentes <Menu> costumam ter MenuItem, MenuIcon e coisas assim
+       * 
+       * Adicionei <MenuItem> em volta do <ModalPerfil> e o warning parou
+       * 
+       * Verificar se nada foi quebrado ou algum bug gerado
+       */}
+      <MenuItem>
+        <ModalPerfil>
+          <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>
+            Perfil
+          </MenuItem>
+        </ModalPerfil>
+      </MenuItem>
+      <Link to="/" className="link" style={{ color: "#000" }}>
         <MenuItem onClick={handleSair} style={{ width: "100px", textDecoration: "none" }}>
           Sair
         </MenuItem>
@@ -118,7 +132,7 @@ export default function PrimarySearchAppBar() {
               </div>
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-              <h3>Olá, Guilherme</h3>
+                <h3>Olá, Guilherme</h3>
 
                 <IconButton
                   edge="end"
@@ -153,20 +167,20 @@ export default function PrimarySearchAppBar() {
               <h3 className={classes.createSquad}>
                 Criar sala
                 <ModalSquad>
-               <IconButton
-                  aria-label="show more"
-                  aria-haspopup="true"
-                  color="secondary"
-                >
-                  <AddCircle
-                    style={{
-                      height: 28,
-                      width: 28,
-                    }}
-                  />
-                  
-                </IconButton> 
-                </ModalSquad> 
+                  <IconButton
+                    aria-label="show more"
+                    aria-haspopup="true"
+                    color="secondary"
+                  >
+                    <AddCircle
+                      style={{
+                        height: 28,
+                        width: 28,
+                      }}
+                    />
+
+                  </IconButton>
+                </ModalSquad>
               </h3>
 
               <Divider />
