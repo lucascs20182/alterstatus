@@ -1,6 +1,5 @@
 import React from 'react';
 
-import fecharJanela from '../../../assets/fecharJanela.png';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';

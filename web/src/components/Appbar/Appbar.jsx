@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CardMembros from '../Card/Card'
 import alterstateLogo from '../../assets/alterstate_logo.png'
 import { useStyles } from './styles'
@@ -25,18 +25,27 @@ import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
-import ModalSquad from '../Modal/ModalCargo/ModalSquad';
+import ModalSquad from '../Modal/ModalSquad/ModalSquad';
 import ModalPerfil from '../Modal/ModalPerfil/ModalPerfil';
 import TreeView from '../TreeView/TreeView.jsx';
 
-import { removerAutenticacao } from '../../utils/Storage';
+import {
+  removerAutenticacao,
+  obterNomeUsuarioNaStorage
+} from '../../utils/Storage';
+
+import { useHistory } from 'react-router-dom';
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [state, setState] = React.useState({
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [state, setState] = useState({
     left: false,
   });
+  const [nomeUsuario,] = useState(obterNomeUsuarioNaStorage());
+  const [pesquisa, setPesquisa] = useState('');
+
+  const history = useHistory();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -60,6 +69,8 @@ export default function PrimarySearchAppBar() {
     removerAutenticacao();
 
     handleMenuClose();
+
+    history.push('/login');
   }
 
   const menuId = 'primary-search-account-menu';
@@ -74,12 +85,27 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem style={{ width: "100px" }}><ModalPerfil> Perfil </ModalPerfil></MenuItem>
-      <Link to="/" className="link" style={{ color: "#000", textDecoration: "none" }}>
-        <MenuItem onClick={handleSair} style={{ width: "100px", }}>
-          Sair
-        </MenuItem>
-      </Link>
+      {/**
+       * ModalPerfil disparando warning "Function components cannot be given refs aqui"
+       * componentes <Menu> costumam ter MenuItem, MenuIcon e coisas assim
+       * 
+       * Adicionei <MenuItem> em volta do <ModalPerfil> e o warning parou
+       * 
+       * Verificar se nada foi quebrado ou algum bug gerado
+       */}
+      <MenuItem>
+        <ModalPerfil>
+          <MenuItem onClick={handleMenuClose} style={{ width: "100%", }}>
+            Perfil
+          </MenuItem>
+        </ModalPerfil>
+      </MenuItem>
+      {/* <Link to="/" className="link" style={{ color: "#000" }}> */}
+      {/* para usar roteamento é melhor fazer navegação pelo history  */}
+      <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
+        Sair
+      </MenuItem>
+      {/* </Link> */}
     </Menu>
   );
 
@@ -108,6 +134,7 @@ export default function PrimarySearchAppBar() {
                 </div>
                 <InputBase
                   placeholder="Buscar membros..."
+                  onChange={e => setPesquisa(e.target.value)}
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
@@ -117,7 +144,7 @@ export default function PrimarySearchAppBar() {
               </div>
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-                <h3>Olá, Guilherme</h3>
+                <h3>{`Olá, ${nomeUsuario}`}</h3>
 
                 <IconButton
                   edge="end"
@@ -158,12 +185,14 @@ export default function PrimarySearchAppBar() {
                     aria-label="show more"
                     aria-haspopup="true"
                     color="secondary"
+                    style={{
+                      height: '100%'
+                    }}
                   >
                     <AddCircle
                       style={{
                         height: 28,
-                        width: 28,
-                        marginBottom: 30
+                        width: 28
                       }}
                     />
 
@@ -177,7 +206,7 @@ export default function PrimarySearchAppBar() {
           </Drawer>
           <main>
             <div className={classes.drawerHeader} />
-            <CardMembros />
+            <CardMembros pesquisa={pesquisa} />
           </main>
 
           {renderMenu}
@@ -186,3 +215,4 @@ export default function PrimarySearchAppBar() {
     </div>
   )
 }
+

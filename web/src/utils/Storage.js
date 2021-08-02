@@ -13,4 +13,13 @@ export function obterTokenDaStorage() {
 export function removerAutenticacao() {
     localStorage.removeItem("token");
     localStorage.removeItem("idUsuario");
+    localStorage.removeItem("nomeUsuario");
+}
+
+export function salvarNomeUsuarioNaStorage(nome) {
+    localStorage.setItem('nomeUsuario', nome);
+}
+
+export function obterNomeUsuarioNaStorage() {
+    return localStorage.getItem('nomeUsuario');
 }

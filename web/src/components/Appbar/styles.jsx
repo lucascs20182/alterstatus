@@ -18,14 +18,11 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   subtitle: {
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
     fontFamily: 'Poppins',
     fontWeight: '700',
     color: "#094B89",
     fontSize: "25px",
-    marginLeft: 55
+    textAlign: "center",
   },
 
   search: {
@@ -68,18 +65,21 @@ export const useStyles = makeStyles((theme) => ({
     },
 
   },
+
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     },
   },
+
   sectionMobile: {
     display: 'flex',
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
+  
 
   list: {
     width: 250,
@@ -100,6 +100,10 @@ export const useStyles = makeStyles((theme) => ({
     },
     left: 10,
     width: 230,
+  },
+
+  iconSquad: {
+    color: '#FFF',
   },
 
   logoutContainer: {
@@ -123,11 +127,9 @@ export const useStyles = makeStyles((theme) => ({
   createSquad: {
     justifyContent: 'space-between',
     marginLeft: 15,
-    alignItems: "center",
     flex: 1,
     display: "flex",
-    marginTop: 0,
-    marginBottom: 0
+    alignItems: "center"
   },
 
   input: {

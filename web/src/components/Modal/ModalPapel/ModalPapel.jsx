@@ -1,6 +1,5 @@
 import React from 'react';
 
-import fecharJanela from '../../../assets/fecharJanela.png';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -44,7 +43,7 @@ export default function ModalCriarPapel({ children }) {
 
   return (
     <div>
-      <Tooltip title="Criar categoria" arrow>
+      <Tooltip title="Criar papel" arrow>
         <button className="buttonModal" type="submit" onClick={handleOpen}>
           {children}
         </button>

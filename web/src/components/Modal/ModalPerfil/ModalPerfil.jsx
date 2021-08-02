@@ -26,7 +26,13 @@ const useStyles = makeStyles((theme) => ({
 
   field: {
     marginBottom: 15,
-  }
+  },
+  
+  avatar: {
+    clipPath: 'circle(26%)',
+    height: 70,
+    marginBottom: 10
+  },
 
 }));
 
@@ -58,11 +64,11 @@ export default function SimpleModal({ children }) {
         style={{ width: "100%" }}
       >
 
-        <form className="form" style={{ width: "270px", height: "400px" }} >
+        <form className="form" style={{ width: "270px", height: "450px" }} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 style={{ textAlign: 'center', marginTop: -5 }}>Perfil</h3>
-
+            <h3 className={classes.avatar}><img className={classes.user} /></h3>
             <p>*</p>
             <TextField
               className={classes.field}
