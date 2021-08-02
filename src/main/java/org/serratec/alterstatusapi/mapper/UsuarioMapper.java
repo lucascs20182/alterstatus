@@ -4,7 +4,7 @@ import org.serratec.alterstatusapi.dto.UsuarioDTORequest;
 import org.serratec.alterstatusapi.dto.UsuarioDTOResponse;
 import org.serratec.alterstatusapi.exception.ResourceNotFoundException;
 import org.serratec.alterstatusapi.model.Usuario;
-import org.serratec.alterstatusapi.repository.SquadRepository;
+import org.serratec.alterstatusapi.repository.CargoRepository;
 import org.serratec.alterstatusapi.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ public class UsuarioMapper {
 	UsuarioService service;
 	
 	@Autowired
-	private SquadRepository repositorioSquad;
+	private CargoRepository repositorioCargo;
 
 	public Usuario toEntity(UsuarioDTORequest dto) throws ResourceNotFoundException {
 		Usuario entity = new Usuario();
@@ -43,7 +43,7 @@ public class UsuarioMapper {
 		UsuarioDTOResponse dto = new UsuarioDTOResponse();
 		
 		if(entity.getId_cargo() != null) {
-			String nomeCargo = repositorioSquad.getById(entity.getId_cargo()).getNome();
+			String nomeCargo = repositorioCargo.getById(entity.getId_cargo()).getNome();
 			
 			dto.setNomeCargo(nomeCargo);
 		}
