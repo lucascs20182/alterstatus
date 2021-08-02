@@ -3,18 +3,13 @@ import CardMembros from '../Card/Card'
 import alterstateLogo from '../../assets/alterstate_logo.png'
 import { useStyles } from './styles'
 
-import { alpha, makeStyles } from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
-import ListItem from '@material-ui/core/ListItem';
-import GroupIcon from '@material-ui/icons/Group';
 import Divider from '@material-ui/core/Divider';
 import Toolbar from '@material-ui/core/Toolbar';
 import { AddCircle } from '@material-ui/icons';
@@ -24,7 +19,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
-import { Link } from 'react-router-dom';
 import ModalSquad from '../Modal/ModalSquad/ModalSquad';
 import ModalPerfil from '../Modal/ModalPerfil/ModalPerfil';
 import TreeView from '../TreeView/TreeView.jsx';

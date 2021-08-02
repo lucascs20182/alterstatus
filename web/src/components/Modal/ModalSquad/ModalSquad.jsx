@@ -1,17 +1,12 @@
 import React from 'react';
-
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import CloseIcon from '@material-ui/icons/Close';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
 import '../styles.css';
+
+import DialogActions from '@material-ui/core/DialogActions';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import CloseIcon from '@material-ui/icons/Close';
+import Tooltip from '@material-ui/core/Tooltip';
+import Dialog from '@material-ui/core/Dialog';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -43,11 +38,11 @@ export default function ModalCriarPapel({ children }) {
 
   return (
     <div>
-
-      <button className="buttonModal" type="submit" onClick={handleOpen}>
-        {children}
-      </button>
-
+      <Tooltip title="Criar squad" arrow>
+        <button className="buttonModal" type="submit" onClick={handleOpen}>
+          {children}
+        </button>
+      </Tooltip>
       <Dialog
         open={open}
         onClose={handleClose}

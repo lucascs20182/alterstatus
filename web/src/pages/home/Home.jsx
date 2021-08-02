@@ -18,10 +18,10 @@ const theme = createTheme({
 
 export default function Home() {
   return (
-    <ThemeProvider theme={theme}>
-      <div>
+    <div>
+      <ThemeProvider theme={theme}>
         <AppBar />
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </div>
   )
 }

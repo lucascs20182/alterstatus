@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { logar } from '../../services/ApiUsuario';
+import { salvarTokenNaStorage } from '../../utils/Storage';
 import alterdataLogo from '../../assets/alterdata-logo.svg'
 import alterstateLogo from '../../assets/alterstate_logo.png'
+import '../../styles/login.css'
+import AlertaError from '../../components/Alert/AlertErrorLogar'
+
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-import { logar } from '../../services/ApiUsuario';
-import { salvarTokenNaStorage } from '../../utils/Storage';
-
-import '../../styles/login.css'
-import loadingImg from '../../assets/loading.gif';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [senha, setSenha] = useState('');
   const [carregar, setCarregar] = useState(false);
+  const [erro, setErro] = useState(false);
 
   const history = useHistory();
 
   const handleEntrar = (e) => {
     e.preventDefault();
     setCarregar(true);
+    setErro(false);
 
     logar(username, senha)
       .then((resposta) => {
@@ -31,9 +32,9 @@ function Login() {
         history.push('/home');
       })
       .catch((erro) => {
-        alert("Erro! Verifique o console.");
         console.error(erro);
         setCarregar(false);
+        setErro(true);
       });
   }
 
@@ -61,8 +62,8 @@ function Login() {
             <TextField
               className="field"
               id="standard-password-input"
-              name="Password"
-              label="Password"
+              name="Senha"
+              label="Senha"
               variant="outlined"
               type="password"
               size="small"
@@ -81,6 +82,15 @@ function Login() {
           }
         </form>
       </div>
+      {erro ?
+        <div>
+          <AlertaError />
+        </div>
+
+        :
+
+        ''
+      }
     </div>
 
   );
