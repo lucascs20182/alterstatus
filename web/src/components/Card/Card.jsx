@@ -109,6 +109,13 @@ export default function CardMembros(props) {
   const [usuariosNaSquad, setUsuariosNaSquad] = useState([]);
   const [carregar, setCarregar] = useState(true);
 
+  const usuariosFiltrados = usuariosNaSquad.filter(function(e) {
+    return e.username.includes(props.pesquisa);
+    
+    // const regexp = new RegExp(props.pesquisa, "gi");
+    // return e.username.match(regexp) !== null;
+  })
+
   useEffect(() => {
     let [, idUsuario] = obterTokenDaStorage();
 
@@ -168,19 +175,38 @@ export default function CardMembros(props) {
             <img src={loadingImg} width={100} alt="loading..." />
           </div>
           :
-          usuariosNaSquad.map(usuario => (
-            <div className={classes.root} key={usuario.id}>
-              <div className={classes.info}>
-                <div>
-                  <ButtonCard />
-                  <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+          props.pesquisa.length === 0 ?
+            usuariosNaSquad.map(usuario => (
+              <div className={classes.root} key={usuario.id}>
+                <div className={classes.info}>
+                  <div>
+                    <ButtonCard />
+                    <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+                  </div>
+                  <h3 className={classes.nome}><Online />{usuario.username}</h3>
+                  <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                  <p className={classes.status}>{usuario.status}</p>
                 </div>
-                <h3 className={classes.nome}><Online />{usuario.username}</h3>
-                <p className={classes.cargo}>{usuario.cargo.nome}</p>
-                <p className={classes.status}>{usuario.status}</p>
               </div>
-            </div>
-          ))}
+            ))
+          :
+            usuariosFiltrados.length === 0 ?
+              'Nenhum usuário encontrado'
+            :
+              usuariosFiltrados.map(usuario => (
+                <div className={classes.root} key={usuario.id}>
+                  <div className={classes.info}>
+                    <div>
+                      <ButtonCard />
+                      <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
+                    </div>
+                    <h3 className={classes.nome}><Online />{usuario.username}</h3>
+                    <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                    <p className={classes.status}>{usuario.status}</p>
+                  </div>
+                </div>
+              ))
+        }
       </div>
     </div>
   );

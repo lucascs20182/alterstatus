@@ -41,8 +41,8 @@ export default function PrimarySearchAppBar() {
   const [state, setState] = useState({
     left: false,
   });
-
   const [nomeUsuario, ] = useState(obterNomeUsuarioNaStorage());
+  const [pesquisa, setPesquisa] = useState('');
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -126,18 +126,18 @@ export default function PrimarySearchAppBar() {
                 <div className={classes.searchIcon}>
                   <SearchIcon />
                 </div>
-                <InputBase
+                <InputBase                
                   placeholder="Buscar membros..."
+                  onChange={e => setPesquisa(e.target.value)}
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
                   inputProps={{ 'aria-label': 'Buscar membros...' }}
-                />
+                />                
               </div>
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-                {console.log(obterNomeUsuarioNaStorage())}
                 <h3>{`Olá, ${nomeUsuario}`}</h3>
 
                 <IconButton
@@ -196,7 +196,7 @@ export default function PrimarySearchAppBar() {
           </Drawer>
           <main>
             <div className={classes.drawerHeader} />
-            <CardMembros />
+            <CardMembros pesquisa={pesquisa} />
           </main>
 
           {renderMenu}
