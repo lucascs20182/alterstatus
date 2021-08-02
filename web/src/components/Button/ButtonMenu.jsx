@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import ModalCargo from '../Modal/ModalCargo/ModalCargo';
+import ModalListaDeCargos from '../Modal/ModalListaDePapeis/ModalListaDePapeis';
 import ModalStatus from '../Modal/ModalStatus/ModalStatus';
 import ModalDeletar from '../Modal/ModalDeletar/ModalDeletar';
 
@@ -64,7 +64,7 @@ export default function PositionedTooltips() {
             }}
           >
             <MenuItem onClick={handleClose}>
-              <ModalCargo>Editar cargo</ModalCargo>
+              <ModalListaDeCargos>Editar cargo</ModalListaDeCargos>
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ModalStatus>Editar status</ModalStatus>

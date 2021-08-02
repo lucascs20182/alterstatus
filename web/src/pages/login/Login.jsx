@@ -4,6 +4,7 @@ import alterdataLogo from '../../assets/alterdata-logo.svg'
 import alterstateLogo from '../../assets/alterstate_logo.png'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { logar } from '../../services/ApiUsuario';
 import { salvarTokenNaStorage } from '../../utils/Storage';
@@ -13,7 +14,7 @@ import loadingImg from '../../assets/loading.gif';
 
 function Login() {
   const [username, setUsername] = useState('');
-  const [senha, setSenha] = useState(''); 
+  const [senha, setSenha] = useState('');
   const [carregar, setCarregar] = useState(false);
 
   const history = useHistory();
@@ -24,22 +25,22 @@ function Login() {
 
     logar(username, senha)
       .then((resposta) => {
-          const {Authorization, idUsuario} = resposta.data;
-          salvarTokenNaStorage(Authorization, idUsuario);                
-          setCarregar(false);
-          history.push('/home');
+        const { Authorization, idUsuario } = resposta.data;
+        salvarTokenNaStorage(Authorization, idUsuario);
+        setCarregar(false);
+        history.push('/home');
       })
       .catch((erro) => {
-          alert("Erro! Verifique o console.");
-          console.error(erro);
-          setCarregar(false);
+        alert("Erro! Verifique o console.");
+        console.error(erro);
+        setCarregar(false);
       });
   }
 
   return (
     <div className="container">
       <header>
-        <img src={alterdataLogo} className="image-Login"/>
+        <img src={alterdataLogo} className="image-Login" />
       </header>
       <div className="box">
         <img src={alterstateLogo} className="logo-Login" />
@@ -69,12 +70,12 @@ function Login() {
             />
           </Paper>
 
-          { carregar ?
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-              <img src={loadingImg} width={100} alt="loading..." />
+          {carregar ?
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <CircularProgress />
             </div>
-          :
-            <button className="button" onClick = {(e) => handleEntrar(e)} >
+            :
+            <button className="button" onClick={(e) => handleEntrar(e)} >
               Entrar
             </button>
           }

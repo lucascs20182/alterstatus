@@ -25,8 +25,9 @@ import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
-import ModalSquad from '../Modal/ModalCargo/ModalCargo';
+import ModalSquad from '../Modal/ModalCargo/ModalSquad';
 import ModalPerfil from '../Modal/ModalPerfil/ModalPerfil';
+import TreeView from '../TreeView/TreeView.jsx';
 
 import { removerAutenticacao } from '../../utils/Storage';
 
@@ -73,7 +74,7 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <ModalPerfil><MenuItem style={{ width: "100px" }}>Perfil</MenuItem> </ModalPerfil>
+      <MenuItem style={{ width: "100px" }}><ModalPerfil> Perfil </ModalPerfil></MenuItem>
       <Link to="/" className="link" style={{ color: "#000", textDecoration: "none" }}>
         <MenuItem onClick={handleSair} style={{ width: "100px", }}>
           Sair
@@ -151,7 +152,7 @@ export default function PrimarySearchAppBar() {
               </Typography>
               <Divider />
               <h3 className={classes.createSquad}>
-                Criar sala
+                Criar equipe
                 <ModalSquad>
                   <IconButton
                     aria-label="show more"
@@ -171,20 +172,8 @@ export default function PrimarySearchAppBar() {
               </h3>
 
               <Divider />
-              {['Pack', 'NFStock', 'Bimer', 'Shop'].map((text) => (
-                <ListItem button key={text} className={classes.equipes} >
-                  <ListItemIcon ><GroupIcon color="primary" /></ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
             </List>
-            <Divider />
-            <List>
-              <h3 className={classes.createSquad}>
-                Membros
-              </h3>
-            </List>
-
+            <TreeView />
           </Drawer>
           <main>
             <div className={classes.drawerHeader} />

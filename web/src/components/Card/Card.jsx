@@ -101,17 +101,23 @@ export default function CardMembros(props) {
   return (
     <div>
       <div className={classes.title}>
+        {/* icone de adicionar squad */}
         <ModalCriarSquad >
           <PostAdd color="secondary"/>
         </ModalCriarSquad>
 
+        {/* icone de adicionar usuario */}
         <ModalCadastrar>
           <PersonAddIcon color="secondary" style={{marginRight: 5,}}/>
         </ModalCadastrar>
         <h2 style={{marginRight: 5,}} >
           Pack
         </h2>
+
       </div>
+
+      {/* Campo onde vão ficar os usuarios da squad */}
+      
       <div className={classes.container}>
         <div className={classes.root}>
           <div className={classes.info}>

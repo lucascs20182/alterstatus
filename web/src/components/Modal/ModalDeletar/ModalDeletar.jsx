@@ -1,127 +1,36 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+
 import fecharJanela from '../../../assets/fecharJanela.png';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import CloseIcon from '@material-ui/icons/Close';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 import '../styles.css';
 
 const useStyles = makeStyles((theme) => ({
 
-  paperModal: {
-    border: '2px solid #000',
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    width: 350,
-    height: 130,
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-    marginLeft: -150,
-    marginTop: -150,
-  },
-
   fecharJanela: {
-    width: 20,
-    height: 20,
-    marginLeft: 315,
-    marginTop: 7
+    width: 25,
+    height: 25,
+    marginLeft: 260,
+    marginTop: 5,
+    color: '#094B89',
   },
 
-  buttonModal: {
-    height: 30,
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-    fontSize: 16,
-  },
+  field: {
+    marginBottom: 5,
+  }
 
-  buttonModalClose: {
-    flexDirection: "row",
-    marginTop: 16,
-    marginRight: 20,
-    width: 100,
-    height: 35,
-    borderRadius: 8,
-    background: "#E83F5B",
-    color: "#FFF",
-    fontSize: 15,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    border: 0,
-    transition: "filter 0.2s",
-  },
-
-  buttonRecusar: {
-    flexDirection: "row",
-    marginTop: 16,
-    width: 100,
-    height: 35,
-    borderRadius: 8,
-    background: "#094B89",
-    color: "#FFF",
-    fontSize: 15,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    border: 0,
-    transition: "filter 0.2s",
-  },
-
-  buttonModalDeletar: {
-    display: 'flex',
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  icone: {
-    borderRadius: "50%",
-  },
-
-  usuario: {
-    fontSize: "medium",
-    alignContent: "center",
-    justifyContent: "center",
-    borderRadius: "60%",
-    marginTop: -30,
-
-  },
-
-  editarUsuario: {
-    height: 17,
-    width: 17,
-
-  },
-
-  cargo: {
-    fontSize: "small",
-    alignContent: "center",
-    justifyContent: "center"
-  },
-
-  editarCargo: {
-    height: 13,
-    width: 13,
-
-  },
-
-  status: {
-    display: "medium",
-    alignContent: "center",
-    justifyContent: "center",
-    borderRadius: "50%",
-
-  },
-
-  confirmarStatus: {
-    marginLeft: 5,
-    height: 20,
-    width: 20,
-
-  },
 }));
 
-export default function SimpleModal({ children }) {
+export default function ModalCriarPapel({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -139,32 +48,32 @@ export default function SimpleModal({ children }) {
         {children}
       </button>
 
-      <Modal
+      <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        style={{ width: "100%" }}
       >
-        <div className={classes.paperModal}>
-          <center>
-            <img className={classes.fecharJanela} src={fecharJanela} onClick={handleClose} />
-            <div className="usuario">
-              <p>Você deseja deletar esse usuário?</p>
-            </div>
-          </center>
-          <center>
-            <div className={classes.buttonModalDeletar}>
-              <button className={classes.buttonModalClose} type="submit" onClick={handleClose}>
-                Sim
-              </button>
-              <button className={classes.buttonRecusar} type="submit" onClick={handleClose}>
-                Não
-              </button>
-            </div>
-          </center>
-        </div>
 
-      </Modal>
+        <form className="form" style={{ width: "300px", height: "200px" }} >
+          <center>
+            <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
+            <h3 style={{ textAlign: 'center', marginTop: -5 }}>Deletar</h3>
+            <h4>Você deseja deletar esse membro?</h4>
+          </center>
+
+          <DialogActions style={{ alignItems: 'center', justifyContent: 'center', marginTop: -20 }}>
+            <button className="buttonDeletar" onClick={handleClose} >
+              Sim
+            </button>
+            <button className="buttonConfirmar" onClick={handleClose} >
+              Não
+            </button>
+          </DialogActions>
+        </form>
+      </Dialog>
+
     </div>
   );
 }

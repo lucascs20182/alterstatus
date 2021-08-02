@@ -1,74 +1,33 @@
 import React from 'react';
-import ModalSquad from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
-import fecharJanela from '../../../assets/fecharJanela.png';
 
+import fecharJanela from '../../../assets/fecharJanela.png';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import CloseIcon from '@material-ui/icons/Close';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import '../styles.css';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    width: 300,
-    height: 200,
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-    marginLeft: -150,
-    marginTop: -250,
-  },
-
-  fechar: {
-    width: 30,
-    height: 30,
-  },
-
-  buttonCriarSquad: {
-    marginTop: 16,
-    width: 110,
-    height: 30,
-    borderRadius: 8,
-    background: '#094B89',
-    color: '#4997bb',
-    fontSize: 15,
-
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    cursor: 'pointer',
-    border: 0,
-
-    transition: 'filter 0.2s',
-
-  },
-
-  barra: {
-    width: 230,
-    height: 20,
-  },
 
   fecharJanela: {
-    width: 20,
-    height: 20,
-    marginLeft: 270,
-    marginTop: 5
+    width: 25,
+    height: 25,
+    marginLeft: 235,
+    marginTop: 5,
+    color: '#094B89',
   },
 
-  user: {
-    width: "100px",
-    height: "100px",
-    marginBottom: -10,
-  },
+  field: {
+    marginBottom: 5,
+  }
 
-  avatar: {
-    backgroundColor: "#094B89",
-    clipPath: 'circle(25%)',
-    padding: "7px",
-    margin: 10,
-  },
 }));
 
 export default function ModalCriarPapel({ children }) {
@@ -92,25 +51,38 @@ export default function ModalCriarPapel({ children }) {
       </Tooltip>
 
 
-      <ModalSquad
+      <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        style={{ width: "100%" }}
       >
-        <div className={classes.paper}>
+
+        <form className="form" style={{ width: "270px", height: "200px" }} >
           <center>
+            <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
+            <h3 style={{ textAlign: 'center', marginTop: -5}}>Criar papel</h3>
+            <TextField
+              className={classes.field}
+              name="Papel"
+              label="Papel"
+              variant="outlined"
+              size="small"
+              color="secondary"
+              onChange={(e) => setUsername(e.target.value)}
+            />
 
-            <img className={classes.fecharJanela} src={fecharJanela} onClick={handleClose} />
-            <p className={classes.titulo}>Criar Papel: </p>
-            <input className={classes.barra} type="text" name="name" />
-            <Button className={classes.buttonCriarSquad} type="submit" onClick={handleClose}>
-              <p>Criar</p>
-            </Button>
           </center>
-        </div>
 
-      </ModalSquad>
+          <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <button className="buttonConfirmar" onClick={handleClose} >
+              Cadastrar
+            </button>
+          </DialogActions>
+        </form>
+      </Dialog>
+
     </div>
   );
 }

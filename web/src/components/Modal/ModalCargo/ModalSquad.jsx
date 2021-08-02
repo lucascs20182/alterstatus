@@ -60,11 +60,11 @@ export default function ModalCriarPapel({ children }) {
         <form className="form" style={{ width: "270px", height: "200px" }} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
-            <h3 style={{ textAlign: 'center', marginTop: -5 }}>Editar Status</h3>
+            <h3 style={{ textAlign: 'center', marginTop: -5 }}>Criar squad</h3>
             <TextField
               className={classes.field}
-              name="Status"
-              label="Status"
+              name="Nome"
+              label="Nome"
               variant="outlined"
               size="small"
               color="secondary"
@@ -75,7 +75,7 @@ export default function ModalCriarPapel({ children }) {
 
           <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
             <button className="buttonConfirmar" onClick={handleClose} >
-              Confirmar
+              Criar
             </button>
           </DialogActions>
         </form>

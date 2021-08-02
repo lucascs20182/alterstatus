@@ -1,5 +1,4 @@
 import React from 'react';
-import fecharJanela from '../../../assets/fecharJanela.png';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -62,7 +61,7 @@ export default function SimpleModal({ children }) {
         <form className="form" style={{ width: "270px", height: "370px" }} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
-            <h3 style={{ textAlign: 'center', marginTop: -5}}>Cadastro</h3>
+            <h3 style={{ textAlign: 'center', marginTop: -5 }}>Cadastro</h3>
             <TextField
               className={classes.field}
               name="Nome"
