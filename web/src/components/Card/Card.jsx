@@ -60,16 +60,17 @@ const useStyles = makeStyles((theme) => ({
   },
 
   avatar: {
-    backgroundColor: "#094B89",
+    // backgroundColor: "#094B89",
     clipPath: 'circle(26%)',
-    padding: "7px",
-    margin: 10,
+    // padding: "7px",
+    height: 70,
+    marginBottom: 10
   },
 
 
   user: {
-    width: "40px",
-    height: "38px",
+    height: 70
+    // height: "38px",
   },
 
 
