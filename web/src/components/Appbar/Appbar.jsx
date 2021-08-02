@@ -144,7 +144,11 @@ export default function PrimarySearchAppBar() {
               </div>
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-                <h3>{`Olá, ${nomeUsuario}`}</h3>
+                {nomeUsuario === null ?
+                  <h3>Olá!</h3>
+                  :
+                  <h3>{`Olá, ${nomeUsuario}`}</h3>
+                }
 
                 <IconButton
                   edge="end"
