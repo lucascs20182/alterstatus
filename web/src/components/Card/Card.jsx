@@ -185,7 +185,7 @@ export default function CardMembros(props) {
                     <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} /></h3>
                   </div>
                   <h3 className={classes.nome}><Online />{usuario.username}</h3>
-                  {console.log(usuario)}
+                  {/* {console.log(usuario)} */}
                   {/* Objects are not valid as a React child */}
                   <p className={classes.cargo}>Bug no cargo ehhe</p>
                   <p className={classes.status}>{usuario.status}</p>
@@ -204,7 +204,7 @@ export default function CardMembros(props) {
                       <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} /></h3>
                     </div>
                     <h3 className={classes.nome}><Online />{usuario.username}</h3>
-                    {console.log(usuario)}
+                    {/* {console.log(usuario)} */}
                     {/* <p className={classes.cargo}>{usuario.cargo.nome}</p> */}
                     <p className={classes.cargo}>Bug no cargo ehhe</p>
                     <p className={classes.status}>{usuario.status}</p>

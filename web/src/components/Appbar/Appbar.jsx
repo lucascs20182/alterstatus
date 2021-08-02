@@ -33,6 +33,8 @@ import {
   obterNomeUsuarioNaStorage
 } from '../../utils/Storage';
 
+import { useHistory } from 'react-router-dom';
+
 const drawerWidth = 240;
 
 export default function PrimarySearchAppBar() {
@@ -43,6 +45,8 @@ export default function PrimarySearchAppBar() {
   });
   const [nomeUsuario, ] = useState(obterNomeUsuarioNaStorage());
   const [pesquisa, setPesquisa] = useState('');
+
+  const history = useHistory();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -66,6 +70,8 @@ export default function PrimarySearchAppBar() {
     removerAutenticacao();
 
     handleMenuClose();
+
+    history.push('/login');
   }
 
   const menuId = 'primary-search-account-menu';
@@ -90,16 +96,17 @@ export default function PrimarySearchAppBar() {
        */}
       <MenuItem>
         <ModalPerfil>
-          <MenuItem onClick={handleMenuClose} style={{ width: "100px", }}>
+          <MenuItem onClick={handleMenuClose} style={{ width: "100%", }}>
             Perfil
           </MenuItem>
         </ModalPerfil>
       </MenuItem>
-      <Link to="/" className="link" style={{ color: "#000" }}>
-        <MenuItem onClick={handleSair} style={{ width: "100px", textDecoration: "none" }}>
-          Sair
-        </MenuItem>
-      </Link>
+      {/* <Link to="/" className="link" style={{ color: "#000" }}> */}
+      {/* para usar roteamento é melhor fazer navegação pelo history  */}
+      <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
+        Sair
+      </MenuItem>
+      {/* </Link> */}
     </Menu>
   );
 
@@ -177,11 +184,14 @@ export default function PrimarySearchAppBar() {
                     aria-label="show more"
                     aria-haspopup="true"
                     color="secondary"
+                    style={{
+                      height: '100%'                      
+                    }}
                   >
                     <AddCircle
                       style={{
                         height: 28,
-                        width: 28,
+                        width: 28
                       }}
                     />
 
@@ -317,9 +327,9 @@ const useStyles = makeStyles((theme) => ({
   createSquad: {
     justifyContent: 'space-between',
     marginLeft: 15,
-    alignItems: "center",
     flex: 1,
     display: "flex",
+    alignItems: "center"
   },
 
   input: {
