@@ -155,8 +155,24 @@ public class UsuarioController {
 	@PutMapping
 	public ResponseEntity<UsuarioDTOResponse> atualizar(@RequestParam MultipartFile file,
 			@RequestPart UsuarioDTORequest usuario) throws ResourceNotFoundException, IOException {
-		UsuarioDTOResponse usuarioAtualizado = mapper.toDto(servicoUsuario.atualizar(usuario.getId_usuario(), usuario, file));
+		UsuarioDTOResponse usuarioAtualizado;
+		
+//		mapper.toDto(servicoUsuario.atualizar(usuario.getId_usuario(), usuario, file));
+
+		if(file==null) {
+			usuarioAtualizado = mapper.toDto(servicoUsuario.atualizar(usuario.getId_usuario(), usuario));
+			return new ResponseEntity<UsuarioDTOResponse>(usuarioAtualizado, HttpStatus.OK);
+		}
+		
+		usuarioAtualizado = mapper.toDto(servicoUsuario.atualizarArquivo(usuario.getId_usuario(), usuario, file));
+			 
 		return new ResponseEntity<UsuarioDTOResponse>(usuarioAtualizado, HttpStatus.OK);
+		
+		
+		
+		
+		
+//		return new ResponseEntity<UsuarioDTOResponse>(usuarioAtualizado, HttpStatus.OK);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
@@ -165,6 +181,14 @@ public class UsuarioController {
 		servicoUsuario.deletar(usuario.getId_usuario());
 
 		return new ResponseEntity<String>("Usuário deletado com sucesso", HttpStatus.OK);
+	}
+	
+	@SecurityRequirement(name = "bearerAuth")
+	@DeleteMapping("cargo")
+	public ResponseEntity<String> removerCargo(@RequestBody UsuarioDTORequest usuario) throws ResourceNotFoundException {
+		servicoUsuario.removerCargo(usuario.getId_usuario());
+
+		return new ResponseEntity<String>("Cargo removido", HttpStatus.OK);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")

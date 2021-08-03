@@ -42,8 +42,8 @@ public class UsuarioMapper {
 	public UsuarioDTOResponse toDto(Usuario entity) {
 		UsuarioDTOResponse dto = new UsuarioDTOResponse();
 		
-		if(entity.getId_cargo() != null) {
-			String nomeCargo = repositorioCargo.getById(entity.getId_cargo()).getNome();
+		if(entity.getCargo() != null) {
+			String nomeCargo = repositorioCargo.getById(entity.getCargo().getId()).getNome();
 			
 			dto.setNomeCargo(nomeCargo);
 		}

@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.serratec.alterstatusapi.dto.UsuarioDTORequest;
 import org.serratec.alterstatusapi.exception.ResourceNotFoundException;
 import org.serratec.alterstatusapi.mapper.UsuarioMapper;
@@ -166,10 +168,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		return clienteRepository.save(obterImagem(entity, true));
 	}
-
+	
 	@Override
-	public Usuario atualizar(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
-			throws ResourceNotFoundException, IOException {
+	public Usuario atualizarArquivo(Long id, UsuarioDTORequest dto, MultipartFile multipartFile) throws ResourceNotFoundException, IOException {
 		Usuario entity = this.obterPorId(id);
 
 		for (Usuario cliente : this.obterTodos()) {
@@ -202,12 +203,51 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
+	public Usuario atualizar(Long id, UsuarioDTORequest dto) throws ResourceNotFoundException {
+		Usuario entity = this.obterPorId(id);
+
+		for (Usuario cliente : this.obterTodos()) {
+			if (cliente.getUsername().equals(dto.getUsername())) {
+				throw new ResourceNotFoundException("Uma conta já foi cadastrada utilizando este username.");
+			}
+		}
+
+		if (dto.getUsername() != null) {
+			entity.setUsername(dto.getUsername());
+		}
+
+		if (dto.getSenha() != null) {
+			entity.setSenha(bCrypt.encode(dto.getSenha()));
+		}
+
+		if (dto.getNome() != null) {
+			entity.setNome(dto.getNome());
+		}
+
+		if (dto.getStatus() != null) {
+			entity.setStatus(dto.getStatus());
+		}
+
+		return clienteRepository.save(entity);
+	}
+
+	@Override
 	public void deletar(Long id) throws ResourceNotFoundException {
 		this.obterPorId(id); // verifica se o usuário existe antes de deletar
 
 		imagemService.removerImagem(id);
 
 		clienteRepository.deleteById(id);
+	}
+	
+	@Transactional
+	@Override
+	public void removerCargo(Long idUsuario) throws ResourceNotFoundException {
+		Usuario usuario = this.obterPorId(idUsuario); // verifica se o usuário existe antes de deletar
+
+		usuario.setCargo(null);
+
+		clienteRepository.save(usuario);
 	}
 
 	@Override

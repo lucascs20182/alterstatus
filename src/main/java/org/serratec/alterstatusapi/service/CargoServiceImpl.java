@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.serratec.alterstatusapi.exception.ResourceBadRequestException;
 import org.serratec.alterstatusapi.exception.ResourceNotFoundException;
 import org.serratec.alterstatusapi.model.Cargo;
 import org.serratec.alterstatusapi.model.Squad;
+import org.serratec.alterstatusapi.model.Usuario;
 import org.serratec.alterstatusapi.repository.CargoRepository;
 import org.serratec.alterstatusapi.repository.SquadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,9 @@ public class CargoServiceImpl implements CargoService {
 	
 	@Autowired
 	private SquadRepository	repositorioSquad;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@Override
 	public List<Cargo> obterTodos() {
@@ -123,6 +129,7 @@ public class CargoServiceImpl implements CargoService {
 		return new ResponseEntity<>(CargoAtualizado, HttpStatus.OK);
 	}
 
+	@Transactional
 	@Override
 	public ResponseEntity<?> deletar(Long id) {
 		Optional<Cargo> existe = repositorioCargo.findById(id);
@@ -130,8 +137,13 @@ public class CargoServiceImpl implements CargoService {
 		if (existe.isEmpty()) {
 			throw new ResourceNotFoundException("Não existe cargo para o id informado: " + id);
 		}
-
+		
+		for (Usuario usuario : existe.get().getUsuario()) {
+			usuarioService.removerCargo(usuario.getId());
+		}
+		
 		this.repositorioCargo.deleteById(id);
+		
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 }
