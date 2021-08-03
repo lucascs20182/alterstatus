@@ -41,15 +41,18 @@ public class Cargo {
 	private Squad squad;
 
 	private Long id_cargo;
+	
+	private Long id_squad;
 
 	// ----------------------
 
-	public Cargo(Long id, String nome, Squad squad, List<Usuario> usuario, Long id_cargo) {
+	public Cargo(Long id, String nome, Squad squad, List<Usuario> usuario, Long id_cargo, Long id_squad) {
 		this.id = id;
 		this.nome = nome;
 		this.squad = squad;
 		this.usuario = usuario;
 		this.id_cargo = id_cargo;
+		this.id_squad = id_squad;
 	}
 
 	public Cargo() {
@@ -95,6 +98,14 @@ public class Cargo {
 
 	public void setId_cargo(Long id_cargo) {
 		this.id_cargo = id_cargo;
+	}
+
+	public Long getId_squad() {
+		return id_squad;
+	}
+
+	public void setId_squad(Long id_squad) {
+		this.id_squad = id_squad;
 	}
 
 }

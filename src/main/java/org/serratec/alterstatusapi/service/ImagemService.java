@@ -17,5 +17,5 @@ public interface ImagemService {
 	public Imagem obterImagem(Long id);
 
 	@Transactional
-	public Imagem removerImagem(Long id);
+	public void removerImagem(Long id);
 }

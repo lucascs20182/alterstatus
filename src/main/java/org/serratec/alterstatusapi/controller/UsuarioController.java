@@ -112,18 +112,20 @@ public class UsuarioController {
 
 	@SecurityRequirement(name = "bearerAuth")
 	@PostMapping
-	public ResponseEntity<String> cadastrar(@RequestParam(required = false) MultipartFile file,
-			@RequestPart UsuarioDTORequest usuario) throws ResourceNotFoundException, IOException {
+	public ResponseEntity<UsuarioDTOResponse> cadastrar(@RequestParam(required=false) MultipartFile file, @RequestPart UsuarioDTORequest usuario)
+			throws ResourceNotFoundException, IOException {
 
-		if (file == null) {
-			servicoUsuario.cadastrar(usuario);
-			return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.OK);
+		UsuarioDTOResponse usuarioCadastrado;
+		
+		if(file==null) {
+			usuarioCadastrado = mapper.toDto(servicoUsuario.cadastrar(usuario));
+			return new ResponseEntity<UsuarioDTOResponse>(usuarioCadastrado, HttpStatus.OK);
 		}
-
-		servicoUsuario.cadastrarArquivo(usuario, file);
-
-		return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.OK);
-	}
+		
+		usuarioCadastrado = mapper.toDto(servicoUsuario.cadastrarArquivo(usuario, file));
+			 
+		return new ResponseEntity<UsuarioDTOResponse>(usuarioCadastrado, HttpStatus.OK);
+	}	
 
 	@SecurityRequirement(name = "bearerAuth")
 	@PostMapping("/squad")
@@ -151,11 +153,10 @@ public class UsuarioController {
 
 	@SecurityRequirement(name = "bearerAuth")
 	@PutMapping
-	public ResponseEntity<String> atualizar(@RequestParam MultipartFile file, @RequestPart UsuarioDTORequest usuario)
-			throws ResourceNotFoundException, IOException {
-		servicoUsuario.atualizar(usuario.getId_usuario(), usuario, file);
-
-		return new ResponseEntity<String>("Usuário editado com sucesso", HttpStatus.OK);
+	public ResponseEntity<UsuarioDTOResponse> atualizar(@RequestParam MultipartFile file,
+			@RequestPart UsuarioDTORequest usuario) throws ResourceNotFoundException, IOException {
+		UsuarioDTOResponse usuarioAtualizado = mapper.toDto(servicoUsuario.atualizar(usuario.getId_usuario(), usuario, file));
+		return new ResponseEntity<UsuarioDTOResponse>(usuarioAtualizado, HttpStatus.OK);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")

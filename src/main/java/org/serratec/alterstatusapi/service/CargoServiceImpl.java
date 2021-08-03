@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.serratec.alterstatusapi.exception.ResourceBadRequestException;
 import org.serratec.alterstatusapi.exception.ResourceNotFoundException;
 import org.serratec.alterstatusapi.model.Cargo;
+import org.serratec.alterstatusapi.model.Squad;
 import org.serratec.alterstatusapi.repository.CargoRepository;
+import org.serratec.alterstatusapi.repository.SquadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,14 +17,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class CargoServiceImpl implements CargoService {
 
 	@Autowired
 	private CargoRepository repositorioCargo;
+	
+	@Autowired
+	private SquadRepository	repositorioSquad;
 
 	@Override
 	public List<Cargo> obterTodos() {
@@ -62,7 +66,7 @@ public class CargoServiceImpl implements CargoService {
 	}
 
 	@Override
-	public ResponseEntity<Optional<Cargo>> obterPorId(@PathVariable("id") Long id) {
+	public ResponseEntity<Optional<Cargo>> obterPorId(Long id) {
 		Optional<Cargo> Cargo = repositorioCargo.findById(id);
 
 		if (Cargo.isEmpty()) {
@@ -84,16 +88,27 @@ public class CargoServiceImpl implements CargoService {
 	}
 
 	@Override
-	public ResponseEntity<Cargo> adicionar(@RequestBody Cargo cargo) {
+	public ResponseEntity<Cargo> adicionar(Cargo cargo) {
 		cargo.setId(null);
-
+		
+		Optional<Squad> squad = repositorioSquad.findById(cargo.getId_squad());
+		
+		if(squad.isEmpty()) {
+			throw new ResourceBadRequestException("Squad não encontrado");
+		}
+		
 		Cargo novoCargo = repositorioCargo.save(cargo);
+		
+		squad.get().setCargos(novoCargo);
+		
+		repositorioSquad.save(squad.get());
+		
 		return new ResponseEntity<>(novoCargo, HttpStatus.CREATED);
 
 	}
 
 	@Override
-	public ResponseEntity<Optional<Cargo>> atualizar(@PathVariable("id") Long id, @RequestBody Cargo cargo) {
+	public ResponseEntity<Optional<Cargo>> atualizar(Long id, Cargo cargo) {
 		cargo.setId(id);
 
 		Optional<Cargo> CargoAtualizado = repositorioCargo.findById(id);
@@ -109,7 +124,7 @@ public class CargoServiceImpl implements CargoService {
 	}
 
 	@Override
-	public ResponseEntity<?> deletar(@PathVariable("id") Long id) {
+	public ResponseEntity<?> deletar(Long id) {
 		Optional<Cargo> existe = repositorioCargo.findById(id);
 
 		if (existe.isEmpty()) {

@@ -125,5 +125,4 @@ public class SquadServiceImpl implements SquadService {
 
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
-
 }

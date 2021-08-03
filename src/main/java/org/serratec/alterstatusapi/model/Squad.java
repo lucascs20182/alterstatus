@@ -1,5 +1,6 @@
 package org.serratec.alterstatusapi.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -30,12 +32,13 @@ public class Squad {
 	@Column(nullable = false, length = 30)
 	private String nome;
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonIgnoreProperties({ "hibernateEagerInitializer", "handler" })
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "squad")
 	private List<Usuario> usuarios;
 
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "squad")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "squad_id", referencedColumnName = "id")
 	private List<Cargo> cargos;
 
 	private Long id_squad;
@@ -84,8 +87,8 @@ public class Squad {
 		return cargos;
 	}
 
-	public void setCargos(List<Cargo> cargos) {
-		this.cargos = cargos;
+	public void setCargos(Cargo cargo) {
+		this.cargos.add(cargo);
 	}
 
 	public Long getId_squad() {

@@ -215,7 +215,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Usuario usuario = clienteRepository.findById(usuario_id).get();
 		Squad squad = repositorioSquad.findById(squad_id).get();
 		usuario.setId_squad(squad_id);
-		usuario.relacionarComSquad(squad);
+		usuario.setSquad(squad);
 
 		return clienteRepository.save(usuario);
 	}
@@ -225,7 +225,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Usuario usuario = clienteRepository.findById(usuario_id).get();
 		Cargo cargo = repositorioCargo.findById(cargo_id).get();
 		usuario.setId_cargo(cargo_id);
-		usuario.relacionarComCargo(cargo);
+		usuario.setCargo(cargo);
 
 		return clienteRepository.save(usuario);
 	}

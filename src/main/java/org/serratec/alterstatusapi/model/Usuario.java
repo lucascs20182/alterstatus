@@ -138,14 +138,6 @@ public class Usuario {
 		this.urlImagem = urlImagem;
 	}
 
-	public void relacionarComCargo(Cargo cargo) {
-		this.cargo = cargo;
-	}
-
-	public void relacionarComSquad(Squad squad) {
-		this.squad = squad;
-	}
-
 	public Cargo getCargo() {
 		return cargo;
 	}
