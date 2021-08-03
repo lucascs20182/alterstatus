@@ -127,6 +127,8 @@ export const useStyles = makeStyles((theme) => ({
   createSquad: {
     justifyContent: 'space-between',
     marginLeft: 15,
+    marginBottom: 0,
+    marginTop: 0,
     flex: 1,
     display: "flex",
     alignItems: "center"
