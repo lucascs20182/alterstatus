@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 const ITEM_HEIGHT = 48;
 
 
-export default function PositionedTooltips() {
+export default function PositionedTooltips(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -64,13 +64,13 @@ export default function PositionedTooltips() {
             }}
           >
             <MenuItem onClick={handleClose}>
-              <ModalListaDeCargos>Editar papel</ModalListaDeCargos>
+              <ModalListaDeCargos usuarioId={props.usuarioId}>Editar papel</ModalListaDeCargos>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <ModalStatus>Editar status</ModalStatus>
+              <ModalStatus usuarioId={props.usuarioId}>Editar status</ModalStatus>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <ModalDeletar>Deletar</ModalDeletar>
+              <ModalDeletar usuarioId={props.usuarioId}>Deletar</ModalDeletar>
             </MenuItem>
           </Menu>
         </Grid>
