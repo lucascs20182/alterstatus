@@ -27,3 +27,16 @@ export function cadastrar(formData) {
             .catch(error => reject(error))
     });
 }
+
+export function mudarUsuarioDeSquad(idUsuario, idSquad) {   
+    const body = {
+        "id_usuario": idUsuario,
+        "id_squad": idSquad
+    }
+    
+    return new Promise((resolve, reject) => {
+        return api.post('/usuario/squad', body)
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+    });
+}

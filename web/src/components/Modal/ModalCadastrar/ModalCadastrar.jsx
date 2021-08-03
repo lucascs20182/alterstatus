@@ -16,7 +16,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import '../styles.css';
 import '../../../styles/login.css'
 
-import { cadastrar, obterDadosUsuario } from '../../../services/ApiUsuario';
+import { cadastrar, mudarUsuarioDeSquad } from '../../../services/ApiUsuario';
 
 import { obterSquadAtivaDaStorage } from '../../../utils/Storage';
 
@@ -88,15 +88,22 @@ export default function SimpleModal({ children }) {
 
     cadastrar(formData)
       .then((resposta) => {
-          console.log(resposta);
+          const idUsuarioCriado = resposta.data.id;
 
+          mudarUsuarioDeSquad(idUsuarioCriado, squadAtiva)
+            .then((resposta) => {
+              alert("Usuário cadastrado!");
+              // console.log(resposta);
+            })
+            .catch((erro) => {
+              alert("Erro ao adicionar usuário na squad! Verifique o console.");
+              console.error(erro);
+            })
 
-
-          alert("Usuário cadastrado!");
-          history.push('/home');
+          history.go(0); // manda para home e dá reload
       })
       .catch((erro) => {
-          alert("Erro! Verifique o console.");
+          alert("Erro ao criar usuário! Verifique o console.");
           console.error(erro);
       });
 
