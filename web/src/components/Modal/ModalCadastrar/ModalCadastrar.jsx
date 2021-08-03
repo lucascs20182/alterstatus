@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,6 +15,10 @@ import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import '../styles.css';
 import '../../../styles/login.css'
+
+import { cadastrar, obterDadosUsuario } from '../../../services/ApiUsuario';
+
+import { obterSquadAtivaDaStorage } from '../../../utils/Storage';
 
 const useStyles = makeStyles((theme) => ({
   fecharJanela: {
@@ -32,7 +37,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleModal({ children }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
+  const [squadAtiva, ] = useState(obterSquadAtivaDaStorage());
+
+  const [nome, setNome] = useState('');
+  const [username, setUsername] = useState('');
+  const [senha, setSenha] = useState('');
+  const [status, setStatus] = useState('');
+
+  const history = useHistory();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -41,6 +55,57 @@ export default function SimpleModal({ children }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleCadastrar = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    const novoUsuario = {}
+
+    if(nome != "") {
+      novoUsuario.nome = nome;
+    }
+
+    if(username != "") {
+        novoUsuario.username = username;
+    }
+
+    if(senha != "") {
+        novoUsuario.senha = senha;
+    }
+
+    if(status != "") {
+        novoUsuario.status = status;
+    }
+
+    const novoUsuarioJSON = JSON.stringify(novoUsuario);
+
+    const blob = new Blob([novoUsuarioJSON], {
+      type: 'application/json'
+    })
+
+    formData.append('usuario', blob);
+
+    cadastrar(formData)
+      .then((resposta) => {
+          console.log(resposta);
+
+
+
+          alert("Usuário cadastrado!");
+          history.push('/home');
+      })
+      .catch((erro) => {
+          alert("Erro! Verifique o console.");
+          console.error(erro);
+      });
+
+    // limpa o formulário
+    setNome('');
+    setUsername('');
+    setSenha('');
+    setStatus('');
+  }
 
   return (
     <div>
@@ -58,7 +123,7 @@ export default function SimpleModal({ children }) {
         style={{ width: "100%" }}
       >
 
-        <form className="form" style={{ width: "270px", height: "370px" }} >
+        <form className="form" style={{ width: "270px", height: "370px" }} onSubmit={e => handleCadastrar(e)} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 style={{ textAlign: 'center', marginTop: -5 }}>Cadastro</h3>
@@ -69,7 +134,8 @@ export default function SimpleModal({ children }) {
               variant="outlined"
               size="small"
               color="secondary"
-              onChange={(e) => setUsername(e.target.value)}
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
             />
 
             <TextField
@@ -79,6 +145,7 @@ export default function SimpleModal({ children }) {
               variant="outlined"
               size="small"
               color="secondary"
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
 
@@ -91,6 +158,7 @@ export default function SimpleModal({ children }) {
               type="password"
               size="small"
               color="secondary"
+              value={senha}
               onChange={(e) => setSenha(e.target.value)}
             />
 
@@ -101,7 +169,8 @@ export default function SimpleModal({ children }) {
               type="string"
               size="small"
               color="secondary"
-              onChange={(e) => setSenha(e.target.value)}
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
             />
 
           </center>

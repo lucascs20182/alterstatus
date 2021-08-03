@@ -13,7 +13,8 @@ import ModalCriarPapel from '../Modal/ModalPapel/ModalPapel';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
-  obterTokenDaStorage
+  obterTokenDaStorage,
+  salvarSquadAtivaNaStorage
 } from '../../utils/Storage';
 
 import { obterDadosUsuario } from '../../services/ApiUsuario';
@@ -46,6 +47,7 @@ export default function CardMembros(props) {
           .then((resposta) => {
             // console.log(resposta.data);
             setSquadAtual(resposta.data);
+            salvarSquadAtivaNaStorage(idSquad);
             setUsuariosNaSquad(resposta.data.usuarios);
             setCarregar(false);
           })
