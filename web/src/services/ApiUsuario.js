@@ -63,3 +63,11 @@ export function removerCargo(idUsuario) {
             .catch(error => reject(error))
     });
 }
+
+export function removerUsuario(idUsuario) {  
+    return new Promise((resolve, reject) => {
+        return api.delete('/usuario', { "id_usuario": idUsuario })
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+    });
+}

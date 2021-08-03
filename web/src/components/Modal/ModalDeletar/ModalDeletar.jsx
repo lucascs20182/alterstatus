@@ -6,6 +6,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/core/styles';
 import '../styles.css';
 
+import { removerUsuario } from '../../../services/ApiUsuario';
+
 const useStyles = makeStyles((theme) => ({
 
   fecharJanela: {
@@ -22,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function ModalDeletar({ children }) {
+export default function ModalDeletar({ children, usuarioId }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -31,6 +33,23 @@ export default function ModalDeletar({ children }) {
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSim = () => {
+    // problema de cors
+    removerUsuario(usuarioId)
+    .then((resposta) => {
+      alert("Usuário removido!");
+      
+      // history.push('/home');
+      history.go(0);
+    })
+    .catch((erro) => {
+      alert("Erro ao remover usuário! Verifique o console.");
+      console.error(erro);
+    })
+    
     setOpen(false);
   };
 
@@ -48,7 +67,7 @@ export default function ModalDeletar({ children }) {
         style={{ width: "100%" }}
       >
 
-        <form className="form" style={{ width: "300px", height: "200px" }} >
+        <form className="form" style={{ width: "300px", height: "200px" }} onSubmit={e => e.preventDefault()} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 style={{ textAlign: 'center', marginTop: -5 }}>Deletar</h3>
@@ -56,7 +75,7 @@ export default function ModalDeletar({ children }) {
           </center>
 
           <DialogActions style={{ alignItems: 'center', justifyContent: 'center', marginTop: -20 }}>
-            <button className="buttonDeletar" onClick={handleClose} >
+            <button className="buttonDeletar" onClick={handleSim} >
               Sim
             </button>
             <button className="buttonConfirmar" onClick={handleClose} >
