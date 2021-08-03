@@ -7,9 +7,11 @@ import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import SettingsIcon from '@material-ui/icons/Settings';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import PersonIcon from '@material-ui/icons/Person';
+import GroupIcon from '@material-ui/icons/Group';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
 
@@ -137,80 +139,68 @@ export default function GmailTreeView() {
       defaultExpandIcon={<ArrowRightIcon />}
       defaultEndIcon={<div style={{ width: 30 }} />}
     >
-      <StyledTreeItem nodeId="1" labelText="Squads" color="#094B89" labelIcon={GroupOutlinedIcon} >
-        <ModalTrocarSquad ><StyledTreeItem
-          nodeId="2"
-          labelText="NFStock"
-          labelIcon={SupervisorAccountIcon}
-          color="#094B89"
-          bgColor="#e8f0fe"
-          
-        /></ModalTrocarSquad>
-        <ModalTrocarSquad><StyledTreeItem
-          nodeId="3"
-          labelText="BimerUp"
-          labelIcon={SupervisorAccountIcon}
-          color="#094B89"
-          bgColor="#e8f0fe"
-        /></ModalTrocarSquad>
-        <ModalTrocarSquad><StyledTreeItem
-          nodeId="4"
-          labelText="Shop"
-          labelIcon={SupervisorAccountIcon}
-          color="#094B89"
-          bgColor="#e8f0fe"
-        /></ModalTrocarSquad>
-        <ModalTrocarSquad><StyledTreeItem
-          nodeId="5"
-          labelText="Financeiro"
-          labelIcon={SupervisorAccountIcon}
-          color="#094B89"
-          bgColor="#e8f0fe"
-        /></ModalTrocarSquad>
+      <StyledTreeItem nodeId="1" labelText="Squads" color="#094B89" labelIcon={GroupIcon} >
+
+        <ModalTrocarSquad >
+          <div style={{ display: "flex", }}>
+            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>Pack</p>
+          </div>
+        </ModalTrocarSquad>
+
+
+        <ModalTrocarSquad >
+          <div style={{ display: "flex", }}>
+            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>Pack</p>
+          </div>
+        </ModalTrocarSquad>
+
+        <ModalTrocarSquad >
+          <div style={{ display: "flex", }}>
+            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>Pack</p>
+          </div>
+        </ModalTrocarSquad>
+
+        <ModalTrocarSquad >
+          <div style={{ display: "flex", }}>
+            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>Pack</p>
+          </div>
+        </ModalTrocarSquad>
+
       </StyledTreeItem>
-      <StyledTreeItem nodeId="8" labelText="Usuários" color="#1a73e8" labelIcon={PersonOutlineIcon} >
-        <StyledTreeItem
-          nodeId="9"
-          labelText="gabriel.dsn.pack"
-          labelIcon={PersonIcon}
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
-          nodeId="10"
-          labelText="sthephanie.dsn.pack"
-          labelIcon={PersonIcon}
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
-          nodeId="11"
-          labelText="lucas.dsn.pack"
-          labelIcon={PersonIcon}
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
-          nodeId="12"
-          labelText="bernard.dsn.pack"
-          labelIcon={PersonIcon}
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
-          nodeId="13"
-          labelText="larissa.dsn.pack"
-          labelIcon={PersonIcon}
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
-          nodeId="14"
-          labelText="andre.dsn.pack"
-          labelIcon={PersonIcon}
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
+
+      <StyledTreeItem nodeId="8" labelText="Opções" color="#094B89" labelIcon={SettingsIcon} >
+        <ModalTrocarSquad >
+          <div style={{ display: "flex", }}>
+            <GroupIcon color="secondary"  />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Designar cargo</p>
+          </div>
+        </ModalTrocarSquad>
+
+
+        <ModalTrocarSquad >
+          <div style={{ display: "flex", }}>
+            <GroupIcon color="secondary" style={{ marginLeft: -15, }} />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Alterar squad</p>
+          </div>
+        </ModalTrocarSquad>
+
+        <ModalTrocarSquad >
+          <div style={{ display: "flex", }}>
+            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Pack</p>
+          </div>
+        </ModalTrocarSquad>
+
+        <ModalTrocarSquad >
+          <div style={{ display: "flex", }}>
+            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Pack</p>
+          </div>
+        </ModalTrocarSquad>
       </StyledTreeItem>
     </TreeView>
   );

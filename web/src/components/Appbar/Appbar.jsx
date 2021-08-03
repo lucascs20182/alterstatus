@@ -199,22 +199,15 @@ export default function PrimarySearchAppBar() {
               <h3 className={classes.createSquad}>
                 Criar equipe
                 <ModalSquad>
-                  <IconButton
-                    aria-label="show more"
-                    aria-haspopup="true"
-                    color="secondary"
-                    style={{
-                      height: '100%'
-                    }}
-                  >
                     <AddCircle
+                      color="secondary"
                       style={{
                         height: 28,
-                        width: 28
+                        width: 28,
+                        height: '100%',
+                        marginTop: 8,
                       }}
                     />
-
-                  </IconButton>
                 </ModalSquad>
               </h3>
 
