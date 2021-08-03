@@ -15,3 +15,28 @@ export function obterDadosUsuario(id) {
             .catch(error => reject(error))
     });
 }
+
+export function cadastrar(formData) {    
+    return new Promise((resolve, reject) => {
+        return api.post('/usuario', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+    });
+}
+
+export function mudarUsuarioDeSquad(idUsuario, idSquad) {   
+    const body = {
+        "id_usuario": idUsuario,
+        "id_squad": idSquad
+    }
+    
+    return new Promise((resolve, reject) => {
+        return api.post('/usuario/squad', body)
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+    });
+}

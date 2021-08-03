@@ -25,9 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
   
   avatar: {
-    clipPath: 'circle(26%)',
-    height: 70,
-    marginBottom: 10
+    clipPath: 'circle(21%)',
+    height: 102,
+    margin: 0,
+    padding: 0
+  },
+
+  user: {
+    height: '92%'
   },
 
   input: {
@@ -67,11 +72,13 @@ export default function SimpleModal({ children }) {
 
 
 
-        <form className="form" style={{ width: "270px", height: "450px" }} >
+        <form className="form" style={{ width: "270px", height: "470px" }} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 style={{ textAlign: 'center', marginTop: -5 }}>Perfil</h3>
-            <h3 className={classes.avatar}><img className={classes.user} /></h3>
+            <h3 className={classes.avatar}>
+              <img className={classes.user} src="https://github.com/lucascs20182/static-default-avatar/blob/main/picture.png?raw=true" />
+            </h3>
 
             {/* --------Botão camera-------- */}
               

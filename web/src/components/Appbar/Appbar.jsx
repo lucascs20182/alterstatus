@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardMembros from '../Card/Card'
 import alterstateLogo from '../../assets/alterstate_logo.png'
 import { useStyles } from './styles'
@@ -26,8 +26,10 @@ import List from '@material-ui/core/List';
 
 import {
   removerAutenticacao,
-  obterNomeUsuarioNaStorage
+  obterTokenDaStorage
 } from '../../utils/Storage';
+
+import { obterDadosUsuario } from '../../services/ApiUsuario';
 
 import { useHistory } from 'react-router-dom';
 
@@ -37,10 +39,28 @@ export default function PrimarySearchAppBar() {
   const [state, setState] = useState({
     left: false,
   });
-  const [nomeUsuario,] = useState(obterNomeUsuarioNaStorage());
+  const [nomeUsuario, setNomeUsuario] = useState('');
   const [pesquisa, setPesquisa] = useState('');
+  const [carregar, setCarregar] = useState(false);
 
   const history = useHistory();
+
+  useEffect(() => {
+    setCarregar(true);
+
+    let [, idUsuario] = obterTokenDaStorage();
+
+    obterDadosUsuario(idUsuario)
+      .then((resposta) => {
+        setNomeUsuario(resposta.data.nome);
+        setCarregar(false);
+      })
+      .catch((erro) => {
+        alert("Erro! Verifique o console.");
+        console.error(erro);
+        setCarregar(false);
+      })
+  }, []);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -96,12 +116,9 @@ export default function PrimarySearchAppBar() {
           </MenuItem>
         </ModalPerfil>
       </MenuItem>
-      {/* <Link to="/" className="link" style={{ color: "#000" }}> */}
-      {/* para usar roteamento é melhor fazer navegação pelo history  */}
       <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
         Sair
       </MenuItem>
-      {/* </Link> */}
     </Menu>
 
   );
@@ -143,8 +160,8 @@ export default function PrimarySearchAppBar() {
               <div className={classes.grow} />
 
               <div className={classes.sectionDesktop}>
-                {nomeUsuario === null ?
-                  <h3>Olá!</h3>
+                {carregar ?
+                  ''
                   :
                   <h3>{`Olá, ${nomeUsuario}`}</h3>
                 }

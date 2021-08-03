@@ -14,7 +14,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
   obterTokenDaStorage,
-  salvarNomeUsuarioNaStorage
+  salvarSquadAtivaNaStorage
 } from '../../utils/Storage';
 
 import { obterDadosUsuario } from '../../services/ApiUsuario';
@@ -43,11 +43,11 @@ export default function CardMembros(props) {
 
         setUsuarioLogado(resposta.data);
 
-        salvarNomeUsuarioNaStorage(resposta.data.nome);
-
         obterDadosSquad(idSquad)
           .then((resposta) => {
+            // console.log(resposta.data);
             setSquadAtual(resposta.data);
+            salvarSquadAtivaNaStorage(idSquad);
             setUsuariosNaSquad(resposta.data.usuarios);
             setCarregar(false);
           })
@@ -108,7 +108,13 @@ export default function CardMembros(props) {
                   <h3 className={classes.nome}>{usuario.username}</h3>
                   {/* {console.log(usuario)} */}
                   {/* Objects are not valid as a React child */}
-                  <p className={classes.cargo}>Bug no cargo ehhe</p>
+                  {usuario.cargo != null ?
+                    <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                    :
+                    <p className={classes.cargo}>Cargo indefinido</p>
+                  }
+
+                  {/* <p className={classes.cargo}>Bug no cargo ehhe</p> */}
                   <p className={classes.status}>{usuario.status}</p>
                 </div>
               </div>
@@ -126,8 +132,12 @@ export default function CardMembros(props) {
                     </div>
                     <h3 className={classes.nome}><Online />{usuario.username}</h3>
                     {/* {console.log(usuario)} */}
-                    {/* <p className={classes.cargo}>{usuario.cargo.nome}</p> */}
-                    <p className={classes.cargo}>Bug no cargo ehhe</p>
+                    {usuario.cargo != null ?
+                      <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                      :
+                      <p className={classes.cargo}>Cargo indefinido</p>
+                    }
+                    {/* <p className={classes.cargo}>Bug no cargo ehhe</p> */}
                     <p className={classes.status}>{usuario.status}</p>
                   </div>
                 </div>
