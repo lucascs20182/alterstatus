@@ -27,9 +27,9 @@ export default function CardMembros(props) {
   const [usuariosNaSquad, setUsuariosNaSquad] = useState([]);
   const [carregar, setCarregar] = useState(true);
 
-  const usuariosFiltrados = usuariosNaSquad.filter(function(e) {
+  const usuariosFiltrados = usuariosNaSquad.filter(function (e) {
     return e.username.includes(props.pesquisa);
-    
+
     // const regexp = new RegExp(props.pesquisa, "gi");
     // return e.username.match(regexp) !== null;
   })
@@ -68,20 +68,25 @@ export default function CardMembros(props) {
       {carregar ?
         ''
         :
-      <div className={classes.title}>
-        {/* icone de adicionar squad */}
-        <ModalCriarPapel >
-          <PostAdd color="secondary"/>
-        </ModalCriarPapel>
+        <div>
+          <div className={classes.title}>
+            {/* icone de adicionar squad */}
+            <h2 style={{ marginBottom: "3px", wordBreak: "break-word", }} >
+              Pack 
+            </h2>
 
-        {/* icone de adicionar usuario */}
-        <ModalCadastrar>
-          <PersonAddIcon color="secondary" style={{marginRight: 5,}}/>
-        </ModalCadastrar>
-        <h2 style={{marginRight: 5,}} >
-          Pack
-        </h2>
+          </div>
 
+          <div className={classes.buttons}>
+            <ModalCriarPapel >
+              <PostAdd color="secondary" />
+            </ModalCriarPapel>
+
+            {/* icone de adicionar usuario */}
+            <ModalCadastrar>
+              <PersonAddIcon color="secondary" style={{ marginRight: 5, }} />
+            </ModalCadastrar>
+          </div>
         </div>
       }
 
@@ -94,7 +99,7 @@ export default function CardMembros(props) {
           props.pesquisa.length === 0 ?
             usuariosNaSquad.map(usuario => (
               <div className={classes.root} key={usuario.id}>
-                
+
                 <div className={classes.info}>
                   <div>
                     <ButtonCard />
@@ -108,16 +113,16 @@ export default function CardMembros(props) {
                 </div>
               </div>
             ))
-          :
+            :
             usuariosFiltrados.length === 0 ?
               'Nenhum usuário encontrado'
-            :
+              :
               usuariosFiltrados.map(usuario => (
                 <div className={classes.root} key={usuario.id}>
                   <div className={classes.info}>
                     <div>
                       <ButtonCard />
-                      <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} alt="Imagem dos membros"/></h3>
+                      <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} alt="Imagem dos membros" /></h3>
                     </div>
                     <h3 className={classes.nome}><Online />{usuario.username}</h3>
                     {/* {console.log(usuario)} */}

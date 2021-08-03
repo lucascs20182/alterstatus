@@ -1,4 +1,4 @@
-import { alpha, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: "wrap",
     margin: "auto",
-    justifyContent: "space-around",
+    justifyContent: "center",
     alignItems: "center",
     width: "90%",
   },
@@ -15,12 +15,21 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: "center",
     justifyContent: "center",
+    textAlign: "center",
+    marginBottom: 0,
+  },
+
+  buttons:{
+    display: 'flex',
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 5,
   },
 
   root: {
     display: 'table',
     textAlign: "center",
-    marginRight: 10,
+    marginRight: 20,
     marginTop: 10,
     backgroundColor: "#D6D6D6",
     width: "170px",
@@ -45,7 +54,6 @@ export const useStyles = makeStyles((theme) => ({
   user: {
     height: 70
   },
-
 
   nome: {
     textAlign: "center",

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import CardMembros from '../Card/Card'
 import alterstateLogo from '../../assets/alterstate_logo.png'
 import { useStyles } from './styles'
+import ModalSquad from '../Modal/ModalSquad/ModalSquad';
+import ModalPerfil from '../Modal/ModalPerfil/ModalPerfil';
+import TreeView from '../TreeView/TreeView.jsx';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,6 +15,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
 import Toolbar from '@material-ui/core/Toolbar';
+import Tooltip from '@material-ui/core/Tooltip';
 import { AddCircle } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,9 +23,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
-import ModalSquad from '../Modal/ModalSquad/ModalSquad';
-import ModalPerfil from '../Modal/ModalPerfil/ModalPerfil';
-import TreeView from '../TreeView/TreeView.jsx';
 
 import {
   removerAutenticacao,
@@ -79,6 +80,7 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+
       {/**
        * ModalPerfil disparando warning "Function components cannot be given refs aqui"
        * componentes <Menu> costumam ter MenuItem, MenuIcon e coisas assim
@@ -101,9 +103,10 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
       {/* </Link> */}
     </Menu>
+
   );
 
-// Menu de squad, usuarios e criar equipe do lado direito
+  // Menu de squad, usuarios e criar equipe do lado direito
   return (
     <div className={classes.grow}>
       {['left'].map((anchor) => (
@@ -138,7 +141,7 @@ export default function PrimarySearchAppBar() {
                 />
               </div>
               <div className={classes.grow} />
-              
+
               <div className={classes.sectionDesktop}>
                 {nomeUsuario === null ?
                   <h3>Olá!</h3>
