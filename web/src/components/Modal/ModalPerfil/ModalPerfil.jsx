@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function SimpleModal({ children }) {
+export default function ModalPerfil({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 

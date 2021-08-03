@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import TreeView from '@material-ui/lab/TreeView';
-import TreeItem from '@material-ui/lab/TreeItem';
-import Typography from '@material-ui/core/Typography';
-import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
-import PersonIcon from '@material-ui/icons/Person';
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import ModalTrocarSquad from '../Modal/ModalTrocarSquad/ModalTrocarSquad'
+
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import PersonIcon from '@material-ui/icons/Person';
+import TreeView from '@material-ui/lab/TreeView';
+import TreeItem from '@material-ui/lab/TreeItem';
 
 import { obterSquads } from '../../services/ApiSquad';
 
@@ -133,37 +135,38 @@ export default function GmailTreeView() {
       defaultExpanded={['10']}
       defaultCollapseIcon={<ArrowDropDownIcon />}
       defaultExpandIcon={<ArrowRightIcon />}
-      defaultEndIcon={<div style={{ width: 24 }} />}
+      defaultEndIcon={<div style={{ width: 30 }} />}
     >
-      <StyledTreeItem nodeId="3" labelText="Squads" color="#1a73e8" labelIcon={GroupOutlinedIcon}>
-        <StyledTreeItem
-          nodeId="4"
+      <StyledTreeItem nodeId="1" labelText="Squads" color="#094B89" labelIcon={GroupOutlinedIcon} >
+        <ModalTrocarSquad ><StyledTreeItem
+          nodeId="2"
           labelText="NFStock"
           labelIcon={SupervisorAccountIcon}
-          color="#1a73e8"
+          color="#094B89"
           bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
+          
+        /></ModalTrocarSquad>
+        <ModalTrocarSquad><StyledTreeItem
+          nodeId="3"
+          labelText="BimerUp"
+          labelIcon={SupervisorAccountIcon}
+          color="#094B89"
+          bgColor="#e8f0fe"
+        /></ModalTrocarSquad>
+        <ModalTrocarSquad><StyledTreeItem
+          nodeId="4"
+          labelText="Shop"
+          labelIcon={SupervisorAccountIcon}
+          color="#094B89"
+          bgColor="#e8f0fe"
+        /></ModalTrocarSquad>
+        <ModalTrocarSquad><StyledTreeItem
           nodeId="5"
-          labelText="Bimer UP"
-          labelIcon={SupervisorAccountIcon}
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
-          nodeId="6"
-          labelText="Fiscal"
-          labelIcon={SupervisorAccountIcon}
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
-          nodeId="7"
           labelText="Financeiro"
           labelIcon={SupervisorAccountIcon}
-          color="#1a73e8"
+          color="#094B89"
           bgColor="#e8f0fe"
-        />
+        /></ModalTrocarSquad>
       </StyledTreeItem>
       <StyledTreeItem nodeId="8" labelText="Usuários" color="#1a73e8" labelIcon={PersonOutlineIcon} >
         <StyledTreeItem

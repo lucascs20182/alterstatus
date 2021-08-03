@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function SimpleModal({ children }) {
+export default function ModalCadastrar({ children }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 

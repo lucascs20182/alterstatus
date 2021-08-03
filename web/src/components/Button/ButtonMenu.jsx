@@ -34,7 +34,7 @@ export default function PositionedTooltips() {
 
   return (
     <div className={classes.pontinhos}>
-      <Grid container justifyContent="flex-end">
+      <Grid container justifyContent="flex-end" style={{marginLeft: 5}}>
         <Grid item>
           <Tooltip title="menu">
             <IconButton
@@ -53,7 +53,7 @@ export default function PositionedTooltips() {
             open={open}
             style={{
               marginTop: 35,
-              marginLeft: 25
+              marginLeft:25
             }}
             onClose={handleClose}
             PaperProps={{

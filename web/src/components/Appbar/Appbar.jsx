@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import CardMembros from '../Card/Card'
-import alterstateLogo from '../../assets/alterstate_logo.png'
-import { useStyles } from './styles'
 import ModalSquad from '../Modal/ModalSquad/ModalSquad';
 import ModalPerfil from '../Modal/ModalPerfil/ModalPerfil';
 import TreeView from '../TreeView/TreeView.jsx';
@@ -15,7 +13,6 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
 import Toolbar from '@material-ui/core/Toolbar';
-import Tooltip from '@material-ui/core/Tooltip';
 import { AddCircle } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
@@ -23,7 +20,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
-
 import {
   removerAutenticacao,
   obterTokenDaStorage
@@ -32,6 +28,8 @@ import {
 import { obterDadosUsuario } from '../../services/ApiUsuario';
 
 import { useHistory } from 'react-router-dom';
+
+import { useStyles } from './styles'
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();

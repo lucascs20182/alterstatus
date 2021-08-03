@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useStyles } from './styles'
+import ModalCadastrar from '../Modal/ModalCadastrar/ModalCadastrar';
+import ModalCriarPapel from '../Modal/ModalPapel/ModalPapel';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Online from '../../components/Status/StatusOnline';
-import ButtonCard from '../Button/ButtonMenu'
-import user from '../../assets/user.svg'
-import fonts from '../../fonts/Fonts.css'
-import { makeStyles } from '@material-ui/core/styles';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import IconButton from '@material-ui/core/IconButton';
-import ModalCadastrar from '../Modal/ModalCadastrar/ModalCadastrar';
+import ButtonCard from '../Button/ButtonMenu';
 import { PostAdd } from '@material-ui/icons';
-import ModalCriarPapel from '../Modal/ModalPapel/ModalPapel';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
+import fonts from '../../fonts/Fonts.css'
 import {
   obterTokenDaStorage,
   salvarSquadAtivaNaStorage
@@ -19,6 +16,9 @@ import {
 
 import { obterDadosUsuario } from '../../services/ApiUsuario';
 import { obterDadosSquad } from '../../services/ApiSquad';
+
+
+import { useStyles } from './styles'
 
 export default function CardMembros(props) {
   const classes = useStyles();
@@ -72,7 +72,7 @@ export default function CardMembros(props) {
           <div className={classes.title}>
             {/* icone de adicionar squad */}
             <h2 style={{ marginBottom: "3px", wordBreak: "break-word", }} >
-              Pack 
+              Pack
             </h2>
 
           </div>

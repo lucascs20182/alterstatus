@@ -32,22 +32,23 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 20,
     marginTop: 10,
     backgroundColor: "#D6D6D6",
-    width: "170px",
-    height: "180px",
+    width: "140px",
+    height: "190  px",
     borderRadius: "2px",
     boxShadow: "0px 1px 1px 1px rgba(00, 00, 25, 0.3)",
   },
 
   info: {
     display: 'block',
-    maxWidth: "200px",
-    height: "215px",
+    maxWidth: "180px",
+    height: "190px",
   },
 
   avatar: {
     clipPath: 'circle(26%)',
     height: 70,
-    marginBottom: 15
+    marginBottom: 10,
+    marginTop: 10,
   },
 
 

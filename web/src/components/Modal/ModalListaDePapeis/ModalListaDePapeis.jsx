@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ModalCargo({ children }) {
+export default function ModalListaDePapeis({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState({

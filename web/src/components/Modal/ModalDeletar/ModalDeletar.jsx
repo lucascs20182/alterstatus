@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function ModalCriarPapel({ children }) {
+export default function ModalDeletar({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
