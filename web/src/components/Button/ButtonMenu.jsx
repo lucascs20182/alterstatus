@@ -64,7 +64,7 @@ export default function PositionedTooltips() {
             }}
           >
             <MenuItem onClick={handleClose}>
-              <ModalListaDeCargos>Editar cargo</ModalListaDeCargos>
+              <ModalListaDeCargos>Editar papel</ModalListaDeCargos>
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ModalStatus>Editar status</ModalStatus>
