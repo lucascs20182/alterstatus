@@ -32,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 20,
     marginTop: 10,
     backgroundColor: "#D6D6D6",
-    width: "140px",
+    width: "150px",
     height: "190  px",
     borderRadius: "2px",
     boxShadow: "0px 1px 1px 1px rgba(00, 00, 25, 0.3)",
