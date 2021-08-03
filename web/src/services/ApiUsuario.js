@@ -40,3 +40,26 @@ export function mudarUsuarioDeSquad(idUsuario, idSquad) {
             .catch(error => reject(error))
     });
 }
+
+export function mudarCargoDoUsuario(idUsuario, idCargo) {   
+    const body = {
+        "id_usuario": idUsuario,
+        "id_cargo": idCargo
+    }
+
+    // console.log(JSON.stringify(body));
+    
+    return new Promise((resolve, reject) => {
+        return api.post('/usuario/cargo', body)
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+    });
+}
+
+export function removerCargo(idUsuario) {  
+    return new Promise((resolve, reject) => {
+        return api.delete('/usuario/cargo', { "id_usuario": idUsuario })
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+    });
+}

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,6 +9,10 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import '../styles.css';
+
+import { obterDadosSquad } from '../../../services/ApiSquad';
+import { mudarCargoDoUsuario, removerCargo } from '../../../services/ApiUsuario';
+import { obterSquadAtivaDaStorage } from '../../../utils/Storage';
 
 const useStyles = makeStyles((theme) => ({
   fecharJanela: {
@@ -23,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ModalListaDePapeis({ children }) {
+export default function ModalListaDePapeis({ children, usuarioId }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState({
@@ -31,21 +36,75 @@ export default function ModalListaDePapeis({ children }) {
     name: 'hai',
   });
 
+  const [cargos, setCargos] = useState(null);
+  const [cargoSelecionado, setCargoSelecionado] = useState(-1);
+
   const handleChange = (event) => {
     const name = event.target.name;
+    
     setState({
       ...state,
       [name]: event.target.value,
     });
+
+    setCargoSelecionado(event.target.value);
   };
 
+  const history = useHistory();
+
   const handleOpen = () => {
+    obterCargos(obterSquadAtivaDaStorage());
+
     setOpen(true);
   };
 
   const handleClose = () => {
+    // chama requisição aqui
+
     setOpen(false);
   };
+
+  const obterCargos = (idSquad) => {
+    obterDadosSquad(idSquad)
+      .then((resposta) => {
+        setCargos(resposta.data.cargos);
+      })
+      .catch((erro) => {
+        alert("Erro ao obter squad! Verifique o console.");
+        console.error(erro);
+      })
+  }
+
+  const handleConfirmar = (e) => {
+    e.preventDefault();
+
+    if(cargoSelecionado == -1) {
+
+      // problema de cors
+      removerCargo(usuarioId)
+        .then((resposta) => {
+          alert("Cargo removido!");
+          // history.go(0);
+          history.push('/home');
+        })
+        .catch((erro) => {
+          alert("Erro ao remover cargo! Verifique o console.");
+          console.error(erro);
+        })
+      
+      return;
+    }
+
+    mudarCargoDoUsuario(usuarioId, cargoSelecionado)
+      .then((resposta) => {
+        // alert("Cargo alterado!");
+        history.go(0);        
+      })
+      .catch((erro) => {
+        alert("Erro ao alterar cargo! Verifique o console.");
+        console.error(erro);
+      })
+  }
 
   return (
     <div>
@@ -62,7 +121,7 @@ export default function ModalListaDePapeis({ children }) {
         style={{ width: "100%" }}
       >
 
-        <form className="form" style={{ width: "270px", height: "210px" }} >
+        <form className="form" style={{ width: "270px", height: "210px" }} onSubmit={e => handleConfirmar(e)}>
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 style={{ textAlign: 'center', marginTop: -5 }}>Selecione o papel:</h3>
@@ -77,10 +136,15 @@ export default function ModalListaDePapeis({ children }) {
                   name: 'cargo',
                 }}
               >
-                <option aria-label="None" value="" />
-                <option value={10}>Bombeiro</option>
-                <option value={20}>Merge</option>
-                <option value={30}>Pegador de Café</option>
+                <option aria-label="None" value={-1}>Sem cargo</option>
+                
+                { cargos ?
+                  cargos.map(cargo => (
+                    <option value={cargo.id}>{cargo.nome}</option>
+                  ))
+                :
+                  ''
+                }
               </Select>
             </FormControl>
           </center>

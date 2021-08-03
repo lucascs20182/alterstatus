@@ -8,7 +8,6 @@ export function obterSquads() {
     });
 }
 
-
 export function obterDadosSquad(idSquad) {
     return new Promise((resolve, reject) => {
         return api.get(`/api/squad/${idSquad}`)

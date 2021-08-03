@@ -57,7 +57,7 @@ export default function ModalPerfil({ children }) {
   }
 
   const handleChangeFile = (img) => {
-    if (img.size > 18600) { // ver limite certo na api
+    if (img.size > 421888) { // definir tamanho máximo de img
       alert('imagem grande demais!');
 
       return;
@@ -164,7 +164,7 @@ export default function ModalPerfil({ children }) {
                 <TextField
                   className={classes.field}
                   name="Papel"
-                  label={usuarioLogado.nomeCargo}
+                  label={usuarioLogado.nomeCargo || 'Cargo indefinido'}
                   variant="outlined"
                   size="small"
                   color="secondary"

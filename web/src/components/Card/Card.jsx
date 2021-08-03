@@ -102,7 +102,7 @@ export default function CardMembros(props) {
 
                 <div className={classes.info}>
                   <div>
-                    <ButtonCard />
+                    <ButtonCard usuarioId={usuario.id} />
                     <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} alt="Imagem dos membros" /></h3>
                   </div>
                   <h3 className={classes.nome}>{usuario.username}</h3>
@@ -127,7 +127,7 @@ export default function CardMembros(props) {
                 <div className={classes.root} key={usuario.id}>
                   <div className={classes.info}>
                     <div>
-                      <ButtonCard />
+                      <ButtonCard usuarioId={usuario.id} />
                       <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} alt="Imagem dos membros" /></h3>
                     </div>
                     <h3 className={classes.nome}><Online />{usuario.username}</h3>
