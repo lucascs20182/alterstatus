@@ -40,7 +40,7 @@ export default function ModalDeletar({ children, usuarioId }) {
     // problema de cors
     removerUsuario(usuarioId)
     .then((resposta) => {
-      alert("Usuário removido!");
+      // alert("Usuário removido!");
       
       // history.push('/home');
       history.go(0);

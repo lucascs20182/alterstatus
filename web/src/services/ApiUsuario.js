@@ -46,8 +46,6 @@ export function mudarCargoDoUsuario(idUsuario, idCargo) {
         "id_usuario": idUsuario,
         "id_cargo": idCargo
     }
-
-    // console.log(JSON.stringify(body));
     
     return new Promise((resolve, reject) => {
         return api.put('/usuario/cargo', body)
@@ -66,7 +64,7 @@ export function removerCargo(idUsuario) {
 
 export function removerUsuario(idUsuario) {
     return new Promise((resolve, reject) => {
-        return api.delete('/usuario', { "id_usuario": idUsuario })
+        return api.delete(`/usuario/${idUsuario}`)
             .then(response => resolve(response))
             .catch(error => reject(error))
     });

@@ -79,13 +79,11 @@ export default function ModalListaDePapeis({ children, usuarioId }) {
     e.preventDefault();
 
     if(cargoSelecionado == -1) {
-
-      // problema de cors
       removerCargo(usuarioId)
         .then((resposta) => {
-          alert("Cargo removido!");
+          // alert("Cargo removido!");
           // history.go(0);
-          history.push('/home');
+          history.go(0);
         })
         .catch((erro) => {
           alert("Erro ao remover cargo! Verifique o console.");
