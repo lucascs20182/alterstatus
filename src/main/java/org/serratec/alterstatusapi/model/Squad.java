@@ -1,6 +1,5 @@
 package org.serratec.alterstatusapi.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,7 +14,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonAutoDetect
@@ -29,7 +27,7 @@ public class Squad {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator_squad")
 	private Long id;
 
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 30, unique = true)
 	private String nome;
 
 	@JsonIgnoreProperties({ "hibernateEagerInitializer", "handler" })

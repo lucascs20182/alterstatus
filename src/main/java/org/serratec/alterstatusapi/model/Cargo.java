@@ -27,7 +27,7 @@ public class Cargo {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator_cargo")
 	private Long id;
 
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 30, unique = true)
 	private String nome;
 
 	@JsonIgnore
