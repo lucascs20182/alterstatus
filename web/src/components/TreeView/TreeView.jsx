@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ModalTrocarSquad from '../Modal/ModalTrocarSquad/ModalTrocarSquad'
 import ModalDeletarSquad from '../Modal/ModalDeletarSquad/DeletSquad'
@@ -34,6 +34,7 @@ const useTreeItemStyles = makeStyles((theme) => ({
     '&:focus > $content $label, &:hover > $content $label, &$selected > $content $label': {
       backgroundColor: 'transparent',
     },
+    width: '95%'
   },
   content: {
     color: theme.palette.text.secondary,
@@ -60,7 +61,7 @@ const useTreeItemStyles = makeStyles((theme) => ({
   labelRoot: {
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(0.50, 1),
+    padding: theme.spacing(0.50, 1)
   },
   labelIcon: {
     marginRight: theme.spacing(2),
@@ -121,65 +122,36 @@ const useStyles = makeStyles({
   },
 });
 
-export default function GmailTreeView() {
+export default function GmailTreeView(props) {
   const classes = useStyles();
-
-  // useEffect(() => {
-  //   obterSquads
-  //     .then((resposta) => {
-  //       console.log(resposta);
-  //     })
-  //     .catch((erro) => {
-  //       alert("Erro! Verifique o console.");
-  //       console.error(erro);
-  //     });
-  // }, []);
 
   return (
     <TreeView
       className={classes.root}
-      defaultExpanded={['10']}
+      defaultExpanded={['1']}
       defaultCollapseIcon={<ArrowDropDownIcon />}
       defaultExpandIcon={<ArrowRightIcon />}
       defaultEndIcon={<div style={{ width: 30 }} />}
     >
       <StyledTreeItem nodeId="1" labelText="Squads" color="#094B89" labelIcon={GroupIcon} >
-
-        <ModalTrocarSquad >
-          <div style={{ display: "flex", }}>
-            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
-            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>Pack</p>
-          </div>
-        </ModalTrocarSquad>
-
-
-        <ModalTrocarSquad >
-          <div style={{ display: "flex", }}>
-            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
-            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>Pack</p>
-          </div>
-        </ModalTrocarSquad>
-
-        <ModalTrocarSquad >
-          <div style={{ display: "flex", }}>
-            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
-            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>Pack</p>
-          </div>
-        </ModalTrocarSquad>
-
-        <ModalTrocarSquad >
-          <div style={{ display: "flex", }}>
-            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
-            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>Pack</p>
-          </div>
-        </ModalTrocarSquad>
-
+        {props.squadsCadastradas.length == 0 ?
+          ''
+          :
+          props.squadsCadastradas.map(nome => (
+            <ModalTrocarSquad >
+              <div style={{ display: "flex", width: '100%' }}>
+                <GroupIcon color="secondary" style={{ paddingLeft: 35 }} />
+                <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>{nome}</p>
+              </div>
+            </ModalTrocarSquad>
+          ))
+        }
       </StyledTreeItem>
 
       <StyledTreeItem nodeId="8" labelText="Opções" color="#094B89" labelIcon={SettingsIcon} >
         <ModalTrocarSquad >
           <div style={{ display: "flex", }}>
-            <GroupIcon color="secondary"  />
+            <GroupIcon color="secondary" />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Designar cargo</p>
           </div>
         </ModalTrocarSquad>
@@ -194,14 +166,14 @@ export default function GmailTreeView() {
 
         <ModalTrocarSquad >
           <div style={{ display: "flex", }}>
-            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
+            <GroupIcon color="secondary" />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Tortinha de limão </p>
           </div>
         </ModalTrocarSquad>
 
         <ModalDeletarSquad >
           <div style={{ display: "flex", }}>
-            <DeleteIcon  style={ { color: red[500], marginLeft: 40, }} />
+            <DeleteIcon style={{ color: red[500], marginLeft: 40, }} />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Deletar Squad</p>
           </div>
         </ModalDeletarSquad>

@@ -27,6 +27,8 @@ import {
 
 import { obterDadosUsuario } from '../../services/ApiUsuario';
 
+import { obterSquads } from '../../services/ApiSquad';
+
 import { useHistory } from 'react-router-dom';
 
 import { useStyles } from './styles'
@@ -41,6 +43,8 @@ export default function PrimarySearchAppBar() {
   const [pesquisa, setPesquisa] = useState('');
   const [carregar, setCarregar] = useState(false);
 
+  const [nomesSquads, setNomesSquads] = useState([]);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -51,7 +55,24 @@ export default function PrimarySearchAppBar() {
     obterDadosUsuario(idUsuario)
       .then((resposta) => {
         setNomeUsuario(resposta.data.nome);
-        setCarregar(false);
+
+        obterSquads()
+          .then((resposta) => {            
+            const nomes = [];
+
+            resposta.data.filter(value => {
+              nomes.push(value.nome);
+            });
+
+            setNomesSquads(nomes);
+            setCarregar(false);
+          })
+          .catch((erro) => {
+            alert("Erro! Verifique o console.");
+            console.error(erro);
+            setCarregar(false);
+          });
+        // setCarregar(false);
       })
       .catch((erro) => {
         alert("Erro! Verifique o console.");
@@ -199,21 +220,25 @@ export default function PrimarySearchAppBar() {
               <h3 className={classes.createSquad}>
                 Criar equipe
                 <ModalSquad>
-                    <AddCircle
-                      color="secondary"
-                      style={{
-                        height: 28,
-                        width: 28,
-                        height: '100%',
-                        marginTop: 8,
-                      }}
-                    />
+                  <AddCircle
+                    color="secondary"
+                    style={{
+                      height: 28,
+                      width: 28,
+                      height: '100%',
+                      marginTop: 8,
+                    }}
+                  />
                 </ModalSquad>
               </h3>
 
               <Divider />
             </List>
-            <TreeView />
+            {carregar ? 
+              ''
+            :
+              <TreeView squadsCadastradas={nomesSquads} />
+            }
           </Drawer>
           <main>
             <div className={classes.drawerHeader} />

@@ -8,6 +8,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import Tooltip from '@material-ui/core/Tooltip';
 import Dialog from '@material-ui/core/Dialog';
 
+import { criarSquad } from '../../../services/ApiSquad';
+
 const useStyles = makeStyles((theme) => ({
 
   fecharJanela: {
@@ -27,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ModalSquad({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [nomeSquad, setNomeSquad] = React.useState('');
 
   const handleOpen = () => {
     setOpen(true);
@@ -35,6 +38,23 @@ export default function ModalSquad({ children }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleCriar = (e) => {
+    e.preventDefault();
+
+    criarSquad(nomeSquad)
+      .then((resposta) => {
+        alert('Squad criado com sucesso!');
+
+        history.go(0);
+        // setCarregar(false);
+      })
+      .catch((erro) => {
+        alert("Erro! Verifique o console.");
+        console.error(erro);
+        // setCarregar(false);
+      });
+  }
 
   return (
     <div>
@@ -52,7 +72,7 @@ export default function ModalSquad({ children }) {
         style={{ width: "100%" }}
       >
 
-        <form className="form" style={{ width: "270px", height: "200px" }} >
+        <form className="form" style={{ width: "270px", height: "200px" }} onSubmit={e => handleCriar(e)} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 style={{ textAlign: 'center', marginTop: -5 }}>Criar squad</h3>
@@ -62,8 +82,8 @@ export default function ModalSquad({ children }) {
               label="Nome"
               variant="outlined"
               size="small"
-              color="secondary"
-              onChange={(e) => setUsername(e.target.value)}
+              color="secondary"              
+              onChange={(e) => setNomeSquad(e.target.value)}
             />
 
           </center>
