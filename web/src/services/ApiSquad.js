@@ -15,3 +15,11 @@ export function obterDadosSquad(idSquad) {
             .catch(error => reject(error))
     });
 }
+
+export function removerSquad(idSquad) {  
+    return new Promise((resolve, reject) => {
+        return api.delete('/squad', { "id_squad": idSquad})
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+    });
+}

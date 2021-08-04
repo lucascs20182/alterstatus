@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ModalTrocarSquad from '../Modal/ModalTrocarSquad/ModalTrocarSquad'
+import ModalDeletarSquad from '../Modal/ModalDeletarSquad/DeletSquad'
 
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
@@ -14,6 +15,9 @@ import PersonIcon from '@material-ui/icons/Person';
 import GroupIcon from '@material-ui/icons/Group';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import red from '@material-ui/core/colors/red';
 
 import { obterSquads } from '../../services/ApiSquad';
 
@@ -191,16 +195,16 @@ export default function GmailTreeView() {
         <ModalTrocarSquad >
           <div style={{ display: "flex", }}>
             <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
-            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Pack</p>
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Tortinha de limão </p>
           </div>
         </ModalTrocarSquad>
 
-        <ModalTrocarSquad >
+        <ModalDeletarSquad >
           <div style={{ display: "flex", }}>
-            <GroupIcon color="secondary" style={{ marginLeft: -80, }} />
-            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Pack</p>
+            <DeleteIcon  style={ { color: red[500], marginLeft: 40, }} />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Deletar Squad</p>
           </div>
-        </ModalTrocarSquad>
+        </ModalDeletarSquad>
       </StyledTreeItem>
     </TreeView>
   );
