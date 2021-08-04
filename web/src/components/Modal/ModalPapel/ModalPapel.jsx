@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles.css';
 
 import DialogActions from '@material-ui/core/DialogActions';
@@ -7,6 +7,9 @@ import TextField from '@material-ui/core/TextField';
 import CloseIcon from '@material-ui/icons/Close';
 import Tooltip from '@material-ui/core/Tooltip';
 import Dialog from '@material-ui/core/Dialog';
+
+import { obterSquadAtivaDaStorage } from '../../../utils/Storage';
+import { cadastrarCargo } from '../../../services/ApiCargo';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -28,9 +31,26 @@ export default function ModalCriarPapel({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
+  const [novoCargo, setNovoCargo] = useState('');
+
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const handleCadastrar = () => {
+    cadastrarCargo(novoCargo, obterSquadAtivaDaStorage())
+    .then((resposta) => {
+      alert('Novo cargo adicionado!');
+      console.log(resposta)
+      
+      setOpen(false);
+      // history.go(0);
+    })
+    .catch((erro) => {
+      alert("Erro ao remover usuário! Verifique o console.");
+      console.error(erro);
+    })
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -53,7 +73,7 @@ export default function ModalCriarPapel({ children }) {
         style={{ width: "100%" }}
       >
 
-        <form className="form" style={{ width: "270px", height: "200px" }} >
+        <form className="form" style={{ width: "270px", height: "200px" }} onSubmit={e => e.preventDefault()} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 style={{ textAlign: 'center', marginTop: -5}}>Criar papel</h3>
@@ -64,13 +84,13 @@ export default function ModalCriarPapel({ children }) {
               variant="outlined"
               size="small"
               color="secondary"
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setNovoCargo(e.target.value)}
             />
 
           </center>
 
           <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <button className="buttonConfirmar" onClick={handleClose} >
+            <button className="buttonConfirmar" onClick={handleCadastrar} >
               Cadastrar
             </button>
           </DialogActions>
