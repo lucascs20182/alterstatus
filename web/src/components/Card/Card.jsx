@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import ModalCadastrar from '../Modal/ModalCadastrar/ModalCadastrar';
 import ModalCriarPapel from '../Modal/ModalPapel/ModalPapel';
+import ModalMudarNomeDoSquad from '../Modal/ModalMudarNomeDoSquad/ModalMudarNomeDoSquad'
 
+import EditIcon from '@material-ui/icons/Edit';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Online from '../../components/Status/StatusOnline';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import IconButton from '@material-ui/core/IconButton';
 import ButtonCard from '../Button/ButtonMenu';
@@ -86,6 +87,11 @@ export default function CardMembros(props) {
             <ModalCadastrar>
               <PersonAddIcon color="secondary" style={{ marginRight: 5, }} />
             </ModalCadastrar>
+
+            <ModalMudarNomeDoSquad>
+              <EditIcon color="secondary" style={{ marginRight: 5, fontSize: 22}} />
+            </ModalMudarNomeDoSquad>
+
           </div>
         </div>
       }

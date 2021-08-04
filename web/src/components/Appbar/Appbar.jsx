@@ -132,7 +132,7 @@ export default function PrimarySearchAppBar() {
     >
 
       <MenuItem>
-        <MenuItem onClick={handleMenuClose} style={{ width: "100%", }}>
+        <MenuItem onClick={handleMenuClose} style={{ width: "100%", }} >
           <ModalPerfil> Perfil </ModalPerfil>
         </MenuItem>
 

@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     height: 25,
     marginLeft: 235,
     marginTop: 5,
-    color: '#094B89',
   },
 
   field: {
@@ -126,7 +125,7 @@ export default function ModalCadastrar({ children }) {
 
         <form className="form" style={{ width: "270px", height: "370px" }} onSubmit={e => handleCadastrar(e)} >
           <center>
-            <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
+            <CloseIcon className={classes.fecharJanela} color="secondary" onClick={handleClose} />
             <h3 style={{ textAlign: 'center', marginTop: -5 }}>Cadastro</h3>
             <TextField
               className={classes.field}
@@ -177,7 +176,7 @@ export default function ModalCadastrar({ children }) {
           </center>
 
           <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <button className="buttonConfirmar" onClick={handleClose} >
+            <button className="buttonConfirmar" color="secondary" onClick={handleClose} >
               Cadastrar
             </button>
           </DialogActions>

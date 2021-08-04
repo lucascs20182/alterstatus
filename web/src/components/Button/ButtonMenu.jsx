@@ -43,7 +43,7 @@ export default function PositionedTooltips(props) {
               aria-haspopup="true"
               onClick={handleClick}
             >
-              <MoreVertIcon />
+              <MoreVertIcon style={{ color: '#000' }}/>
             </IconButton>
           </Tooltip>
           <Menu
