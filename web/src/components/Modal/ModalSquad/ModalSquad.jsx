@@ -43,7 +43,7 @@ export default function ModalSquad({ children }) {
           {children}
         </button>
       </Tooltip>
-      
+
       <Dialog
         open={open}
         onClose={handleClose}

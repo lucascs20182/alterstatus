@@ -3,9 +3,9 @@
   grid-template-columns: (4, 1fr);
   gap: 10px;
   grid-auto-rows: 200px;
-  grid-template-areas: 
-      'header header'
-      'form form';
+  grid-template-areas:
+    'header header'
+    'form form';
 }
 
 header {
@@ -24,14 +24,14 @@ header {
   border-radius: 5px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   background: #FFF;
   transition: 1s;
   box-shadow: 0px 3px 0.5px 0.5px rgba(22, 80, 145, 0.3);
   position: fixed;
 }
 
-.logo-Login{
+.logo-Login {
   height: 40px;
   align-items: center;
   justify-content: center;
@@ -39,13 +39,13 @@ header {
   margin-bottom: 20px;
 }
 
-.form{
+.form {
   grid-area: form;
   align-self: center;
   justify-self: center;
 }
 
-.input{
+.input {
   margin-bottom: 16px;
 }
 
@@ -66,7 +66,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   cursor: pointer;
   border: 0;
 

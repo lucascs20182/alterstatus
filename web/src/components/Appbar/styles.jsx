@@ -79,7 +79,7 @@ export const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
-  
+
 
   list: {
     width: 250,
@@ -158,5 +158,12 @@ export const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(0),
+  },
+
+  sectionMobile: {
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
   },
 }));

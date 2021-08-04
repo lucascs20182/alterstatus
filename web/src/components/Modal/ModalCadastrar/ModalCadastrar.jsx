@@ -33,7 +33,7 @@ export default function ModalCadastrar({ children }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  const [squadAtiva, ] = useState(obterSquadAtivaDaStorage());
+  const [squadAtiva,] = useState(obterSquadAtivaDaStorage());
 
   const [nome, setNome] = useState('');
   const [username, setUsername] = useState('');
@@ -56,20 +56,20 @@ export default function ModalCadastrar({ children }) {
     const formData = new FormData();
     const novoUsuario = {}
 
-    if(nome != "") {
+    if (nome != "") {
       novoUsuario.nome = nome;
     }
 
-    if(username != "") {
-        novoUsuario.username = username;
+    if (username != "") {
+      novoUsuario.username = username;
     }
 
-    if(senha != "") {
-        novoUsuario.senha = senha;
+    if (senha != "") {
+      novoUsuario.senha = senha;
     }
 
-    if(status != "") {
-        novoUsuario.status = status;
+    if (status != "") {
+      novoUsuario.status = status;
     }
 
     const novoUsuarioJSON = JSON.stringify(novoUsuario);
@@ -82,23 +82,23 @@ export default function ModalCadastrar({ children }) {
 
     cadastrar(formData)
       .then((resposta) => {
-          const idUsuarioCriado = resposta.data.id;
+        const idUsuarioCriado = resposta.data.id;
 
-          mudarUsuarioDeSquad(idUsuarioCriado, squadAtiva)
-            .then((resposta) => {
-              alert("Usuário cadastrado!");
-              // console.log(resposta);
-            })
-            .catch((erro) => {
-              alert("Erro ao adicionar usuário na squad! Verifique o console.");
-              console.error(erro);
-            })
+        mudarUsuarioDeSquad(idUsuarioCriado, squadAtiva)
+          .then((resposta) => {
+            alert("Usuário cadastrado!");
+            // console.log(resposta);
+          })
+          .catch((erro) => {
+            alert("Erro ao adicionar usuário na squad! Verifique o console.");
+            console.error(erro);
+          })
 
-          history.go(0); // manda para home e dá reload
+        history.go(0); // manda para home e dá reload
       })
       .catch((erro) => {
-          alert("Erro ao criar usuário! Verifique o console.");
-          console.error(erro);
+        alert("Erro ao criar usuário! Verifique o console.");
+        console.error(erro);
       });
 
     // limpa o formulário

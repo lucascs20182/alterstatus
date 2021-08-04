@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AlertaSucesso from '../../Alert/AlertSucess'
 
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,6 +9,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
+import Tooltip from '@material-ui/core/Tooltip';
 import '../styles.css';
 
 import { obterDadosSquad } from '../../../services/ApiSquad';
@@ -41,7 +43,7 @@ export default function ModalListaDePapeis({ children, usuarioId }) {
 
   const handleChange = (event) => {
     const name = event.target.name;
-    
+
     setState({
       ...state,
       [name]: event.target.value,
@@ -65,6 +67,7 @@ export default function ModalListaDePapeis({ children, usuarioId }) {
   };
 
   const obterCargos = (idSquad) => {
+
     obterDadosSquad(idSquad)
       .then((resposta) => {
         setCargos(resposta.data.cargos);
@@ -78,25 +81,25 @@ export default function ModalListaDePapeis({ children, usuarioId }) {
   const handleConfirmar = (e) => {
     e.preventDefault();
 
-    if(cargoSelecionado == -1) {
+    if (cargoSelecionado == -1) {
       removerCargo(usuarioId)
         .then((resposta) => {
           // alert("Cargo removido!");
-          // history.go(0);
           history.go(0);
+          setSuccess(true);
         })
         .catch((erro) => {
           alert("Erro ao remover cargo! Verifique o console.");
           console.error(erro);
         })
-      
+
       return;
     }
 
     mudarCargoDoUsuario(usuarioId, cargoSelecionado)
       .then((resposta) => {
         // alert("Cargo alterado!");
-        history.go(0);        
+        history.go(0);
       })
       .catch((erro) => {
         alert("Erro ao alterar cargo! Verifique o console.");
@@ -106,54 +109,57 @@ export default function ModalListaDePapeis({ children, usuarioId }) {
 
   return (
     <div>
+      <Tooltip title="Editar papel" arrow>
+        <button className="buttonModal" type="submit" onClick={handleOpen}>
+          {children}
+        </button>
+      </Tooltip>
 
-      <button className="buttonModal" type="submit" onClick={handleOpen}>
-        {children}
-      </button>
+      <div>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          style={{ width: "100%" }}
+        >
 
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        style={{ width: "100%" }}
-      >
+          <form className="form" style={{ width: "270px", height: "210px" }} onSubmit={e => handleConfirmar(e)}>
+            <center>
+              <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
+              <h3 style={{ textAlign: 'center', marginTop: -5 }}>Selecione o papel:</h3>
+              <FormControl color="secondary" variant="outlined" className={classes.formControl} style={{ width: "220px" }}>
+                <InputLabel >Papéis</InputLabel>
+                <Select
+                  native
+                  value={state.cargo}
+                  onChange={handleChange}
+                  label="Papéis"
+                  inputProps={{
+                    name: 'cargo',
+                  }}
+                >
+                  <option aria-label="None" value={-1}>Sem cargo</option>
 
-        <form className="form" style={{ width: "270px", height: "210px" }} onSubmit={e => handleConfirmar(e)}>
-          <center>
-            <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
-            <h3 style={{ textAlign: 'center', marginTop: -5 }}>Selecione o papel:</h3>
-            <FormControl color="secondary" variant="outlined" className={classes.formControl} style={{ width: "220px" }}>
-              <InputLabel >Papéis</InputLabel>
-              <Select
-                native
-                value={state.cargo}
-                onChange={handleChange}
-                label="Papéis"
-                inputProps={{
-                  name: 'cargo',
-                }}
-              >
-                <option aria-label="None" value={-1}>Sem cargo</option>
-                
-                { cargos ?
-                  cargos.map(cargo => (
-                    <option value={cargo.id}>{cargo.nome}</option>
-                  ))
-                :
-                  ''
-                }
-              </Select>
-            </FormControl>
-          </center>
+                  {cargos ?
+                    cargos.map(cargo => (
+                      <option value={cargo.id}>{cargo.nome}</option>
+                    ))
+                    :
+                    ''
+                  }
+                </Select>
+              </FormControl>
+            </center>
 
-          <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <button className="buttonConfirmar" onClick={handleClose} >
-              Confirmar
-            </button>
-          </DialogActions>
-        </form>
-      </Dialog>
+            <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
+              <button className="buttonConfirmar" onClick={handleClose} >
+                Confirmar
+              </button>
+            </DialogActions>
+          </form>
+        </Dialog>
+      </div>
 
     </div>
   );

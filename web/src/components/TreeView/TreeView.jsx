@@ -179,7 +179,7 @@ export default function GmailTreeView() {
       <StyledTreeItem nodeId="8" labelText="Opções" color="#094B89" labelIcon={SettingsIcon} >
         <ModalTrocarSquad >
           <div style={{ display: "flex", }}>
-            <GroupIcon color="secondary"  />
+            <GroupIcon color="secondary" />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Designar cargo</p>
           </div>
         </ModalTrocarSquad>
@@ -201,7 +201,7 @@ export default function GmailTreeView() {
 
         <ModalDeletarSquad >
           <div style={{ display: "flex", }}>
-            <DeleteIcon  style={ { color: red[500], marginLeft: 40, }} />
+            <DeleteIcon style={{ color: red[500], marginLeft: 40, }} />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Deletar Squad</p>
           </div>
         </ModalDeletarSquad>

@@ -34,7 +34,7 @@ export default function PositionedTooltips(props) {
 
   return (
     <div className={classes.pontinhos}>
-      <Grid container justifyContent="flex-end" style={{marginLeft: 5}}>
+      <Grid container justifyContent="flex-end" style={{ marginLeft: 5 }}>
         <Grid item>
           <Tooltip title="menu">
             <IconButton
@@ -53,7 +53,6 @@ export default function PositionedTooltips(props) {
             open={open}
             style={{
               marginTop: 35,
-              marginLeft:25
             }}
             onClose={handleClose}
             PaperProps={{
@@ -69,9 +68,11 @@ export default function PositionedTooltips(props) {
             <MenuItem onClick={handleClose}>
               <ModalStatus usuarioId={props.usuarioId}>Editar status</ModalStatus>
             </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ModalDeletar usuarioId={props.usuarioId}>Deletar</ModalDeletar>
-            </MenuItem>
+            <ModalDeletar usuarioId={props.usuarioId}>
+              <MenuItem onClick={handleClose}>
+                Deletar
+              </MenuItem>
+            </ModalDeletar>
           </Menu>
         </Grid>
       </Grid>

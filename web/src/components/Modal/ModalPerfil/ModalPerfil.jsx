@@ -82,16 +82,16 @@ export default function ModalPerfil({ children }) {
       "id_usuario": usuarioLogado.id
     }
 
-    if(nome != "") {
+    if (nome != "") {
       novoUsuario.nome = nome;
     }
 
-    if(senha != "") {
-        novoUsuario.senha = senha;
+    if (senha != "") {
+      novoUsuario.senha = senha;
     }
 
-    if(status != "") {
-        novoUsuario.status = status;
+    if (status != "") {
+      novoUsuario.status = status;
     }
 
     const novoUsuarioJSON = JSON.stringify(novoUsuario);
@@ -102,23 +102,23 @@ export default function ModalPerfil({ children }) {
 
     formData.append('usuario', blob);
 
-    if(imagem != null) {
+    if (imagem != null) {
       formData.append('file', imagem);
     }
 
     editar(formData)
       .then((resposta) => {
-          alert("Informações atualizadas!");
+        alert("Informações atualizadas!");
 
-          if(senha != "") {
-            removerAutenticacao();
-          }
+        if (senha != "") {
+          removerAutenticacao();
+        }
 
-          history.go(0);
+        history.go(0);
       })
       .catch((erro) => {
-          alert("Erro ao criar usuário! Verifique o console.");
-          console.error(erro);
+        alert("Erro ao criar usuário! Verifique o console.");
+        console.error(erro);
       });
   }
 

@@ -38,7 +38,7 @@ export default function ModalTrocarSquad({ children }) {
   return (
     <div>
 
-      <Button disableElevation  className="buttonModal" style={{ width: "100%", textTransform: 'none', }} onClick={handleOpen}>
+      <Button disableElevation className="buttonModal" style={{ width: "100%", textTransform: 'none', }} onClick={handleOpen}>
         {children}
       </Button>
 

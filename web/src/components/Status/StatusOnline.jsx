@@ -3,7 +3,7 @@ import Badge from '@material-ui/core/Badge';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 const StyledBadge = withStyles((theme) => ({
-  badge: { 
+  badge: {
     clipPath: "circle()",
     width: 11,
     height: 11,

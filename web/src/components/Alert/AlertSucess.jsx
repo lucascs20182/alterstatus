@@ -17,13 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedSnackbars() {
+export default function AlertaSucesso({ children }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
+  const [open, setOpen] = React.useState(true);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -35,18 +31,11 @@ export default function CustomizedSnackbars() {
 
   return (
     <div className={classes.root}>
-      <Button variant="outlined" onClick={handleClick}>
-        Open success snackbar
-      </Button>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
-          This is a success message!
+          {children}
         </Alert>
       </Snackbar>
-      <Alert severity="error">This is an error message!</Alert>
-      <Alert severity="warning">This is a warning message!</Alert>
-      <Alert severity="info">This is an information message!</Alert>
-      <Alert severity="success">This is a success message!</Alert>
     </div>
   );
 }

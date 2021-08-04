@@ -9,7 +9,7 @@ import '../styles.css';
 import { removerSquad } from '../../../services/ApiSquad';
 
 const useStyles = makeStyles((theme) => ({
-  
+
   fecharJanela: {
     width: 25,
     height: 25,
@@ -40,16 +40,16 @@ export default function ModalDeletarSquad({ children, idSquad }) {
   const handleSim = () => {
 
     removerSquad(idSquad)
-    .then((resposta) => {
-      alert("Squad Excluido!!");
-    
-      history.go(0);
-    })
-    .catch((erro) => {
-      alert("Erro ao remover o Squad!");
-      console.error(erro);
-    })
-    
+      .then((resposta) => {
+        alert("Squad Excluido!!");
+
+        history.go(0);
+      })
+      .catch((erro) => {
+        alert("Erro ao remover o Squad!");
+        console.error(erro);
+      })
+
     setOpen(false);
   };
 

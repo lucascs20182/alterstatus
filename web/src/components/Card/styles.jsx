@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: 0,
   },
 
-  buttons:{
+  buttons: {
     display: 'flex',
     alignItems: "center",
     justifyContent: "center",

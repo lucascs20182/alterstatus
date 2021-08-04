@@ -34,6 +34,7 @@ import { useStyles } from './styles'
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [state, setState] = useState({
     left: false,
   });
@@ -69,6 +70,7 @@ export default function PrimarySearchAppBar() {
   };
 
   const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -76,6 +78,11 @@ export default function PrimarySearchAppBar() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
   };
 
   const handleSair = () => {
@@ -85,6 +92,10 @@ export default function PrimarySearchAppBar() {
 
     history.push('/login');
   }
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -99,26 +110,41 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
 
-      {/**
-       * ModalPerfil disparando warning "Function components cannot be given refs aqui"
-       * componentes <Menu> costumam ter MenuItem, MenuIcon e coisas assim
-       * 
-       * Adicionei <MenuItem> em volta do <ModalPerfil> e o warning parou
-       * 
-       * Verificar se nada foi quebrado ou algum bug gerado
-       */}
       <MenuItem>
-        <ModalPerfil>
-          <MenuItem onClick={handleMenuClose} style={{ width: "100%", }}>
-            Perfil
-          </MenuItem>
-        </ModalPerfil>
+        <MenuItem onClick={handleMenuClose} style={{ width: "100%", }}>
+          <ModalPerfil> Perfil </ModalPerfil>
+        </MenuItem>
+
       </MenuItem>
       <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
         Sair
       </MenuItem>
     </Menu>
 
+  );
+
+  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <ModalPerfil>
+          <MenuItem onClick={handleMobileMenuClose} style={{ width: "100%", }}>
+            Perfil
+          </MenuItem>
+        </ModalPerfil>
+      </MenuItem>
+      <MenuItem onClick={handleMobileMenuClose} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
+        Sair
+      </MenuItem>
+    </Menu>
   );
 
   // Menu de squad, usuarios e criar equipe do lado direito
@@ -179,18 +205,25 @@ export default function PrimarySearchAppBar() {
                   }} />
                 </IconButton>
               </div>
+
               <div className={classes.sectionMobile}>
                 <IconButton
                   aria-label="show more"
+                  aria-controls={mobileMenuId}
                   aria-haspopup="true"
+                  onClick={handleMobileMenuOpen}
                   color="secondary"
                 >
                   <MoreIcon />
                 </IconButton>
               </div>
+
             </Toolbar>
           </AppBar>
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} >
+          {renderMobileMenu}
+          {renderMenu}
+
+          <Drawer anchor="left" open={state[anchor]} onClose={toggleDrawer(anchor, false)} >
             <List className={classes.list}>
               <Typography className={classes.subtitle}>
                 Alterstate
@@ -199,15 +232,15 @@ export default function PrimarySearchAppBar() {
               <h3 className={classes.createSquad}>
                 Criar equipe
                 <ModalSquad>
-                    <AddCircle
-                      color="secondary"
-                      style={{
-                        height: 28,
-                        width: 28,
-                        height: '100%',
-                        marginTop: 8,
-                      }}
-                    />
+                  <AddCircle
+                    color="secondary"
+                    style={{
+                      height: 28,
+                      width: 28,
+                      height: '100%',
+                      marginTop: 8,
+                    }}
+                  />
                 </ModalSquad>
               </h3>
 
@@ -219,10 +252,9 @@ export default function PrimarySearchAppBar() {
             <div className={classes.drawerHeader} />
             <CardMembros pesquisa={pesquisa} />
           </main>
-
-          {renderMenu}
         </React.Fragment>
       ))}
+
     </div>
   )
 }
