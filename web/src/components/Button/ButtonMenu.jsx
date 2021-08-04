@@ -12,7 +12,8 @@ import ModalDeletar from '../Modal/ModalDeletar/ModalDeletar';
 
 const useStyles = makeStyles({
   pontinhos: {
-    marginBottom: -40
+    color: '#000',
+    marginBottom: -40,
   },
 });
 

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     height: 25,
     marginLeft: 235,
     marginTop: 5,
-    color: '#094B89',
+    color: 'secondary',
   },
 
   field: {
@@ -152,7 +152,7 @@ export default function ModalPerfil({ children }) {
         ''
         :
         <div>
-          <Tooltip title="Cadastrar membro" arrow>
+          <Tooltip title="Ver Perfil" arrow>
             <button className="buttonModal" color="secondary" onClick={handleClickOpen}>
               {children}
             </button>

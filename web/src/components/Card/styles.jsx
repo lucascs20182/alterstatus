@@ -62,6 +62,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 2,
     wordBreak: "break-word",
     fontSize: 13,
+    color: "#000",
   },
 
   cargo: {
@@ -70,6 +71,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 3,
     wordBreak: "break-word",
     fontSize: 13,
+    color: "#000",
   },
 
   status: {
@@ -78,6 +80,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 3,
     wordBreak: "break-word",
     fontSize: 13,
+    color: "#000",
   },
 
   Button: {

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     height: 25,
     marginLeft: 260,
     marginTop: 5,
-    color: '#094B89',
+    color: 'secondary',
   },
 
   field: {

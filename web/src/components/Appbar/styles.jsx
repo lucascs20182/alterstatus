@@ -13,14 +13,14 @@ export const useStyles = makeStyles((theme) => ({
     },
     fontFamily: 'Poppins',
     fontWeight: '700',
-    color: "#094B89",
+    color: "secondary",
     fontSize: "25px",
   },
 
   subtitle: {
     fontFamily: 'Poppins',
     fontWeight: '700',
-    color: "#094B89",
+    color: "secondary",
     fontSize: "25px",
     textAlign: "center",
   },
