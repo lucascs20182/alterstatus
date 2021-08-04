@@ -11,8 +11,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import Tooltip from '@material-ui/core/Tooltip';
 import Dialog from '@material-ui/core/Dialog';
 
-import { obterTokenDaStorage } from '../../../utils/Storage';
-import { obterDadosUsuario } from '../../../services/ApiUsuario';
+import { obterTokenDaStorage, removerAutenticacao } from '../../../utils/Storage';
+import { obterDadosUsuario, editar } from '../../../services/ApiUsuario';
 
 const useStyles = makeStyles((theme) => ({
   fecharJanela: {
@@ -49,29 +49,102 @@ export default function ModalPerfil({ children }) {
   const [open, setOpen] = React.useState(false);
 
   const [usuarioLogado, setUsuarioLogado] = useState({});
+  const [representacaoImagem, setRepresentacaoImagem] = useState(null);
   const [imagem, setImagem] = useState(null);
+  const [senha, setSenha] = useState('');
+  const [nome, setNome] = useState('');
+  const [status, setStatus] = useState('');
 
   const handleFile = (e) => {
     const content = e.target.result;
-    setImagem(content);
+    setRepresentacaoImagem(content);
   }
 
   const handleChangeFile = (img) => {
     if (img.size > 421888) { // definir tamanho máximo de img
-      alert('imagem grande demais!');
+      alert('Imagem grande demais!');
 
       return;
     }
+
+    setImagem(img);
 
     const fileData = new FileReader();
     fileData.onloadend = handleFile;
     fileData.readAsDataURL(img);
   }
 
+  // funcionando quando passa avatar
   const handleConfirmar = (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
+    const novoUsuario = {
+      "id_usuario": usuarioLogado.id
+    }
+
+    if(nome != "") {
+      novoUsuario.nome = nome;
+    }
+
+    // verificar se o melhor campo é da senha msmo
+    if(senha != "") {
+        novoUsuario.senha = senha;
+    }
+
+    if(status != "") {
+        novoUsuario.status = status;
+    }
+
+    const novoUsuarioJSON = JSON.stringify(novoUsuario);
+
+    const blob = new Blob([novoUsuarioJSON], {
+      type: 'application/json'
+    })
+
+    formData.append('usuario', blob);
+
+    if(imagem != null) {
+      formData.append('file', imagem);
+    }
+
+    // console.log(formData);
     console.log(imagem);
+    console.log(novoUsuario);
+
+    editar(formData)
+      .then((resposta) => {
+          // const idUsuarioCriado = resposta.data.id;
+
+          // mudarUsuarioDeSquad(idUsuarioCriado, squadAtiva)
+          //   .then((resposta) => {
+          //     alert("Usuário cadastrado!");
+          //     // console.log(resposta);
+          //   })
+          //   .catch((erro) => {
+          //     alert("Erro ao adicionar usuário na squad! Verifique o console.");
+          //     console.error(erro);
+          //   })
+          
+          alert("Informações atualizadas!");
+
+          // if(senha != "") {
+          //   removerAutenticacao();
+          // }
+
+          history.go(0);
+      })
+      .catch((erro) => {
+          alert("Erro ao criar usuário! Verifique o console.");
+          console.error(erro);
+      });
+
+    // limpa o formulário
+    setNome('');
+    setSenha('');
+    setStatus('');
+
+    
   }
 
   const handleClickOpen = () => {
@@ -90,7 +163,7 @@ export default function ModalPerfil({ children }) {
         const usuario = resposta.data;
 
         setUsuarioLogado(usuario);
-        setImagem(usuario.url);
+        setRepresentacaoImagem(usuario.url);
       })
       .catch((erro) => {
         alert("Erro! Verifique o console.");
@@ -127,7 +200,7 @@ export default function ModalPerfil({ children }) {
 
 
                 <h3 className={classes.avatar}>
-                  <img className={classes.user} src={imagem} />
+                  <img className={classes.user} src={representacaoImagem} />
                 </h3>
 
                 {/* --------Botão camera-------- */}
@@ -156,19 +229,21 @@ export default function ModalPerfil({ children }) {
                   variant="outlined"
                   size="small"
                   color="secondary"
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
                 />
 
 
                 {/* checar se cargo pode ser null */}
                 <TextField
                   className={classes.field}
-                  name="Papel"
-                  label={usuarioLogado.nomeCargo || 'Cargo indefinido'}
+                  name="Senha"
+                  label={'Nova senha'}
                   variant="outlined"
                   size="small"
                   color="secondary"
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
                 />
 
                 <TextField
@@ -178,7 +253,8 @@ export default function ModalPerfil({ children }) {
                   type="string"
                   size="small"
                   color="secondary"
-                  onChange={(e) => setSenha(e.target.value)}
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
                 />
 
               </center>

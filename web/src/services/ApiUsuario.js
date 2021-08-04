@@ -28,6 +28,18 @@ export function cadastrar(formData) {
     });
 }
 
+export function editar(formData) {    
+    return new Promise((resolve, reject) => {
+        return api.put('/usuario', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+    });
+}
+
 export function mudarUsuarioDeSquad(idUsuario, idSquad) {   
     const body = {
         "id_usuario": idUsuario,
