@@ -74,7 +74,6 @@ export default function ModalPerfil({ children }) {
     fileData.readAsDataURL(img);
   }
 
-  // funcionando quando passa avatar
   const handleConfirmar = (e) => {
     e.preventDefault();
 
@@ -87,7 +86,6 @@ export default function ModalPerfil({ children }) {
       novoUsuario.nome = nome;
     }
 
-    // verificar se o melhor campo é da senha msmo
     if(senha != "") {
         novoUsuario.senha = senha;
     }
@@ -108,29 +106,13 @@ export default function ModalPerfil({ children }) {
       formData.append('file', imagem);
     }
 
-    // console.log(formData);
-    console.log(imagem);
-    console.log(novoUsuario);
-
     editar(formData)
       .then((resposta) => {
-          // const idUsuarioCriado = resposta.data.id;
-
-          // mudarUsuarioDeSquad(idUsuarioCriado, squadAtiva)
-          //   .then((resposta) => {
-          //     alert("Usuário cadastrado!");
-          //     // console.log(resposta);
-          //   })
-          //   .catch((erro) => {
-          //     alert("Erro ao adicionar usuário na squad! Verifique o console.");
-          //     console.error(erro);
-          //   })
-          
           alert("Informações atualizadas!");
 
-          // if(senha != "") {
-          //   removerAutenticacao();
-          // }
+          if(senha != "") {
+            removerAutenticacao();
+          }
 
           history.go(0);
       })
@@ -138,13 +120,6 @@ export default function ModalPerfil({ children }) {
           alert("Erro ao criar usuário! Verifique o console.");
           console.error(erro);
       });
-
-    // limpa o formulário
-    setNome('');
-    setSenha('');
-    setStatus('');
-
-    
   }
 
   const handleClickOpen = () => {
@@ -168,7 +143,6 @@ export default function ModalPerfil({ children }) {
       .catch((erro) => {
         alert("Erro! Verifique o console.");
         console.error(erro);
-        // setCarregar(false);
       })
   }, []);
 
@@ -203,8 +177,6 @@ export default function ModalPerfil({ children }) {
                   <img className={classes.user} src={representacaoImagem} />
                 </h3>
 
-                {/* --------Botão camera-------- */}
-
                 <div className={classes.root}>
 
                   {
@@ -233,8 +205,6 @@ export default function ModalPerfil({ children }) {
                   onChange={(e) => setNome(e.target.value)}
                 />
 
-
-                {/* checar se cargo pode ser null */}
                 <TextField
                   className={classes.field}
                   name="Senha"
@@ -256,7 +226,6 @@ export default function ModalPerfil({ children }) {
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
                 />
-
               </center>
 
               <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>

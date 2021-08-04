@@ -41,7 +41,6 @@ export default function ModalCriarPapel({ children }) {
     cadastrarCargo(novoCargo, obterSquadAtivaDaStorage())
     .then((resposta) => {
       alert('Novo cargo adicionado!');
-      console.log(resposta)
       
       setOpen(false);
       // history.go(0);
