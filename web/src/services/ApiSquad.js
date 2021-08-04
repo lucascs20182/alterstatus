@@ -8,6 +8,14 @@ export function obterSquads() {
     });
 }
 
+export function criarSquad(nomeSquad) {
+    return new Promise((resolve, reject) => {
+        return api.post('/api/squad', { 'nome': nomeSquad })
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+    });
+}
+
 export function obterDadosSquad(idSquad) {
     return new Promise((resolve, reject) => {
         return api.get(`/api/squad/${idSquad}`)

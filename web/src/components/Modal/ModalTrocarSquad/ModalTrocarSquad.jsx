@@ -35,6 +35,12 @@ export default function ModalTrocarSquad({ children }) {
     setOpen(false);
   };
 
+  const handleSim = () => {
+    console.log('bonjour');
+
+    handleClose();
+  }
+
   return (
     <div>
 
@@ -50,7 +56,7 @@ export default function ModalTrocarSquad({ children }) {
         style={{ width: "100%" }}
       >
 
-        <form className="form" style={{ width: "290px", height: "180px" }} >
+        <form className="form" style={{ width: "290px", height: "180px" }} onSubmit={e => e.preventDefault()}>
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 style={{ textAlign: 'center', marginTop: -5 }}>Trocar de Squad</h3>
@@ -58,7 +64,7 @@ export default function ModalTrocarSquad({ children }) {
           </center>
 
           <DialogActions style={{ alignItems: 'center', justifyContent: 'center', marginTop: -20 }}>
-            <button className="buttonDeletar" onClick={handleClose} >
+            <button className="buttonDeletar" onClick={handleSim} >
               Sim
             </button>
             <button className="buttonConfirmar" onClick={handleClose} >
