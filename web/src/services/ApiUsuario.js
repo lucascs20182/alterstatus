@@ -50,21 +50,21 @@ export function mudarCargoDoUsuario(idUsuario, idCargo) {
     // console.log(JSON.stringify(body));
     
     return new Promise((resolve, reject) => {
-        return api.post('/usuario/cargo', body)
+        return api.put('/usuario/cargo', body)
             .then(response => resolve(response))
             .catch(error => reject(error))
     });
 }
 
-export function removerCargo(idUsuario) {  
+export function removerCargo(idUsuario) {
     return new Promise((resolve, reject) => {
-        return api.delete('/usuario/cargo', { "id_usuario": idUsuario })
+        return api.delete(`/usuario/cargo/${idUsuario}`)
             .then(response => resolve(response))
             .catch(error => reject(error))
     });
 }
 
-export function removerUsuario(idUsuario) {  
+export function removerUsuario(idUsuario) {
     return new Promise((resolve, reject) => {
         return api.delete('/usuario', { "id_usuario": idUsuario })
             .then(response => resolve(response))

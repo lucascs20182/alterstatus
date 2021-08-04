@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles.css';
 
 import DialogActions from '@material-ui/core/DialogActions';
@@ -23,9 +23,11 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function ModalStatus({ children }) {
+export default function ModalStatus({ children, usuarioId }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+
+  const [status, setStatus] = useState('');
 
   const handleOpen = () => {
     setOpen(true);
@@ -34,6 +36,12 @@ export default function ModalStatus({ children }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleConfirmar = e => {
+    e.preventDefault();
+
+    console.log(status);
+  }
 
   return (
     <div>
@@ -50,7 +58,7 @@ export default function ModalStatus({ children }) {
         style={{ width: "100%" }}
       >
 
-        <form className="form" style={{ width: "270px", height: "200px" }} >
+        <form className="form" style={{ width: "270px", height: "200px" }} onSubmit={e => handleConfirmar(e)} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 style={{ textAlign: 'center', marginTop: -5 }}>Editar Status</h3>
@@ -61,7 +69,7 @@ export default function ModalStatus({ children }) {
               variant="outlined"
               size="small"
               color="secondary"
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setStatus(e.target.value)}
             />
 
           </center>
