@@ -184,9 +184,9 @@ public class UsuarioController {
 	}
 	
 	@SecurityRequirement(name = "bearerAuth")
-	@DeleteMapping("cargo")
-	public ResponseEntity<String> removerCargo(@RequestBody UsuarioDTORequest usuario) throws ResourceNotFoundException {
-		servicoUsuario.removerCargo(usuario.getId_usuario());
+	@DeleteMapping("/cargo/{idUsuario}")
+	public ResponseEntity<String> removerCargo(@PathVariable Long idUsuario) throws ResourceNotFoundException {
+		servicoUsuario.removerCargo(idUsuario);
 
 		return new ResponseEntity<String>("Cargo removido", HttpStatus.OK);
 	}

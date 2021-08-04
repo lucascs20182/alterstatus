@@ -30,8 +30,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String[] AUTH_WHITLIST = { "/swagger-ui/**", "/v3/api-docs/**" };
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+	protected void configure(HttpSecurity http) throws Exception {		
+		
+		CorsConfiguration config = new CorsConfiguration().applyPermitDefaultValues();
+		
+		config.addAllowedMethod(HttpMethod.GET);
+		config.addAllowedMethod(HttpMethod.POST);
+		config.addAllowedMethod(HttpMethod.PUT);
+		config.addAllowedMethod(HttpMethod.DELETE);
+		config.addAllowedMethod(HttpMethod.PATCH);
+		
+		http.cors().configurationSource(request -> config);
 
 		http.csrf().disable();
 
