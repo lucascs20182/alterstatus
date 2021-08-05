@@ -69,14 +69,14 @@ export default function PrimarySearchAppBar() {
             setCarregar(false);
           })
           .catch((erro) => {
-            alert("Erro! Verifique o console.");
+            alert('Erro! Verifique o console.');
             console.error(erro);
             setCarregar(false);
           });
         // setCarregar(false);
       })
       .catch((erro) => {
-        alert("Erro! Verifique o console.");
+        alert('Erro! Verifique o console.');
         console.error(erro);
         setCarregar(false);
       })
@@ -131,16 +131,17 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
 
-      <MenuItem>
-        <MenuItem onClick={handleMenuClose} style={{ width: "100%", }} >
-          <ModalPerfil> Perfil </ModalPerfil>
-        </MenuItem>
-
-      </MenuItem>
-      <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
+        <ModalPerfil>
+          <MenuItem onClick={handleMenuClose} style={{ width: "150%", right: 8}}>
+           <div style= {{marginLeft: 10}}>
+            Perfil
+            </div>
+           </MenuItem>
+          </ModalPerfil>
+       <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
         Sair
-      </MenuItem>
-    </Menu>
+       </MenuItem>
+      </Menu>
 
   );
 
@@ -155,17 +156,17 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
         <ModalPerfil>
-          <MenuItem onClick={handleMobileMenuClose} style={{ width: "100%", }}>
+          <MenuItem onClick={handleMenuClose} style={{ width: "150%", right: 8}}>
+            <div style= {{marginLeft: 10}}>
             Perfil
+            </div>
           </MenuItem>
-        </ModalPerfil>
-      </MenuItem>
-      <MenuItem onClick={handleMobileMenuClose} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
+         </ModalPerfil>
+      <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
         Sair
-      </MenuItem>
-    </Menu>
+        </MenuItem>
+       </Menu>
   );
 
   // Menu de squad, usuarios e criar equipe do lado direito
@@ -173,18 +174,18 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <AppBar position="fixed" elevation={1}>
+          <AppBar position='fixed' elevation={1}>
             <Toolbar>
               <IconButton
-                edge="start"
-                color="secondary"
-                aria-label="open drawer"
+                edge='start'
+                color='secondary'
+                aria-label='open drawer'
                 onClick={toggleDrawer(anchor, true)}
-                anchor="left"
+                anchor='left'
               >
                 <MenuIcon />
               </IconButton>
-              <Typography className={classes.title}>
+              <Typography color='secondary' className={classes.title}>
                 Alterstate
               </Typography>
               <div className={classes.search}>
@@ -193,7 +194,7 @@ export default function PrimarySearchAppBar() {
                 </div>
                 {/* menu de busca */}
                 <InputBase
-                  placeholder="Buscar membros..."
+                  placeholder='Buscar membros...'
                   onChange={e => setPesquisa(e.target.value)}
                   classes={{
                     root: classes.inputRoot,
@@ -208,32 +209,39 @@ export default function PrimarySearchAppBar() {
                 {carregar ?
                   ''
                   :
-                  <h3>{`Olá, ${nomeUsuario}`}</h3>
+                  <Typography variant='h3' color='secondary' style={{
+                    fontFamily: 'Poppins',
+                    fontWeight: '600',
+                    fontSize: '20px',
+                    textAlign: 'center',
+                    alignItems: 'center',
+                    marginTop: 17,
+                  }}>{`Olá, ${nomeUsuario}`}</Typography>
                 }
 
                 <IconButton
-                  edge="end"
-                  aria-label="user"
+                  edge='end'
+                  aria-label='user'
                   aria-controls={menuId}
-                  aria-haspopup="true"
+                  aria-haspopup='true'
                   onClick={handleProfileMenuOpen}
-                  color="secondary"
+                  color='secondary'
                 >
                   <AccountCircle style={{
-                    width: "30px",
-                    height: "30px",
-                    color: '#094B89'
+                    width: '30px',
+                    height: '30px',
+                    color: 'secondary'
                   }} />
                 </IconButton>
               </div>
 
               <div className={classes.sectionMobile}>
                 <IconButton
-                  aria-label="show more"
+                  aria-label='show more'
                   aria-controls={mobileMenuId}
-                  aria-haspopup="true"
+                  aria-haspopup='true'
                   onClick={handleMobileMenuOpen}
-                  color="secondary"
+                  color='secondary'
                 >
                   <MoreIcon />
                 </IconButton>
@@ -244,7 +252,7 @@ export default function PrimarySearchAppBar() {
           {renderMobileMenu}
           {renderMenu}
 
-          <Drawer anchor="left" open={state[anchor]} onClose={toggleDrawer(anchor, false)} >
+          <Drawer anchor='left' open={state[anchor]} onClose={toggleDrawer(anchor, false)} >
             <List className={classes.list}>
               <Typography className={classes.subtitle}>
                 Alterstate
@@ -254,7 +262,7 @@ export default function PrimarySearchAppBar() {
                 Criar equipe
                 <ModalSquad>
                   <AddCircle
-                    color="secondary"
+                    color='secondary'
                     style={{
                       height: 28,
                       width: 28,

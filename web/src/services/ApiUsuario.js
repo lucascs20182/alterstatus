@@ -80,4 +80,18 @@ export function removerUsuario(idUsuario) {
             .then(response => resolve(response))
             .catch(error => reject(error))
     });
+
+   }
+
+export function editarStatus(status,idUsuario) {    
+    return new Promise((resolve, reject) => {
+        return api.patch(`/usuario/${idUsuario}`, {status}, {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+    });
+
 }

@@ -9,7 +9,6 @@ import '../styles.css';
 
 import { removerSquad } from '../../../services/ApiSquad';
 
-
 export default function ModalDeletarSquad({ children, idSquad }) {
   const classes = useStyles();
 

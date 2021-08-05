@@ -14,7 +14,6 @@ import { useStyles } from './Styles'
 import { obterTokenDaStorage, removerAutenticacao } from '../../../utils/Storage';
 import { obterDadosUsuario, editar } from '../../../services/ApiUsuario';
 
-
 export default function ModalPerfil({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);

@@ -12,7 +12,8 @@ import ModalDeletar from '../Modal/ModalDeletar/ModalDeletar';
 
 const useStyles = makeStyles({
   pontinhos: {
-    marginBottom: -40
+    color: '#000',
+    marginBottom: -40,
   },
 });
 
@@ -58,20 +59,26 @@ export default function PositionedTooltips(props) {
             PaperProps={{
               style: {
                 maxHeight: ITEM_HEIGHT * 4.0,
-                width: '18ch',
+                width: '16ch',
               },
             }}
           >
-            <MenuItem onClick={handleClose}>
-              <ModalListaDeCargos usuarioId={props.usuarioId}>Editar papel</ModalListaDeCargos>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ModalStatus usuarioId={props.usuarioId}>Editar status</ModalStatus>
-            </MenuItem>
-            <ModalDeletar usuarioId={props.usuarioId}>
-              <MenuItem onClick={handleClose}>
-                Deletar
+          <ModalListaDeCargos usuarioId={props.usuarioId}>
+          <MenuItem onClick={handleClose} style={{ width: 150, right: 5 }}>
+              Editar papel
+             </MenuItem>
+            </ModalListaDeCargos>
+             <ModalStatus usuarioId={props.usuarioId}>
+              <MenuItem onClick={handleClose} style={{ width: 150, right: 5}}>
+                Editar status   
               </MenuItem>
+             </ModalStatus>
+            <ModalDeletar usuarioId={props.usuarioId}>
+           <MenuItem onClick={handleClose} style={{ width: 150, right: 5 }}>
+               <div style= {{marginLeft: 20, color: '#f44336'}}>
+                Deletar
+              </div>
+             </MenuItem>
             </ModalDeletar>
           </Menu>
         </Grid>

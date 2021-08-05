@@ -26,6 +26,19 @@ export default function ModalStatus({ children, usuarioId }) {
     e.preventDefault();
 
     console.log(status);
+    
+    editarStatus(status, usuarioId)
+    .then((resposta)=> {
+      history.go(0)
+
+    })
+    .catch( erro => { 
+      console.log(erro);
+      alert("Erro ao alterar status!")
+
+      
+    })
+
   }
 
   return (

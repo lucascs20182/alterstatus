@@ -9,7 +9,6 @@ import '../styles.css';
 
 import { removerUsuario } from '../../../services/ApiUsuario';
 
-
 export default function ModalDeletar({ children, usuarioId }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
