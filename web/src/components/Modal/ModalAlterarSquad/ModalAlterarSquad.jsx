@@ -17,7 +17,7 @@ import { obterSquadAtivaDaStorage } from '../../../utils/Storage';
 import { useStyles } from './Styles';
 import '../styles.css';
 
-export default function ModalDesignarPapel({ children }) {
+export default function ModalAlterarSquad({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState({

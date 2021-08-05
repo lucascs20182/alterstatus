@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ModalTrocarSquad from '../Modal/ModalTrocarSquad/ModalTrocarSquad'
 import ModalDeletarSquad from '../Modal/ModalDeletarSquad/DeletSquad'
-
+import ModalDeletarPapel from '../Modal/ModalDeletarPapel/ModalDeletarPapel'
 import ModalDesignarPapel from '../Modal/ModalDesignarPapel/ModalDesignarPapel'
 import ModalAlterarSquad from '../Modal/ModalAlterarSquad/ModalAlterarSquad'
 
@@ -170,9 +170,16 @@ export default function GmailTreeView(props) {
         <ModalDesignarPapel >
           <div style={{ display: "flex", }}>
             <GroupIcon color="secondary" />
-            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Designar cargo</p>
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Designar Papel</p>
           </div>
         </ModalDesignarPapel>
+        
+        <ModalDeletarPapel >
+          <div style={{ display: "flex", }}>
+            <DeleteIcon style={{ color: "#FF0000", marginLeft: -15, }} />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Deletar Papel</p>
+          </div>
+        </ModalDeletarPapel>
 
 
         <ModalAlterarSquad >
@@ -182,19 +189,20 @@ export default function GmailTreeView(props) {
           </div>
         </ModalAlterarSquad>
 
-        {/* <ModalTrocarSquad >
-          <div style={{ display: "flex", }}>
-            <GroupIcon color="secondary" />
-            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Tortinha de limão </p>
-          </div>
-        </ModalTrocarSquad> */}
-
         <ModalDeletarSquad >
           <div style={{ display: "flex", }}>
             <DeleteIcon style={{ color: "#FF0000", marginLeft: -15, }} />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Deletar Squad</p>
           </div>
         </ModalDeletarSquad>
+
+        {/* <ModalTrocarSquad >
+          <div style={{ display: "flex", }}>
+            <GroupIcon color="secondary" />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Tortinha de limão </p>
+          </div>
+        </ModalTrocarSquad> */} 
+
       </StyledTreeItem>
     </TreeView>
   );

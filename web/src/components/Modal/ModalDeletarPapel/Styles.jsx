@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
   fecharJanela: {
     width: 25,
     height: 25,
-    marginLeft: 295,
+    marginLeft: 290,
     marginTop: 5,
     color: '#094B89',
   },
@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   form: {
-    width: "340px", 
+    width: "330px", 
     height: "240px"
   },
 
