@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ModalTrocarSquad from '../Modal/ModalTrocarSquad/ModalTrocarSquad'
-import ModalDesignarPapel from '../Modal/ModalDesignarPapel/ModalDesignarPapel'
-import ModalAlterarSquad from '../Modal/ModalAlterarSquad/ModalAlterarSquad'
 import ModalDeletarSquad from '../Modal/ModalDeletarSquad/DeletSquad'
 
+import ModalDesignarPapel from '../Modal/ModalDesignarPapel/ModalDesignarPapel'
+import ModalAlterarSquad from '../Modal/ModalAlterarSquad/ModalAlterarSquad'
+
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -124,6 +128,24 @@ const useStyles = makeStyles({
 export default function GmailTreeView(props) {
   const classes = useStyles();
 
+  const [carregar, setCarregar] = useState(true);
+  const [squads, setSquads] = useState();
+
+  useEffect(() => {
+    setCarregar(true);
+
+    obterSquads()
+      .then((resposta) => {
+        setSquads(resposta.data);
+        setCarregar(false);
+      })
+      .catch((erro) => {
+        alert('Erro! Verifique o console.');
+        console.error(erro);
+        setCarregar(false);
+      });
+  }, []);
+
   return (
     <TreeView
       className={classes.root}
@@ -133,11 +155,11 @@ export default function GmailTreeView(props) {
       defaultEndIcon={<div style={{ width: 30 }} />}
     >
       <StyledTreeItem nodeId="1" labelText="Squads" color="#094B89" labelIcon={GroupIcon} >
-        {props.squadsCadastradas.length == 0 ?
+        {carregar ?
           ''
           :
-          props.squadsCadastradas.map(nome => (
-            <ModalTrocarSquad >
+          squads.map(squad => (
+            <ModalTrocarSquad idSquad={squad.id}>
               <div style={{ display: "flex", width: '100%' }}>
                 <GroupIcon color="secondary" style={{ marginLeft: 20}} />
                 <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px", wordBreak: "break-word",}}>{nome}</p>
@@ -148,7 +170,7 @@ export default function GmailTreeView(props) {
       </StyledTreeItem>
 
       <StyledTreeItem nodeId="8" labelText="Opções" color="#094B89" labelIcon={SettingsIcon} >
-        <ModalDesignarPapel>
+        <ModalDesignarPapel >
           <div style={{ display: "flex", }}>
             <GroupIcon color="secondary" />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Designar cargo</p>
@@ -156,12 +178,19 @@ export default function GmailTreeView(props) {
         </ModalDesignarPapel>
 
 
-        <ModalAlterarSquad>
+        <ModalDesignarPapel >
           <div style={{ display: "flex", }}>
             <GroupIcon color="secondary" style={{ marginLeft: -15, }} />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Alterar squad</p>
           </div>
-        </ModalAlterarSquad>
+        </ModalDesignarPapel>
+
+        {/* <ModalTrocarSquad >
+          <div style={{ display: "flex", }}>
+            <GroupIcon color="secondary" />
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Tortinha de limão </p>
+          </div>
+        </ModalTrocarSquad> */}
 
         <ModalDeletarSquad >
           <div style={{ display: "flex", }}>
