@@ -54,11 +54,11 @@ public class Usuario {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "squad_id", referencedColumnName = "id")
 	private Squad squad;
-	
+
 	private Long id_usuario;
-	
+
 	private Long id_cargo;
-	
+
 	private Long id_squad;
 
 	public Usuario(Long id, String nome, String username, String senha, String status, LocalDate dataCadastro,
@@ -138,14 +138,6 @@ public class Usuario {
 		this.urlImagem = urlImagem;
 	}
 
-	public void relacionarComCargo(Cargo cargo) {
-		this.cargo = cargo;
-	}
-
-	public void relacionarComSquad(Squad squad) {
-		this.squad = squad;
-	}
-
 	public Cargo getCargo() {
 		return cargo;
 	}
@@ -193,7 +185,5 @@ public class Usuario {
 	public void setId_squad(Long id_squad) {
 		this.id_squad = id_squad;
 	}
-	
-	
 
 }
