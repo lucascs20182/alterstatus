@@ -114,12 +114,12 @@ export default function CardMembros(props) {
                   {/* Objects are not valid as a React child */}
                   {usuario.cargo != null ?
                     <>
-                      <h5 className={classes.subtitle}>Papel:</h5>
+                      <h5 className={classes.subtitle} className="makeStyles-subtitle-24">Papel:</h5>
                       <p className={classes.cargo}>{usuario.cargo.nome}</p>
                     </>
                     :
                     <>
-                      <h5 className={classes.subtitle}>Papel:</h5>
+                      <h5 className={classes.subtitle} className="makeStyles-subtitle-24">Papel:</h5>
                       <p className={classes.subtitle}>Cargo indefinido</p>
                     </>
                   }

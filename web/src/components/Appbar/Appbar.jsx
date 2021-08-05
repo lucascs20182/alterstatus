@@ -119,7 +119,7 @@ export default function PrimarySearchAppBar() {
             </div>
            </MenuItem>
           </ModalPerfil>
-       <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
+       <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none", color: "#000" }}>
         Sair
        </MenuItem>
       </Menu>
