@@ -24,6 +24,18 @@ export function obterDadosSquad(idSquad) {
     });
 }
 
+export function editarNomeDeSquad(idSquad, nome) {
+    const body ={
+        "id_squad": idSquad,
+        "nome": nome,
+    }
+    return new Promise((resolve, reject) => {
+        return api.put(`/api/squad/`, body)
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+}
+
 export function removerSquad(idSquad) {  
     return new Promise((resolve, reject) => {
         return api.delete('/squad', { "id_squad": idSquad})

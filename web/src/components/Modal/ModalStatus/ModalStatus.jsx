@@ -2,26 +2,11 @@ import React, { useState } from 'react';
 import '../styles.css';
 
 import DialogActions from '@material-ui/core/DialogActions';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
 
-const useStyles = makeStyles((theme) => ({
-
-  fecharJanela: {
-    width: 25,
-    height: 25,
-    marginLeft: 235,
-    marginTop: 5,
-    color: '#094B89',
-  },
-
-  field: {
-    marginBottom: 5,
-  }
-
-}));
+import { useStyles } from './Styles'
 
 export default function ModalStatus({ children, usuarioId }) {
   const classes = useStyles();
@@ -55,13 +40,13 @@ export default function ModalStatus({ children, usuarioId }) {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        style={{ width: "100%" }}
+        className={classes.dialog}
       >
 
-        <form className="form" style={{ width: "270px", height: "200px" }} onSubmit={e => handleConfirmar(e)} >
+        <form className={classes.form} onSubmit={e => handleConfirmar(e)} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
-            <h3 style={{ textAlign: 'center', marginTop: -5 }}>Editar Status</h3>
+            <h3 className={classes.titleModal}>Editar Status</h3>
             <TextField
               className={classes.field}
               name="Status"
@@ -74,7 +59,7 @@ export default function ModalStatus({ children, usuarioId }) {
 
           </center>
 
-          <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <DialogActions className={classes.dialogActions}>
             <button className="buttonConfirmar" onClick={handleClose} >
               Confirmar
             </button>

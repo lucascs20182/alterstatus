@@ -1,32 +1,17 @@
 import React, { useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
+import { useStyles } from './Styles'
 import '../styles.css';
-import '../../../styles/login.css'
 
 import { cadastrar, mudarUsuarioDeSquad } from '../../../services/ApiUsuario';
 
 import { obterSquadAtivaDaStorage } from '../../../utils/Storage';
-
-const useStyles = makeStyles((theme) => ({
-  fecharJanela: {
-    width: 25,
-    height: 25,
-    marginLeft: 235,
-    marginTop: 5,
-  },
-
-  field: {
-    marginBottom: 15,
-  }
-
-}));
 
 export default function ModalCadastrar({ children }) {
   const classes = useStyles();
@@ -120,13 +105,13 @@ export default function ModalCadastrar({ children }) {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        style={{ width: "100%" }}
+        className={classes.dialog}
       >
 
-        <form className="form" style={{ width: "270px", height: "370px" }} onSubmit={e => handleCadastrar(e)} >
+        <form className={classes.form} onSubmit={e => handleCadastrar(e)} >
           <center>
             <CloseIcon className={classes.fecharJanela} color="secondary" onClick={handleClose} />
-            <h3 style={{ textAlign: 'center', marginTop: -5 }}>Cadastro</h3>
+            <h3 className={classes.titleModal}>Cadastro</h3>
             <TextField
               className={classes.field}
               name="Nome"
@@ -175,7 +160,7 @@ export default function ModalCadastrar({ children }) {
 
           </center>
 
-          <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <DialogActions className={classes.dialogActions}>
             <button className="buttonConfirmar" color="secondary" onClick={handleClose} >
               Cadastrar
             </button>

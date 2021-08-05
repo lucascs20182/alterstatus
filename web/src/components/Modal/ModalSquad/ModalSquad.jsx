@@ -2,29 +2,13 @@ import React from 'react';
 import '../styles.css';
 
 import DialogActions from '@material-ui/core/DialogActions';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import CloseIcon from '@material-ui/icons/Close';
 import Tooltip from '@material-ui/core/Tooltip';
 import Dialog from '@material-ui/core/Dialog';
 
 import { criarSquad } from '../../../services/ApiSquad';
-
-const useStyles = makeStyles((theme) => ({
-
-  fecharJanela: {
-    width: 25,
-    height: 25,
-    marginLeft: 235,
-    marginTop: 5,
-    color: '#094B89',
-  },
-
-  field: {
-    marginBottom: 5,
-  }
-
-}));
+import { useStyles } from './Styles'
 
 export default function ModalSquad({ children }) {
   const classes = useStyles();
@@ -69,13 +53,13 @@ export default function ModalSquad({ children }) {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        style={{ width: "100%" }}
+        className={classes.dialog}
       >
 
-        <form className="form" style={{ width: "270px", height: "200px" }} onSubmit={e => handleCriar(e)} >
+        <form className={classes.form} onSubmit={e => handleCriar(e)} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
-            <h3 style={{ textAlign: 'center', marginTop: -5 }}>Criar squad</h3>
+            <h3 className={classes.titleModal}>Criar squad</h3>
             <TextField
               className={classes.field}
               name="Nome"
@@ -88,7 +72,7 @@ export default function ModalSquad({ children }) {
 
           </center>
 
-          <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <DialogActions className={classes.dialogActions}>
             <button className="buttonConfirmar" onClick={handleClose} >
               Criar
             </button>

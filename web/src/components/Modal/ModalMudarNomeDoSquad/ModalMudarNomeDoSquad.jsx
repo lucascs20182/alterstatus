@@ -1,40 +1,41 @@
 import React, { useState } from 'react';
 
 import DialogActions from '@material-ui/core/DialogActions';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import CloseIcon from '@material-ui/icons/Close';
 import Tooltip from '@material-ui/core/Tooltip';
 import Dialog from '@material-ui/core/Dialog';
+import { useStyles } from './Styles'
 
-import { obterSquadAtivaDaStorage } from '../../../utils/Storage';
-import { cadastrarCargo } from '../../../services/ApiCargo';
+import { mudarNomeDoSquad } from '../../../utils/Storage';
+import { editarNomeDeSquad } from '../../../services/ApiSquad';
 import '../styles.css';
-import AlertaSucesso from '../../Alert/AlertSucess';
-
-const useStyles = makeStyles((theme) => ({
-
-  fecharJanela: {
-    width: 25,
-    height: 25,
-    marginLeft: 235,
-    marginTop: 5,
-    color: '#094B89',
-  },
-
-  field: {
-    marginBottom: 5,
-  }
-
-}));
 
 export default function ModalCriarPapel({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [novoNome, setNovoNome] = useState('');
+
+  // const history = useHistory();
 
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const handleEditarNome = (e) => {
+    e.preventDefault();
+    editarNomeDeSquad(mudarNomeDoSquad(), novoNome)
+      .then((resposta) => {
+        alert('Qualquer mensagem!');
+
+        history.go(0);
+      })
+      .catch((erro) => {
+        alert("Erro! Verifique o console.");
+        console.error(erro);
+        // setCarregar(false);
+      });
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -56,10 +57,10 @@ export default function ModalCriarPapel({ children }) {
           style={{ width: "100%" }}
         >
 
-          <form className="form" style={{ width: "280px", height: "210px" }} onSubmit={e => e.preventDefault()} >
+          <form className={classes.form} onSubmit={e => e.preventDefault()} >
             <center>
               <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
-              <h3 style={{ textAlign: 'center', marginTop: 0 }}>Alterar nome da equipe</h3>
+              <h3 className={classes.titleModal} >Alterar nome da equipe</h3>
               <TextField
                 className={classes.field}
                 name="Novo nome"
@@ -67,12 +68,13 @@ export default function ModalCriarPapel({ children }) {
                 variant="outlined"
                 size="small"
                 color="secondary"
+                onChange={e => setNovoNome(e.target.value)}
               />
 
             </center>
 
             <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
-              <button className="buttonConfirmar" >
+              <button className="buttonConfirmar" onClick={handleEditarNome}>
                 Alterar
               </button>
             </DialogActions>

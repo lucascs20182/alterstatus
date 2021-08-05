@@ -29,10 +29,8 @@ export default function CardMembros(props) {
   const [carregar, setCarregar] = useState(true);
 
   const usuariosFiltrados = usuariosNaSquad.filter(function (e) {
-    return e.username.includes(props.pesquisa);
-
-    // const regexp = new RegExp(props.pesquisa, "gi");
-    // return e.username.match(regexp) !== null;
+    const regexp = new RegExp(props.pesquisa, 'gi');
+    return e.nome.match(regexp) !== null || e.username.match(regexp) !== null;
   })
 
   useEffect(() => {
@@ -111,7 +109,7 @@ export default function CardMembros(props) {
                     <ButtonCard usuarioId={usuario.id} />
                     <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} alt="Imagem dos membros" /></h3>
                   </div>
-                  <h3 className={classes.nome}>{usuario.username}</h3>
+                  <h3 className={classes.nome}>{usuario.nome}</h3>
                   {/* {console.log(usuario)} */}
                   {/* Objects are not valid as a React child */}
                   {usuario.cargo != null ?
@@ -136,7 +134,7 @@ export default function CardMembros(props) {
                       <ButtonCard usuarioId={usuario.id} />
                       <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} alt="Imagem dos membros" /></h3>
                     </div>
-                    <h3 className={classes.nome}>{usuario.username}</h3>
+                    <h3 className={classes.nome}>{usuario.nome}</h3>
                     {/* {console.log(usuario)} */}
                     {usuario.cargo != null ?
                       <p className={classes.cargo}>{usuario.cargo.nome}</p>

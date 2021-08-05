@@ -23,3 +23,7 @@ export function salvarSquadAtivaNaStorage(idSquad) {
 export function obterSquadAtivaDaStorage() {
     return localStorage.getItem('idSquadAtiva');
 }
+
+export function mudarNomeDoSquad() {
+    return localStorage.getItem('idSquadAtiva')
+}

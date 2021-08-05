@@ -22,9 +22,28 @@ const useStyles = makeStyles((theme) => ({
     color: '#094B89',
   },
 
+  dialog: {
+    width: "100%"
+  },
+
   field: {
     marginBottom: 5,
-  }
+  },
+
+  form: {
+    width: "270px", 
+    height: "200px"
+  },
+
+  titleModal: {
+    textAlign: 'center', 
+    marginTop: -5
+  },
+
+  dialogActions: {
+    alignItems: 'center', 
+    justifyContent: 'center'
+  },
 
 }));
 
@@ -73,13 +92,13 @@ export default function ModalCriarPapel({ children }) {
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
-          style={{ width: "100%" }}
+          className={classes.dialog}
         >
 
-          <form className="form" style={{ width: "270px", height: "200px" }} onSubmit={e => e.preventDefault()} >
+          <form className={classes.form} onSubmit={e => e.preventDefault()} >
             <center>
               <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
-              <h3 style={{ textAlign: 'center', marginTop: -5 }}>Criar papel</h3>
+              <h3 className={classes.titleModal}>Criar papel</h3>
               <TextField
                 className={classes.field}
                 name="Papel"
@@ -92,7 +111,7 @@ export default function ModalCriarPapel({ children }) {
 
             </center>
 
-            <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <DialogActions className={classes.dialogActions}>
               <button className="buttonConfirmar" onClick={handleCadastrar} >
                 Cadastrar
               </button>
