@@ -62,11 +62,11 @@ public class SquadServiceImpl implements SquadService {
 
 	@Override
 	public ResponseEntity<Optional<Squad>> obterPorId(Long id) {
-		
-		if(id == null) {
+
+		if (id == null) {
 			throw new ResourceBadRequestException("Nenhum id passado");
 		}
-		
+
 		Optional<Squad> Squad = repositorioSquad.findById(id);
 
 		if (Squad.isEmpty()) {
@@ -78,11 +78,11 @@ public class SquadServiceImpl implements SquadService {
 
 	@Override
 	public ResponseEntity<List<Squad>> obterPorNome(String nome) {
-		
-		if(nome == null) {
+
+		if (nome == null) {
 			throw new ResourceBadRequestException("Nenhum nome passado");
 		}
-		
+
 		List<Squad> Squad = repositorioSquad.findByNomeContainingIgnoreCase(nome);
 
 		if (Squad.isEmpty()) {
@@ -95,17 +95,17 @@ public class SquadServiceImpl implements SquadService {
 	@Override
 	public ResponseEntity<Squad> adicionar(Squad squad) {
 		squad.setId(null);
-		
-		if(squad.getNome() == "") {
-			throw new ResourceBadRequestException("Um dos campos não foi definido"); 
+
+		if (squad.getNome() == "") {
+			throw new ResourceBadRequestException("Um dos campos não foi definido");
 		}
-		
-        List<Squad> ConferirSquad = repositorioSquad.findByNomeContainingIgnoreCase(squad.getNome());
-		
-		if(!ConferirSquad.isEmpty()) {
+
+		List<Squad> ConferirSquad = repositorioSquad.findByNomeContainingIgnoreCase(squad.getNome());
+
+		if (!ConferirSquad.isEmpty()) {
 			throw new ResourceBadRequestException("Nome de Squad já cadastrado");
 		}
-		
+
 		Squad novoSquad = repositorioSquad.save(squad);
 
 		return new ResponseEntity<>(novoSquad, HttpStatus.CREATED);
@@ -114,11 +114,11 @@ public class SquadServiceImpl implements SquadService {
 
 	@Override
 	public ResponseEntity<Optional<Squad>> atualizar(Long id, Squad squad) {
-		
-		if(squad.getNome() == "" || id == null) {
-			throw new ResourceBadRequestException("Um dos campos não foi definido"); 
+
+		if (squad.getNome() == "" || id == null) {
+			throw new ResourceBadRequestException("Um dos campos não foi definido");
 		}
-		
+
 		squad.setId(id);
 
 		Optional<Squad> SquadAtualizado = repositorioSquad.findById(id);
@@ -135,11 +135,11 @@ public class SquadServiceImpl implements SquadService {
 
 	@Override
 	public ResponseEntity<?> deletar(Long id) {
-		
-		if(id == null) {
+
+		if (id == null) {
 			throw new ResourceBadRequestException("id não foi definido");
 		}
-		
+
 		Optional<Squad> existe = repositorioSquad.findById(id);
 
 		if (existe.isEmpty()) {

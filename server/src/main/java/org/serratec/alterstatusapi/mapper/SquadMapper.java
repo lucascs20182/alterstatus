@@ -12,7 +12,7 @@ public class SquadMapper {
 
 		dto.setId(entity.getId());
 		dto.setNome(entity.getNome());
-		
+
 		return dto;
 	}
 

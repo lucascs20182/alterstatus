@@ -32,15 +32,14 @@ public interface UsuarioService {
 			throws ResourceNotFoundException, IOException;
 
 	Usuario cadastrar(UsuarioDTORequest dto) throws ResourceNotFoundException;
-	
+
 	Usuario atualizarArquivo(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException;
 
-	Usuario atualizar(Long id, UsuarioDTORequest dto)
-			throws ResourceNotFoundException, IOException;
+	Usuario atualizar(Long id, UsuarioDTORequest dto) throws ResourceNotFoundException, IOException;
 
 	void deletar(Long id) throws ResourceNotFoundException;
-	
+
 	void removerCargo(Long idUsuario) throws ResourceNotFoundException;
 
 	Usuario relacionarUsuarioComSquad(Long usuario_id, Long squad_id);

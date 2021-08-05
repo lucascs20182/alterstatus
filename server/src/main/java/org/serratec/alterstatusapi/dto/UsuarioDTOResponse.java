@@ -15,9 +15,9 @@ public class UsuarioDTOResponse {
 	private String url;
 
 	private String status;
-	
+
 	private Long idSquad;
-	
+
 	private String nomeCargo;
 
 	public Long getId() {

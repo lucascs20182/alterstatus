@@ -41,7 +41,7 @@ public class Cargo {
 	private Squad squad;
 
 	private Long id_cargo;
-	
+
 	private Long id_squad;
 
 	// ----------------------

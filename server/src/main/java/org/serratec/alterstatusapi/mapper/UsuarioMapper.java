@@ -14,7 +14,7 @@ public class UsuarioMapper {
 
 	@Autowired
 	UsuarioService service;
-	
+
 	@Autowired
 	private CargoRepository repositorioCargo;
 
@@ -41,10 +41,10 @@ public class UsuarioMapper {
 
 	public UsuarioDTOResponse toDto(Usuario entity) {
 		UsuarioDTOResponse dto = new UsuarioDTOResponse();
-		
-		if(entity.getCargo() != null) {
+
+		if (entity.getCargo() != null) {
 			String nomeCargo = repositorioCargo.getById(entity.getCargo().getId()).getNome();
-			
+
 			dto.setNomeCargo(nomeCargo);
 		}
 
@@ -55,7 +55,7 @@ public class UsuarioMapper {
 		dto.setUrl(entity.getUrlImagem());
 		dto.setStatus(entity.getStatus());
 		dto.setIdSquad(entity.getId_squad());
-		
+
 		return dto;
 	}
 }

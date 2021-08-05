@@ -73,14 +73,6 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
 
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
-
-
   list: {
     width: 250,
   },

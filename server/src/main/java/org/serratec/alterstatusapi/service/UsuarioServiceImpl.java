@@ -91,13 +91,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario obterPorId(Long id) throws ResourceNotFoundException {
-		
-		if(id == null) {
+
+		if (id == null) {
 			throw new ResourceBadRequestException("Nenhum id foi definido");
 		}
-		
+
 		Optional<Usuario> cliente = clienteRepository.findById(id);
-		
+
 		if (cliente.isEmpty()) {
 			throw new ResourceNotFoundException("Não existe cliente com esse Id.");
 		}
@@ -107,18 +107,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public List<Usuario> obterPorUsername(String username) {
-		
-		if(username == null) {
+
+		if (username == null) {
 			throw new ResourceBadRequestException("Username não foi definido");
 		}
-		
+
 		List<Usuario> usuario = clienteRepository.findByUsernameContainingIgnoreCase(username);
-		
+
 		if (usuario.isEmpty()) {
 			throw new ResourceNotFoundException("Não foi localizado nenhum usuário com o username: " + username);
 
 		}
-		
+
 		return usuario;
 	}
 
@@ -143,17 +143,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario cadastrarArquivo(UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException {
-		
-		if(dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "") {
+
+		if (dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "") {
 			throw new ResourceBadRequestException("Um dos campos não foi definido");
 		}
-		
+
 		Usuario UsuarioVerificar = clienteRepository.findByUsername(dto.getUsername());
-		
-		if(UsuarioVerificar != null) {
+
+		if (UsuarioVerificar != null) {
 			throw new ResourceBadRequestException("Username ja existe");
 		}
-		
+
 		Usuario entity = clienteMapper.toEntity(dto);
 
 		entity.setDataCadastro(LocalDate.now());
@@ -176,17 +176,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario cadastrar(UsuarioDTORequest dto) throws ResourceNotFoundException {
-		
-		if(dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "") {
+
+		if (dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "") {
 			throw new ResourceBadRequestException("Um dos campos não foi definido");
 		}
-		
+
 		Usuario UsuarioVerificar = clienteRepository.findByUsername(dto.getUsername());
-		
-		if(UsuarioVerificar != null) {
+
+		if (UsuarioVerificar != null) {
 			throw new ResourceBadRequestException("Username ja existe");
 		}
-		
+
 		Usuario entity = clienteMapper.toEntity(dto);
 
 		entity.setDataCadastro(LocalDate.now());
@@ -204,15 +204,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		return clienteRepository.save(obterImagem(entity, true));
 	}
-	
+
 	@Override
-	public Usuario atualizarArquivo(Long id, UsuarioDTORequest dto, MultipartFile multipartFile) 
+	public Usuario atualizarArquivo(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException {
-		
-		if(dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "" || id == null) {
+
+		if (dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "" || id == null) {
 			throw new ResourceBadRequestException("Um dos campos não foi definido");
 		}
-		
+
 		Usuario entity = this.obterPorId(id);
 
 		for (Usuario cliente : this.obterTodos()) {
@@ -246,11 +246,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario atualizar(Long id, UsuarioDTORequest dto) throws ResourceNotFoundException {
-		
-		if(dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "" || id == null) {
+
+		if (dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "" || id == null) {
 			throw new ResourceBadRequestException("Um dos campos não foi definido");
 		}
-		
+
 		Usuario entity = this.obterPorId(id);
 
 		for (Usuario cliente : this.obterTodos()) {
@@ -280,26 +280,26 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public void deletar(Long id) throws ResourceNotFoundException {
-		
-		if(id == null) {
+
+		if (id == null) {
 			throw new ResourceBadRequestException("Nenhum id definido");
 		}
-		
+
 		this.obterPorId(id); // verifica se o usuário existe antes de deletar
 
 		imagemService.removerImagem(id);
 
 		clienteRepository.deleteById(id);
 	}
-	
+
 	@Transactional
 	@Override
 	public void removerCargo(Long idUsuario) throws ResourceNotFoundException {
-		
-		if(idUsuario == null) {
+
+		if (idUsuario == null) {
 			throw new ResourceBadRequestException("Nenhum id definido");
 		}
-		
+
 		Usuario usuario = this.obterPorId(idUsuario); // verifica se o usuário existe antes de deletar
 
 		usuario.setCargo(null);
@@ -309,14 +309,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario relacionarUsuarioComSquad(Long usuario_id, Long squad_id) {
-		
-		if(usuario_id == null || squad_id == null) {
+
+		if (usuario_id == null || squad_id == null) {
 			throw new ResourceBadRequestException("Um dos id(s) não foi definido");
 		}
-		
+
 		Usuario usuario = clienteRepository.findById(usuario_id).get();
 		Squad squad = repositorioSquad.findById(squad_id).get();
-		
+
 		usuario.setCargo(null);
 		usuario.setId_squad(squad_id);
 		usuario.setSquad(squad);
@@ -326,14 +326,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario relacionarUsuarioComCargo(Long usuario_id, Long cargo_id) {
-		
-		if(usuario_id == null || cargo_id == null) {
+
+		if (usuario_id == null || cargo_id == null) {
 			throw new ResourceBadRequestException("Um dos id(s) não foi definido");
 		}
-		
+
 		Usuario usuario = clienteRepository.findById(usuario_id).get();
 		Cargo cargo = repositorioCargo.findById(cargo_id).get();
-		
+
 		usuario.setId_cargo(cargo_id);
 		usuario.setCargo(cargo);
 
@@ -342,11 +342,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public ResponseEntity<Optional<Usuario>> atualizarEspecifico(Long id, Map<Object, Object> campos) {
-		
-		if(id == null || campos == null) {
+
+		if (id == null || campos == null) {
 			throw new ResourceBadRequestException("Um dos campos não foi definido");
 		}
-		
+
 		Optional<Usuario> UsuarioAtualizado = clienteRepository.findById(id);
 		// Map key is field name, v is value
 		campos.forEach((chave, valor) -> {

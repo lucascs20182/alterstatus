@@ -47,8 +47,8 @@ public class ImagemServiceImpl implements ImagemService {
 	@Override
 	public void removerImagem(Long id) {
 		Imagem image = repositoryImagem.findByUsuarioId(id);
-		if(image != null) {
-		repositoryImagem.delete(repositoryImagem.findByUsuarioId(id));	
+		if (image != null) {
+			repositoryImagem.delete(repositoryImagem.findByUsuarioId(id));
 		}
 	}
 }
