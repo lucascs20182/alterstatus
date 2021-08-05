@@ -3,6 +3,7 @@ import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
+import Button from '@material-ui/core/Button';
 
 import { useStyles } from './Styles'
 import '../styles.css';
@@ -40,9 +41,9 @@ export default function ModalDeletarSquad({ children, idSquad }) {
 
   return (
     <div>
-      <button className="buttonModal" type="submit" onClick={handleOpen}>
+      <Button disableElevation className="buttonModal" type="submit" style={{ width: "100%", textTransform: 'none', }} onClick={handleOpen}>
         {children}
-      </button>
+      </Button>
 
       <Dialog
         open={open}

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ModalTrocarSquad from '../Modal/ModalTrocarSquad/ModalTrocarSquad'
+import ModalDesignarPapel from '../Modal/ModalDesignarPapel/ModalDesignarPapel'
+import ModalAlterarSquad from '../Modal/ModalAlterarSquad/ModalAlterarSquad'
 import ModalDeletarSquad from '../Modal/ModalDeletarSquad/DeletSquad'
 
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -149,31 +148,24 @@ export default function GmailTreeView(props) {
       </StyledTreeItem>
 
       <StyledTreeItem nodeId="8" labelText="Opções" color="#094B89" labelIcon={SettingsIcon} >
-        <ModalTrocarSquad >
+        <ModalDesignarPapel>
           <div style={{ display: "flex", }}>
             <GroupIcon color="secondary" />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Designar cargo</p>
           </div>
-        </ModalTrocarSquad>
+        </ModalDesignarPapel>
 
 
-        <ModalTrocarSquad >
+        <ModalAlterarSquad>
           <div style={{ display: "flex", }}>
             <GroupIcon color="secondary" style={{ marginLeft: -15, }} />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Alterar squad</p>
           </div>
-        </ModalTrocarSquad>
-
-        <ModalTrocarSquad >
-          <div style={{ display: "flex", }}>
-            <GroupIcon color="secondary" />
-            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Tortinha de limão </p>
-          </div>
-        </ModalTrocarSquad>
+        </ModalAlterarSquad>
 
         <ModalDeletarSquad >
           <div style={{ display: "flex", }}>
-            <DeleteIcon style={{ color: red[500], marginLeft: 40, }} />
+            <DeleteIcon style={{ color: "#FF0000", marginLeft: -15, }} />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Deletar Squad</p>
           </div>
         </ModalDeletarSquad>
