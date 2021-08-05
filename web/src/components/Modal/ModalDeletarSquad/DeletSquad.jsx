@@ -62,39 +62,18 @@ export default function ModalDeletarSquad({ children }) {
 
   }
 
-  const handleSim = (e) => {
-    e.preventDefault();
-
-    obterDadosSquad(squadSelecionado)
-    .then((resposta) => {
-      setUsuariosDoSquad(resposta.data.usuarios)
-    })
-    .catch((erro) => {
-      alert("Erro ao obter usuarios do squad! Verifique o console.");
-      console.error(erro);
-    })
-
-    console.log(usuariosDoSquad.length);
-
-    if(usuariosDoSquad.length == 0){
-
-      console.log(squadSelecionado);
-    removerSquad(squadSelecionado) //Dando erro Bad Request 400, Pq meu deus do céu?
+  const handleSim = (e) => {    
+    removerSquad(squadSelecionado)
       .then((resposta) => {
-        alert("Equipe Excluido!!");
+        alert("Equipe Excluída!");
 
         history.go(0);
       })
       .catch((erro) => {
-        alert("Erro ao remover o equipe!");
+        alert("Equipe não pode ser removida com usuários dentro.");
         console.error(erro);
       })
-    } else{
-      alert("Não se pode deletar um squad com usuários ainda nele");
-    }
-
-    setOpen(false);
-  }
+    } 
 
   return (
     <div>
@@ -111,7 +90,7 @@ export default function ModalDeletarSquad({ children }) {
         className={classes.dialog}
       >
 
-        <form className={classes.form} onSubmit={e => handleSim(e)} >
+        <form className={classes.form} onSubmit={e => e.preventDefault()} >
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 className={classes.titleModal}>Atenção!!!</h3>
