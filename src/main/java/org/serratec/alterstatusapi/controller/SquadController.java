@@ -73,9 +73,9 @@ public class SquadController {
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
-	@DeleteMapping
-	public ResponseEntity<?> deletar(@RequestBody Squad squad) {
-		return servicoSquad.deletar(squad.getId_squad());
+	@DeleteMapping("/{idSquad}")
+	public ResponseEntity<?> deletar(@PathVariable Long idSquad) {
+		return servicoSquad.deletar(idSquad);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")

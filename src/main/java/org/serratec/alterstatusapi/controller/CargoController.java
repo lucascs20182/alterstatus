@@ -60,9 +60,9 @@ public class CargoController {
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
-	@DeleteMapping
-	public ResponseEntity<?> deletar(@RequestBody Cargo cargo) {
-		return servicoCargo.deletar(cargo.getId_cargo());
+	@DeleteMapping("/{idCargo}")
+	public ResponseEntity<?> deletar(@PathVariable Long idCargo) {
+		return servicoCargo.deletar(idCargo);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")

@@ -157,8 +157,6 @@ public class UsuarioController {
 			@RequestPart UsuarioDTORequest usuario) throws ResourceNotFoundException, IOException {
 		UsuarioDTOResponse usuarioAtualizado;
 
-//		requisição só funciona se tiver foto 
-
 		if (file == null) {
 			usuarioAtualizado = mapper.toDto(servicoUsuario.atualizar(usuario.getId_usuario(), usuario));
 			return new ResponseEntity<UsuarioDTOResponse>(usuarioAtualizado, HttpStatus.OK);
@@ -167,8 +165,6 @@ public class UsuarioController {
 		usuarioAtualizado = mapper.toDto(servicoUsuario.atualizarArquivo(usuario.getId_usuario(), usuario, file));
 
 		return new ResponseEntity<UsuarioDTOResponse>(usuarioAtualizado, HttpStatus.OK);
-
-//		return new ResponseEntity<UsuarioDTOResponse>(usuarioAtualizado, HttpStatus.OK);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
