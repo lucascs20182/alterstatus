@@ -244,8 +244,7 @@ export default function PrimarySearchAppBar() {
                 <ModalSquad>
                   <AddCircle
                     color='secondary'
-                    style={{
-                      height: 28,
+                    style={{                      
                       width: 28,
                       height: '100%',
                       marginTop: 8,

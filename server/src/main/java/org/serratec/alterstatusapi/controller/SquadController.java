@@ -1,11 +1,15 @@
 package org.serratec.alterstatusapi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.serratec.alterstatusapi.dto.SquadDTO;
+import org.serratec.alterstatusapi.mapper.SquadMapper;
 import org.serratec.alterstatusapi.model.Squad;
 import org.serratec.alterstatusapi.service.SquadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,10 +31,27 @@ public class SquadController {
 	@Autowired
 	SquadService servicoSquad;
 
+	@Autowired
+	SquadMapper squadMapper;
+
 	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping
-	public List<Squad> obterTodos() {
-		return servicoSquad.obterTodos();
+	public ResponseEntity<List<SquadDTO>> obterTodos() {
+		List<SquadDTO> listaSquad = new ArrayList<SquadDTO>();
+
+		for (Squad squad : servicoSquad.obterTodos()) {
+			listaSquad.add(squadMapper.toDto(squad));
+		}
+
+		return new ResponseEntity<List<SquadDTO>>(listaSquad, HttpStatus.OK);
+	}
+
+	@SecurityRequirement(name = "bearerAuth")
+	@GetMapping("/pagina/{pagina}/qtde/{qtdRegistros}")
+	public ResponseEntity<List<Squad>> obterPaginado(@PathVariable("pagina") Integer pagina,
+			@PathVariable("qtdRegistros") Integer qtdRegistros) throws Exception {
+
+		return servicoSquad.obterPaginado(pagina, qtdRegistros);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
@@ -52,9 +73,9 @@ public class SquadController {
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
-	@DeleteMapping
-	public ResponseEntity<?> deletar(@RequestBody Squad squad) {
-		return servicoSquad.deletar(squad.getId_squad());
+	@DeleteMapping("/{idSquad}")
+	public ResponseEntity<?> deletar(@PathVariable Long idSquad) {
+		return servicoSquad.deletar(idSquad);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
