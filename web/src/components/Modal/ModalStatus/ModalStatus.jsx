@@ -7,6 +7,9 @@ import TextField from '@material-ui/core/TextField';
 import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
 
+
+import { editarStatus } from '../../../services/ApiUsuario'
+
 const useStyles = makeStyles((theme) => ({
 
   fecharJanela: {
@@ -41,6 +44,19 @@ export default function ModalStatus({ children, usuarioId }) {
     e.preventDefault();
 
     console.log(status);
+    
+    editarStatus(status, usuarioId)
+    .then((resposta)=> {
+      history.go(0)
+
+    })
+    .catch( erro => { 
+      console.log(erro);
+      alert("Erro ao alterar status!")
+
+      
+    })
+
   }
 
   return (
