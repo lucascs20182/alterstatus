@@ -40,7 +40,6 @@ export default function PositionedTooltips(props) {
           <Tooltip title="menu">
             <IconButton
               aria-label="more"
-              aria-controls="long-menu"
               aria-haspopup="true"
               onClick={handleClick}
             >
