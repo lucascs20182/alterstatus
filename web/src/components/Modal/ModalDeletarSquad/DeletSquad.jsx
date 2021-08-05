@@ -116,6 +116,28 @@ export default function ModalDeletarSquad({ children }) {
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 className={classes.titleModal}>Atenção!!!</h3>
             <h4 className={classes.subtitleModal}>Você deseja deletar o equipe do Alterstate?</h4>
+            <FormControl color="secondary" variant="outlined" className={classes.formControl} >
+                <InputLabel >Equipe:</InputLabel>
+                <Select
+                  native
+                  value={state.squad}
+                  onChange={handleChange}
+                  label="Equipe"
+                  inputProps={{
+                    name: 'squad',
+                  }}
+                >
+                  <option aria-label="None" value={-1}>Sem papel</option>
+
+                  {squads ?
+                    squads.map(squad => (
+                      <option value={squad.id}>{squad.nome}</option>
+                    ))
+                    :
+                    ''
+                  }
+                </Select>
+              </FormControl>
           </center>
           <DialogActions className={classes.dialogActions}>
             <button className="buttonDeletar" onClick={handleSim} >

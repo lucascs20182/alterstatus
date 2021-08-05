@@ -66,30 +66,30 @@ export default function ModalDeletarSquad({ children }) {
     e.preventDefault();
 
     obterDadosSquad(squadSelecionado)
-    .then((resposta) => {
-      setUsuariosDoSquad(resposta.data.usuarios)
-    })
-    .catch((erro) => {
-      alert("Erro ao obter usuarios do squad! Verifique o console.");
-      console.error(erro);
-    })
+      .then((resposta) => {
+        setUsuariosDoSquad(resposta.data.usuarios)
+      })
+      .catch((erro) => {
+        alert("Erro ao obter usuarios do squad! Verifique o console.");
+        console.error(erro);
+      })
 
     console.log(usuariosDoSquad.length);
 
-    if(usuariosDoSquad.length == 0){
+    if (usuariosDoSquad.length == 0) {
 
       console.log(squadSelecionado);
-    removerSquad(squadSelecionado) //Dando erro Bad Request 400, Pq meu deus do céu?
-      .then((resposta) => {
-        alert("Squad Excluido!!");
+      removerSquad(squadSelecionado) //Dando erro Bad Request 400, Pq meu deus do céu?
+        .then((resposta) => {
+          alert("Squad Excluido!!");
 
-        history.go(0);
-      })
-      .catch((erro) => {
-        alert("Erro ao remover o Squad!");
-        console.error(erro);
-      })
-    } else{
+          history.go(0);
+        })
+        .catch((erro) => {
+          alert("Erro ao remover o Squad!");
+          console.error(erro);
+        })
+    } else {
       alert("Não se pode deletar um squad com usuários ainda nele");
     }
 
@@ -102,23 +102,23 @@ export default function ModalDeletarSquad({ children }) {
         {children}
       </Button>
 
-    <div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        className={classes.dialog}
-      >
+      <div>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          className={classes.dialog}
+        >
 
-        <form className={classes.form} onSubmit={e => handleSim(e)} >
-          <center>
-            <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
-            <h3 className={classes.titleModal}>Deletar papel</h3>
-            <h4 className={classes.subtitleModal}>Você deseja deletar esse papel?</h4>
+          <form className={classes.form} onSubmit={e => handleSim(e)} >
+            <center>
+              <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
+              <h3 className={classes.titleModal}>Deletar papel</h3>
+              <h4 className={classes.subtitleModal}>Você deseja deletar esse papel?</h4>
 
 
-          <FormControl color="secondary" variant="outlined" className={classes.formControl} >
+              <FormControl color="secondary" variant="outlined" className={classes.formControl} >
                 <InputLabel >Papel:</InputLabel>
                 <Select
                   native
@@ -140,17 +140,16 @@ export default function ModalDeletarSquad({ children }) {
                   }
                 </Select>
               </FormControl>
-              </center>
+            </center>
 
-              
             <DialogActions className={classes.dialogActions}>
               <button className="buttonConfirmar" onClick={handleClose} >
                 Confirmar
               </button>
             </DialogActions>
-        </form>
-      </Dialog>
-      </div>            
+          </form>
+        </Dialog>
+      </div>
     </div>
   );
 }
