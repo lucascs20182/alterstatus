@@ -131,16 +131,17 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
 
-      <MenuItem>
-        <MenuItem onClick={handleMenuClose} style={{ width: '100%', }} >
-          <ModalPerfil> Perfil </ModalPerfil>
-        </MenuItem>
-
-      </MenuItem>
-      <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: '100%', textDecoration: 'none' }}>
+        <ModalPerfil>
+          <MenuItem onClick={handleMenuClose} style={{ width: "150%", right: 8}}>
+           <div style= {{marginLeft: 10}}>
+            Perfil
+            </div>
+           </MenuItem>
+          </ModalPerfil>
+       <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
         Sair
-      </MenuItem>
-    </Menu>
+       </MenuItem>
+      </Menu>
 
   );
 
@@ -155,17 +156,17 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
         <ModalPerfil>
-          <MenuItem onClick={handleMobileMenuClose} style={{ width: '100%', }}>
+          <MenuItem onClick={handleMenuClose} style={{ width: "150%", right: 8}}>
+            <div style= {{marginLeft: 10}}>
             Perfil
+            </div>
           </MenuItem>
-        </ModalPerfil>
-      </MenuItem>
-      <MenuItem onClick={handleMobileMenuClose} style={{ display: 'flex', justifyContent: 'center', width: '100%', textDecoration: 'none' }}>
+         </ModalPerfil>
+      <MenuItem onClick={handleSair} style={{ display: 'flex', justifyContent: 'center', width: "100%", textDecoration: "none" }}>
         Sair
-      </MenuItem>
-    </Menu>
+        </MenuItem>
+       </Menu>
   );
 
   // Menu de squad, usuarios e criar equipe do lado direito
