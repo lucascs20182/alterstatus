@@ -8,6 +8,7 @@ import { useStyles } from './Styles'
 import '../styles.css';
 
 import { removerUsuario } from '../../../services/ApiUsuario';
+import { obterTokenDaStorage, removerAutenticacao } from '../../../utils/Storage';
 
 export default function ModalDeletar({ children, usuarioId }) {
   const classes = useStyles();
@@ -22,10 +23,15 @@ export default function ModalDeletar({ children, usuarioId }) {
   };
 
   const handleSim = () => {
-    // problema de cors
+    const [, idUsuarioStorage] = obterTokenDaStorage();
+
     removerUsuario(usuarioId)
     .then((resposta) => {
       // alert("Usuário removido!");
+      // console.log(usuarioId, idUsuarioStorage)
+      if(usuarioId == idUsuarioStorage) {
+        removerAutenticacao();        
+      }
       
       // history.push('/home');
       history.go(0);
@@ -35,7 +41,7 @@ export default function ModalDeletar({ children, usuarioId }) {
       console.error(erro);
     })
     
-    setOpen(false);
+    // setOpen(false);
   };
 
   return (
