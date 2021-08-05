@@ -110,7 +110,7 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
               <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
               <h3 className={classes.titleModal}>Mudar membro de Equipe:</h3>
               <FormControl color="secondary" variant="outlined" className={classes.formControl} >
-                <InputLabel >Squad</InputLabel>
+                <InputLabel >Equipe</InputLabel>
                 <Select
                   native
                   value={state.cargo}

@@ -70,7 +70,7 @@ export default function CardMembros(props) {
         <div>
           <div className={classes.title}>
             {/* icone de adicionar squad */}
-            <h2 style={{ marginBottom: "3px", wordBreak: "break-word", }} >
+            <h2 className={classes.squadTitle} >
               {squadAtual.nome}
             </h2>
 
@@ -87,7 +87,7 @@ export default function CardMembros(props) {
             </ModalCadastrar>
 
             <ModalMudarNomeDoSquad>
-              <EditIcon color="secondary" style={{ marginRight: 5, fontSize: 22}} />
+              <EditIcon color="secondary" style={{ marginRight: 5, fontSize: 22 }} />
             </ModalMudarNomeDoSquad>
 
           </div>
@@ -109,16 +109,23 @@ export default function CardMembros(props) {
                     <ButtonCard usuarioId={usuario.id} />
                     <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} alt="Imagem dos membros" /></h3>
                   </div>
-                  <h3 className={classes.nome}>{usuario.nome}</h3>
+                  <h2 className={classes.nome}>{usuario.nome}</h2>
                   {/* {console.log(usuario)} */}
                   {/* Objects are not valid as a React child */}
                   {usuario.cargo != null ?
-                    <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                    <>
+                      <h5 className={classes.subtitle}>Papel:</h5>
+                      <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                    </>
                     :
-                    <p className={classes.cargo}>Cargo indefinido</p>
+                    <>
+                      <h5 className={classes.subtitle}>Papel:</h5>
+                      <p className={classes.subtitle}>Cargo indefinido</p>
+                    </>
                   }
 
                   {/* <p className={classes.cargo}>Bug no cargo ehhe</p> */}
+                  <h5 className={classes.subtitle}>Status:</h5>
                   <p className={classes.status}>{usuario.status}</p>
                 </div>
               </div>
@@ -134,14 +141,21 @@ export default function CardMembros(props) {
                       <ButtonCard usuarioId={usuario.id} />
                       <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} alt="Imagem dos membros" /></h3>
                     </div>
-                    <h3 className={classes.nome}>{usuario.nome}</h3>
+                    <h2 className={classes.nome}>{usuario.nome}</h2>
                     {/* {console.log(usuario)} */}
                     {usuario.cargo != null ?
-                      <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                      <>
+                        <h5 className={classes.subtitle}>Papel:</h5>
+                        <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                      </>
                       :
-                      <p className={classes.cargo}>Cargo indefinido</p>
+                      <>
+                        <h5 className={classes.subtitle}>Papel:</h5>
+                        <p className={classes.cargo}>Cargo indefinido</p>
+                      </>
                     }
                     {/* <p className={classes.cargo}>Bug no cargo ehhe</p> */}
+                    <h5 className={classes.subtitle}>Status:</h5>
                     <p className={classes.status}>{usuario.status}</p>
                   </div>
                 </div>
