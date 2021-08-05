@@ -29,7 +29,9 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: 0,
     marginTop: 5,
     color: "#000",
-    fontStyle: "bold"
+    fontStyle: "bold",
+    fontWeight: '700',
+    fontSize: 12  
   },
 
   buttons: {

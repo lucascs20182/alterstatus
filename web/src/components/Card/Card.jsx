@@ -114,18 +114,18 @@ export default function CardMembros(props) {
                   {/* Objects are not valid as a React child */}
                   {usuario.cargo != null ?
                     <>
-                      <h5 className={classes.subtitle} className="makeStyles-subtitle-24">Papel:</h5>
+                      <p className={classes.subtitle} >Papel:</p>
                       <p className={classes.cargo}>{usuario.cargo.nome}</p>
                     </>
                     :
                     <>
-                      <h5 className={classes.subtitle} className="makeStyles-subtitle-24">Papel:</h5>
-                      <p className={classes.subtitle}>Cargo indefinido</p>
+                      <p className={classes.subtitle} >Papel:</p>
+                      <p className={classes.cargo}>Cargo indefinido</p>
                     </>
                   }
 
                   {/* <p className={classes.cargo}>Bug no cargo ehhe</p> */}
-                  <h5 className={classes.subtitle}>Status:</h5>
+                  <p className={classes.subtitle}>Status:</p>
                   <p className={classes.status}>{usuario.status}</p>
                 </div>
               </div>
@@ -145,17 +145,17 @@ export default function CardMembros(props) {
                     {/* {console.log(usuario)} */}
                     {usuario.cargo != null ?
                       <>
-                        <h5 className={classes.subtitle}>Papel:</h5>
+                        <p className={classes.subtitle}>Papel:</p>
                         <p className={classes.cargo}>{usuario.cargo.nome}</p>
                       </>
                       :
                       <>
-                        <h5 className={classes.subtitle}>Papel:</h5>
+                        <p className={classes.subtitle}>Papel:</p>
                         <p className={classes.cargo}>Cargo indefinido</p>
                       </>
                     }
                     {/* <p className={classes.cargo}>Bug no cargo ehhe</p> */}
-                    <h5 className={classes.subtitle}>Status:</h5>
+                    <p className={classes.subtitle}>Status:</p>
                     <p className={classes.status}>{usuario.status}</p>
                   </div>
                 </div>

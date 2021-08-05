@@ -4,6 +4,7 @@ import AppBar from '../../components/Appbar/Appbar'
 
 import { Switch } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -44,7 +45,10 @@ export default function Home() {
       <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
         <CssBaseline />
         <AppBar />
-        <Switch id="Modo dark" className="Modo-Dark-Switch" checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+        <FormControlLabel
+        control={<Switch id="Modo dark" name="Modo-Dark-Switch" className="Modo-Dark-Switch" checked={darkMode} onChange={() => setDarkMode(!darkMode)} />   }
+        label="Modo Dark"
+      />
       </ThemeProvider>
     </div>
   )
