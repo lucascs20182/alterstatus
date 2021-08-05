@@ -10,25 +10,31 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 
-import { obterDadosSquad } from '../../../services/ApiSquad';
-import { mudarCargoDoUsuario, removerCargo } from '../../../services/ApiUsuario';
+import { obterSquads, obterDadosSquad } from '../../../services/ApiSquad';
+import { mudarUsuarioDeSquad } from '../../../services/ApiUsuario';
 import { obterSquadAtivaDaStorage } from '../../../utils/Storage';
 
 import { useStyles } from './Styles';
 import '../styles.css';
 
-export default function ModalDesignarPapel({ children, usuarioId }) {
+export default function ModalDesignarPapel({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState({
-    cargo: '',
+    squad: '',
+    name: 'hai',
+  });
+  const [stateUser, setStateUser] = React.useState({
+    usuario: '',
     name: 'hai',
   });
 
-  const [cargos, setCargos] = useState(null);
-  const [cargoSelecionado, setCargoSelecionado] = useState(-1);
+  const [squads, setSquads] = useState(null);
+  const [usuarios, setUsuarios] = useState(null);
+  const [usuarioSelecionado, setUsuarioSelecionado] = useState(-1);
+  const [squadSelecionado, setSquadSelecionado] = useState(-1);
 
-  const handleChange = (event) => {
+  const handleChangeSquad = (event) => {
     const name = event.target.name;
 
     setState({
@@ -36,13 +42,25 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
       [name]: event.target.value,
     });
 
-    setCargoSelecionado(event.target.value);
+    setSquadSelecionado(event.target.value);
   };
+
+  const handleChangeUsuario = (event) =>{
+    const name = event.target.name;
+
+    setStateUser({
+      ...stateUser,
+      [name]: event.target.value,
+    });
+
+    setUsuarioSelecionado(event.target.value);
+  }
 
   const history = useHistory();
 
   const handleOpen = () => {
-    obterCargos(obterSquadAtivaDaStorage());
+    obterEquipes();
+    obterUsuarios(obterSquadAtivaDaStorage());
 
     setOpen(true);
   };
@@ -52,11 +70,24 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
     setOpen(false);
   };
 
-  const obterCargos = (idSquad) => {
+  const obterEquipes = () => {
+
+    obterSquads()
+      .then((resposta) => {
+        setSquads(resposta.data);
+      })
+      .catch((erro) => {
+        alert("Erro ao obter squad! Verifique o console.");
+        console.error(erro);
+      })
+
+  }
+
+  const obterUsuarios = (idSquad) => {
 
     obterDadosSquad(idSquad)
       .then((resposta) => {
-        setCargos(resposta.data.cargos);
+        setUsuarios(resposta.data.usuarios)
       })
       .catch((erro) => {
         alert("Erro ao obter squad! Verifique o console.");
@@ -64,32 +95,24 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
       })
   }
 
+
   const handleConfirmar = (e) => {
     e.preventDefault();
 
-    if (cargoSelecionado == -1) {
-      removerCargo(usuarioId)
-        .then((resposta) => {
-          history.go(0);
-        })
-        .catch((erro) => {
-          alert("Erro ao remover cargo! Verifique o console.");
-          console.error(erro);
-        })
-
+    if (squadSelecionado == -1) {
+          alert("Nenhum squad selecionado");
       return;
     }
 
-    mudarCargoDoUsuario(usuarioId, cargoSelecionado)
+    mudarUsuarioDeSquad(usuarioSelecionado, squadSelecionado)
       .then((resposta) => {
         history.go(0);
       })
       .catch((erro) => {
-        alert("Erro ao alterar cargo! Verifique o console.");
+        alert("Erro ao alterar usuario de squad! Verifique o console.");
         console.error(erro);
       })
-  }
-
+   }
   return (
     <div>
         <Button disableElevation className="buttonModal" type="submit" style={{ width: "100%", textTransform: 'none', }} onClick={handleOpen}>
@@ -113,18 +136,18 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
                 <InputLabel >Equipe</InputLabel>
                 <Select
                   native
-                  value={state.cargo}
-                  onChange={handleChange}
+                  value={state.squad}
+                  onChange={handleChangeSquad}
                   label="Squad"
                   inputProps={{
-                    name: 'cargo',
+                    name: 'squad',
                   }}
                 >
                   <option aria-label="None" value={-1}>Sem equipe</option>
 
-                  {cargos ?
-                    cargos.map(cargo => (
-                      <option value={cargo.id}>{cargo.nome}</option>
+                  {squads ?
+                    squads.map(squad => (
+                      <option value={squad.id}>{squad.nome}</option>
                     ))
                     :
                     ''
@@ -135,18 +158,18 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
                 <InputLabel>Usuário</InputLabel>
                 <Select
                   native
-                  value={state.cargo}
-                  onChange={handleChange}
+                  value={stateUser.usuario}
+                  onChange={handleChangeUsuario}
                   label="Nome"
                   inputProps={{
-                    name: 'username',
+                    name: 'usuario',
                   }}
                 >
                   <option aria-label="None" value={-1}>Sem usuário</option>
 
-                  {cargos ?
-                    cargos.map(cargo => (
-                      <option value={cargo.id}>{cargo.nome}</option>
+                  {usuarios ?
+                    usuarios.map(usuario => (
+                      <option value={usuario.id}>{usuario.nome}</option>
                     ))
                     :
                     ''

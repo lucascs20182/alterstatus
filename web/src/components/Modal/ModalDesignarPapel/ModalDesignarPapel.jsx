@@ -17,18 +17,24 @@ import { obterSquadAtivaDaStorage } from '../../../utils/Storage';
 import { useStyles } from './Styles';
 import '../styles.css';
 
-export default function ModalDesignarPapel({ children, usuarioId }) {
+export default function ModalDesignarPapel({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState({
     cargo: '',
     name: 'hai',
   });
+  const [stateUser, setStateUser] = React.useState({
+    usuario: '',
+    name: 'hai',
+  });
 
   const [cargos, setCargos] = useState(null);
+  const [usuarios, setUsuarios] = useState(null);
+  const [usuarioSelecionado, setUsuarioSelecionado] = useState(-1);
   const [cargoSelecionado, setCargoSelecionado] = useState(-1);
 
-  const handleChange = (event) => {
+  const handleChangeCargo = (event) => {
     const name = event.target.name;
 
     setState({
@@ -39,10 +45,22 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
     setCargoSelecionado(event.target.value);
   };
 
+  const handleChangeUsuario = (event) =>{
+    const name = event.target.name;
+
+    setStateUser({
+      ...stateUser,
+      [name]: event.target.value,
+    });
+
+    setUsuarioSelecionado(event.target.value);
+  }
+
   const history = useHistory();
 
   const handleOpen = () => {
     obterCargos(obterSquadAtivaDaStorage());
+    obterUsuarios(obterSquadAtivaDaStorage());
 
     setOpen(true);
   };
@@ -64,11 +82,23 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
       })
   }
 
+  const obterUsuarios = (idSquad) => {
+
+    obterDadosSquad(idSquad)
+      .then((resposta) => {
+        setUsuarios(resposta.data.usuarios)
+      })
+      .catch((erro) => {
+        alert("Erro ao obter squad! Verifique o console.");
+        console.error(erro);
+      })
+  }
+
   const handleConfirmar = (e) => {
     e.preventDefault();
 
     if (cargoSelecionado == -1) {
-      removerCargo(usuarioId)
+      removerCargo(usuarioSelecionado)
         .then((resposta) => {
           history.go(0);
         })
@@ -80,7 +110,7 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
       return;
     }
 
-    mudarCargoDoUsuario(usuarioId, cargoSelecionado)
+    mudarCargoDoUsuario(usuarioSelecionado, cargoSelecionado)
       .then((resposta) => {
         history.go(0);
       })
@@ -114,7 +144,7 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
                 <Select
                   native
                   value={state.cargo}
-                  onChange={handleChange}
+                  onChange={handleChangeCargo}
                   label="Papéis"
                   inputProps={{
                     name: 'cargo',
@@ -135,18 +165,18 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
                 <InputLabel >Membro:</InputLabel>
                 <Select
                   native
-                  value={state.cargo}
-                  onChange={handleChange}
+                  value={stateUser.usuario}
+                  onChange={handleChangeUsuario}
                   label="Nome"
                   inputProps={{
-                    name: 'username',
+                    name: 'usuario',
                   }}
                 >
                   <option aria-label="None" value={-1}>Sem membro</option>
 
-                  {cargos ?
-                    cargos.map(cargo => (
-                      <option value={cargo.id}>{cargo.nome}</option>
+                  {usuarios ?
+                    usuarios.map(usuario => (
+                      <option value={usuario.id}>{usuario.nome}</option>
                     ))
                     :
                     ''
