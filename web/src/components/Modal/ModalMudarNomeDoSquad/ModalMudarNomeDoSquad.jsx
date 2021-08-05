@@ -26,8 +26,6 @@ export default function ModalCriarPapel({ children }) {
     e.preventDefault();
     editarNomeDeSquad(mudarNomeDoSquad(), novoNome)
       .then((resposta) => {
-        alert('Qualquer mensagem!');
-
         history.go(0);
       })
       .catch((erro) => {

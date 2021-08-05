@@ -71,7 +71,7 @@ export default function CardMembros(props) {
           <div className={classes.title}>
             {/* icone de adicionar squad */}
             <h2 style={{ marginBottom: "3px", wordBreak: "break-word", }} >
-              Pack
+              {squadAtual.nome}
             </h2>
 
           </div>
