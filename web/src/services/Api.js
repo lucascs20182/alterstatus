@@ -2,7 +2,7 @@ import axios from 'axios';
 import { obterTokenDaStorage } from '../utils/Storage';
 
 const api = axios.create({
-  baseURL: 'https://alterstatus.herokuapp.com'
+  baseURL: 'https://alterstatustestes.herokuapp.com'
 })
 
 api.interceptors.request.use((config) => {
