@@ -63,10 +63,8 @@ export default function ModalCriarPapel({ children }) {
     cadastrarCargo(novoCargo, obterSquadAtivaDaStorage())
 
       .then((resposta) => {
-        setSuccess(true);
-
         setOpen(false);
-        // history.go(0);
+        setSuccess(true);
       })
       .catch((erro) => {
         alert("Erro ao remover usuário! Verifique o console.");

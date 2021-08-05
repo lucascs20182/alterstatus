@@ -14,7 +14,7 @@ export default function Home() {
     palette: {
       primary: {
         main: '#fff',
-        
+
       },
       secondary: {
         main: '#094B89',
@@ -22,7 +22,7 @@ export default function Home() {
       },
     },
   });
-  
+
   const darkTheme = createTheme({
     palette: {
       background: {
@@ -34,8 +34,8 @@ export default function Home() {
       secondary: {
         main: '#fff',
         dark: '3A3A3A',
-      }, 
-      type: "dark", 
+      },
+      type: "dark",
     },
   });
 
@@ -44,7 +44,7 @@ export default function Home() {
       <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
         <CssBaseline />
         <AppBar />
-        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/>
+        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
       </ThemeProvider>
     </div>
   )
