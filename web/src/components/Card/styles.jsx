@@ -11,12 +11,25 @@ export const useStyles = makeStyles((theme) => ({
     width: "90%",
   },
 
+  squadTitle: {
+    marginBottom: "3px", 
+    wordBreak: "break-word", 
+    marginTop: 30
+  },
+
   title: {
     display: 'flex',
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
     marginBottom: 0,
+  },
+  
+  subtitle: {
+    marginBottom: 0,
+    marginTop: 5,
+    color: "#000",
+    fontStyle: "bold"
   },
 
   buttons: {
@@ -32,8 +45,8 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 20,
     marginTop: 10,
     backgroundColor: "#D6D6D6",
-    width: "150px",
-    height: "190  px",
+    width: "160px",
+    height: "230px",
     borderRadius: "2px",
     boxShadow: "0px 1px 1px 1px rgba(00, 00, 25, 0.3)",
   },
@@ -51,7 +64,6 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 10,
   },
 
-
   user: {
     height: 70
   },
@@ -59,7 +71,7 @@ export const useStyles = makeStyles((theme) => ({
   nome: {
     textAlign: "center",
     marginBottom: 2,
-    marginTop: 2,
+    marginTop: -5,
     wordBreak: "break-word",
     fontSize: 13,
     color: "#000",

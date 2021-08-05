@@ -6,9 +6,6 @@ import ModalDeletarSquad from '../Modal/ModalDeletarSquad/DeletSquad'
 import ModalDesignarPapel from '../Modal/ModalDesignarPapel/ModalDesignarPapel'
 import ModalAlterarSquad from '../Modal/ModalAlterarSquad/ModalAlterarSquad'
 
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -159,7 +156,7 @@ export default function GmailTreeView(props) {
           ''
           :
           squads.map(squad => (
-            <ModalTrocarSquad idSquad={squad.id}>
+            <ModalTrocarSquad key={squad.id} idSquad={squad.id}>
               <div style={{ display: "flex", width: '100%' }}>
                 <GroupIcon color="secondary" style={{ marginLeft: 35 }} />
                 <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>{squad.nome}</p>
@@ -178,12 +175,12 @@ export default function GmailTreeView(props) {
         </ModalDesignarPapel>
 
 
-        <ModalDesignarPapel >
+        <ModalAlterarSquad >
           <div style={{ display: "flex", }}>
             <GroupIcon color="secondary" style={{ marginLeft: -15, }} />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Alterar equipe</p>
           </div>
-        </ModalDesignarPapel>
+        </ModalAlterarSquad>
 
         {/* <ModalTrocarSquad >
           <div style={{ display: "flex", }}>

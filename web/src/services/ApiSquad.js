@@ -37,8 +37,12 @@ export function editarNomeDeSquad(idSquad, nome) {
 }
 
 export function removerSquad(idSquad) {  
+    const body ={
+        "id_squad": idSquad
+    }
+
     return new Promise((resolve, reject) => {
-        return api.delete('/squad', { "id_squad": idSquad})
+        return api.delete(`/api/squad`, body)
             .then(response => resolve(response))
             .catch(error => reject(error))
     });

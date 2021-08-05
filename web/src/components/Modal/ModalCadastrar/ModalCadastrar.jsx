@@ -1,71 +1,70 @@
 import React, { useState } from 'react';
-
 import { useHistory } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
-import { useStyles } from './Styles'
 import '../styles.css';
+import '../../../styles/login.css'
 
 import { cadastrar, mudarUsuarioDeSquad } from '../../../services/ApiUsuario';
 
 import { obterSquadAtivaDaStorage } from '../../../utils/Storage';
 
-export default function ModalCadastrar({ children }) {
+const useStyles = makeStyles((theme) => ({
+  fecharJanela: {
+    width: 25,
+    height: 25,
+    marginLeft: 235,
+    marginTop: 5,
+    color: '#094B89',
+  },
+  field: {
+    marginBottom: 15,
+  }
+}));
+export default function SimpleModal({ children }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-
-  const [squadAtiva,] = useState(obterSquadAtivaDaStorage());
-
+  const [squadAtiva, ] = useState(obterSquadAtivaDaStorage());
   const [nome, setNome] = useState('');
   const [username, setUsername] = useState('');
   const [senha, setSenha] = useState('');
   const [status, setStatus] = useState('');
-
   const history = useHistory();
-
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-
   const handleCadastrar = (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     const novoUsuario = {}
-
-    if (nome != "") {
+    if(nome != "") {
       novoUsuario.nome = nome;
     }
-
-    if (username != "") {
-      novoUsuario.username = username;
+    if(username != "") {
+        novoUsuario.username = username;
     }
-
-    if (senha != "") {
-      novoUsuario.senha = senha;
+    if(senha != "") {
+        novoUsuario.senha = senha;
     }
-
-    if (status != "") {
-      novoUsuario.status = status;
+    if(status != "") {
+        novoUsuario.status = status;
     }
-
     const novoUsuarioJSON = JSON.stringify(novoUsuario);
-
     const blob = new Blob([novoUsuarioJSON], {
       type: 'application/json'
     })
-
     formData.append('usuario', blob);
 
     cadastrar(formData)
       .then((resposta) => {
+<<<<<<< HEAD
         const idUsuarioCriado = resposta.data.id;
 
         mudarUsuarioDeSquad(idUsuarioCriado, squadAtiva)
@@ -79,19 +78,26 @@ export default function ModalCadastrar({ children }) {
           })
 
         history.go(0); // manda para home e dá reload
+=======
+          const idUsuarioCriado = resposta.data.id;
+
+          mudarUsuarioDeSquad(idUsuarioCriado, squadAtiva)
+            .then((resposta) => {
+              alert("Usuário cadastrado!");
+            })
+            .catch((erro) => {
+              alert("Erro ao adicionar usuário na squad! Verifique o console.");
+              console.error(erro);
+            })
+
+          history.go(0); // manda para home e dá reload
+>>>>>>> f5d900206ea5c7bf58047ec1bc3147c837b019ad
       })
       .catch((erro) => {
-        alert("Erro ao criar usuário! Verifique o console.");
-        console.error(erro);
+          alert("Erro ao criar usuário! Verifique o console.");
+          console.error(erro);
       });
-
-    // limpa o formulário
-    setNome('');
-    setUsername('');
-    setSenha('');
-    setStatus('');
   }
-
   return (
     <div>
       <Tooltip title="Cadastrar membro" arrow>
@@ -99,19 +105,17 @@ export default function ModalCadastrar({ children }) {
           {children}
         </button>
       </Tooltip>
-
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        className={classes.dialog}
+        style={{ width: "100%" }}
       >
-
-        <form className={classes.form} onSubmit={e => handleCadastrar(e)} >
+        <form className="form" style={{ width: "270px", height: "370px" }} onSubmit={e => handleCadastrar(e)} >
           <center>
-            <CloseIcon className={classes.fecharJanela} color="secondary" onClick={handleClose} />
-            <h3 className={classes.titleModal}>Cadastro</h3>
+            <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
+            <h3 style={{ textAlign: 'center', marginTop: -5 }}>Cadastro</h3>
             <TextField
               className={classes.field}
               name="Nome"
@@ -122,7 +126,6 @@ export default function ModalCadastrar({ children }) {
               value={nome}
               onChange={(e) => setNome(e.target.value)}
             />
-
             <TextField
               className={classes.field}
               name="Username"
@@ -133,7 +136,6 @@ export default function ModalCadastrar({ children }) {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-
             <TextField
               className={classes.field}
               id="standard-password-input"
@@ -146,7 +148,6 @@ export default function ModalCadastrar({ children }) {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
             />
-
             <TextField
               name="Status (Opcional)"
               label="Status (Opcional)"
@@ -157,17 +158,14 @@ export default function ModalCadastrar({ children }) {
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             />
-
           </center>
-
-          <DialogActions className={classes.dialogActions}>
-            <button className="buttonConfirmar" color="secondary" onClick={handleClose} >
+          <DialogActions style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <button className="buttonConfirmar" onClick={handleClose} >
               Cadastrar
             </button>
           </DialogActions>
         </form>
       </Dialog>
-
     </div>
   );
 }
