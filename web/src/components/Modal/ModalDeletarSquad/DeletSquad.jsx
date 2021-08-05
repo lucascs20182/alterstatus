@@ -115,7 +115,6 @@ export default function ModalDeletarSquad({ children }) {
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 className={classes.titleModal}>Atenção!!!</h3>
-<<<<<<< HEAD
             <h4 className={classes.subtitleModal}>Você deseja deletar o equipe do Alterstate?</h4>
           </center>
           <DialogActions className={classes.dialogActions}>
@@ -126,41 +125,6 @@ export default function ModalDeletarSquad({ children }) {
               Não
             </button>
           </DialogActions>
-=======
-            <h4 className={classes.subtitleModal}>Você deseja deletar o Squad do Alterstate?</h4>
-
-
-          <FormControl color="secondary" variant="outlined" className={classes.formControl} >
-                <InputLabel >Equipe</InputLabel>
-                <Select
-                  native
-                  value={state.squad}
-                  onChange={handleChange}
-                  label="Squad"
-                  inputProps={{
-                    name: 'squad',
-                  }}
-                >
-                  <option aria-label="None" value={-1}>Sem equipe</option>
-
-                  {squads ?
-                    squads.map(squad => (
-                      <option value={squad.id}>{squad.nome}</option>
-                    ))
-                    :
-                    ''
-                  }
-                </Select>
-              </FormControl>
-              </center>
-
-              
-            <DialogActions className={classes.dialogActions}>
-              <button className="buttonConfirmar" onClick={handleClose} >
-                Confirmar
-              </button>
-            </DialogActions>
->>>>>>> f5d900206ea5c7bf58047ec1bc3147c837b019ad
         </form>
       </Dialog>
       </div>            

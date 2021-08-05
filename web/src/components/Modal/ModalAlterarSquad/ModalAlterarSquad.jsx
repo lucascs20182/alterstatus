@@ -136,15 +136,9 @@ export default function ModalAlterarSquad({ children }) {
                 <InputLabel >Equipe</InputLabel>
                 <Select
                   native
-<<<<<<< HEAD
                   value={state.cargo}
-                  onChange={handleChange}
-                  label="Equipe"
-=======
-                  value={state.squad}
                   onChange={handleChangeSquad}
-                  label="Squad"
->>>>>>> f5d900206ea5c7bf58047ec1bc3147c837b019ad
+                  label="Equipe"
                   inputProps={{
                     name: 'squad',
                   }}

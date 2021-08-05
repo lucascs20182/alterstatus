@@ -184,14 +184,14 @@ export default function GmailTreeView(props) {
 
         <ModalAlterarSquad >
           <div style={{ display: "flex", }}>
-            <GroupIcon color="secondary" style={{ marginLeft: -15, }} />
+            <GroupIcon color="secondary" style={{ marginLeft: -5, }} />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Alterar equipe</p>
           </div>
         </ModalAlterarSquad>
 
         <ModalDeletarSquad >
           <div style={{ display: "flex", }}>
-            <DeleteIcon style={{ color: "#FF0000", marginLeft: -15, }} />
+            <DeleteIcon style={{ color: "#FF0000", marginLeft: -5,}} />
             <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Deletar equipe</p>
           </div>
         </ModalDeletarSquad>

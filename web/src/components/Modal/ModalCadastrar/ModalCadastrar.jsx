@@ -64,7 +64,6 @@ export default function SimpleModal({ children }) {
 
     cadastrar(formData)
       .then((resposta) => {
-<<<<<<< HEAD
         const idUsuarioCriado = resposta.data.id;
 
         mudarUsuarioDeSquad(idUsuarioCriado, squadAtiva)
@@ -78,20 +77,6 @@ export default function SimpleModal({ children }) {
           })
 
         history.go(0); // manda para home e dá reload
-=======
-          const idUsuarioCriado = resposta.data.id;
-
-          mudarUsuarioDeSquad(idUsuarioCriado, squadAtiva)
-            .then((resposta) => {
-              alert("Usuário cadastrado!");
-            })
-            .catch((erro) => {
-              alert("Erro ao adicionar usuário na squad! Verifique o console.");
-              console.error(erro);
-            })
-
-          history.go(0); // manda para home e dá reload
->>>>>>> f5d900206ea5c7bf58047ec1bc3147c837b019ad
       })
       .catch((erro) => {
           alert("Erro ao criar usuário! Verifique o console.");
