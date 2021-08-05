@@ -45,7 +45,7 @@ export default function Home() {
       <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
         <CssBaseline />
         <AppBar />
-        <FormControlLabel
+        <FormControlLabel style={{marginLeft: 10,}} 
         control={<Switch id="Modo dark" name="Modo-Dark-Switch" className="Modo-Dark-Switch" checked={darkMode} onChange={() => setDarkMode(!darkMode)} />   }
         label="Modo Dark"
       />
