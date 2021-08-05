@@ -13,7 +13,9 @@ import Button from '@material-ui/core/Button';
 import { useStyles } from './Styles'
 import '../styles.css';
 
-import { removerSquad, obterSquads, obterDadosSquad } from '../../../services/ApiSquad';
+import { obterDadosSquad } from '../../../services/ApiSquad';
+import { removerCargo } from '../../../services/ApiCargo';
+import { obterSquadAtivaDaStorage } from '../../../utils/Storage';
 
 export default function ModalDeletarSquad({ children }) {
   const classes = useStyles();
@@ -23,9 +25,8 @@ export default function ModalDeletarSquad({ children }) {
     name: 'hai',
   });
 
-  const [squads, setSquads] = React.useState(null);
-  const [squadSelecionado, setSquadSelecionado] = React.useState(-1);
-  const [usuariosDoSquad, setUsuariosDoSquad] = React.useState([]);
+  const [cargos, setCargos] = React.useState(null);
+  const [cargoSelecionado, setCargoSelecionado] = React.useState(-1);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -35,13 +36,13 @@ export default function ModalDeletarSquad({ children }) {
       [name]: event.target.value,
     });
 
-    setSquadSelecionado(event.target.value);
+    setCargoSelecionado(event.target.value);
   };
 
   const history = useHistory();
 
   const handleOpen = () => {
-    obterEquipes();
+    listarPapeis();
     setOpen(true);
   };
 
@@ -49,51 +50,31 @@ export default function ModalDeletarSquad({ children }) {
     setOpen(false);
   };
 
-  const obterEquipes = () => {
-
-    obterSquads()
+  const listarPapeis = () => {
+    obterDadosSquad(obterSquadAtivaDaStorage())
       .then((resposta) => {
-        setSquads(resposta.data);
+        setCargos(resposta.data.cargos);
       })
       .catch((erro) => {
-        alert("Erro ao obter squad! Verifique o console.");
+        alert("Erro ao obter equipe! Verifique o console.");
         console.error(erro);
       })
-
   }
 
   const handleSim = (e) => {
     e.preventDefault();
 
-    obterDadosSquad(squadSelecionado)
+    // remover cargo aqui
+    removerCargo(cargoSelecionado)
       .then((resposta) => {
-        setUsuariosDoSquad(resposta.data.usuarios)
+        alert("Cargo Excluido!!");
+
+        history.go(0);
       })
       .catch((erro) => {
-        alert("Erro ao obter usuarios do squad! Verifique o console.");
+        alert("Erro ao remover papel!");
         console.error(erro);
       })
-
-    console.log(usuariosDoSquad.length);
-
-    if (usuariosDoSquad.length == 0) {
-
-      console.log(squadSelecionado);
-      removerSquad(squadSelecionado) //Dando erro Bad Request 400, Pq meu deus do céu?
-        .then((resposta) => {
-          alert("Squad Excluido!!");
-
-          history.go(0);
-        })
-        .catch((erro) => {
-          alert("Erro ao remover o Squad!");
-          console.error(erro);
-        })
-    } else {
-      alert("Não se pode deletar um squad com usuários ainda nele");
-    }
-
-    setOpen(false);
   }
 
   return (
@@ -131,8 +112,8 @@ export default function ModalDeletarSquad({ children }) {
                 >
                   <option aria-label="None" value={-1}>Sem papel</option>
 
-                  {squads ?
-                    squads.map(squad => (
+                  {cargos ?
+                    cargos.map(squad => (
                       <option value={squad.id}>{squad.nome}</option>
                     ))
                     :

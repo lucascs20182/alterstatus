@@ -12,3 +12,11 @@ export function cadastrarCargo(nomeCargo, idSquad) {
             .catch(error => reject(error))
     });
 }
+
+export function removerCargo(idCargo) {  
+    return new Promise((resolve, reject) => {
+        return api.delete(`/api/cargo/${idCargo}`)
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+    });
+}
