@@ -16,6 +16,10 @@ public class UsuarioDTOResponse {
 
 	private String status;
 
+	private Long idSquad;
+
+	private String nomeCargo;
+
 	public Long getId() {
 		return id;
 	}
@@ -64,4 +68,19 @@ public class UsuarioDTOResponse {
 		this.status = status;
 	}
 
+	public Long getIdSquad() {
+		return idSquad;
+	}
+
+	public void setIdSquad(Long idSquad) {
+		this.idSquad = idSquad;
+	}
+
+	public String getNomeCargo() {
+		return nomeCargo;
+	}
+
+	public void setNomeCargo(String nomeCargo) {
+		this.nomeCargo = nomeCargo;
+	}
 }

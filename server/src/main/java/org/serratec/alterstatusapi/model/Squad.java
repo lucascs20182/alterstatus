@@ -8,12 +8,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonAutoDetect
@@ -27,19 +27,20 @@ public class Squad {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator_squad")
 	private Long id;
 
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 30, unique = true)
 	private String nome;
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonIgnoreProperties({ "hibernateEagerInitializer", "handler" })
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "squad")
 	private List<Usuario> usuarios;
 
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "squad")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "squad_id", referencedColumnName = "id")
 	private List<Cargo> cargos;
 
 	private Long id_squad;
-	
+
 	// --------------------------------------
 
 	public Squad(Long id, String nome, List<Cargo> cargos, List<Usuario> usuarios, Long id_squad) {
@@ -84,8 +85,8 @@ public class Squad {
 		return cargos;
 	}
 
-	public void setCargos(List<Cargo> cargos) {
-		this.cargos = cargos;
+	public void setCargos(Cargo cargo) {
+		this.cargos.add(cargo);
 	}
 
 	public Long getId_squad() {
@@ -96,6 +97,4 @@ public class Squad {
 		this.id_squad = id_squad;
 	}
 
-	
-	
 }

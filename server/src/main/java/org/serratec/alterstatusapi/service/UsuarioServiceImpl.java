@@ -4,26 +4,31 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.serratec.alterstatusapi.dto.UsuarioDTORequest;
+import org.serratec.alterstatusapi.exception.ResourceBadRequestException;
 import org.serratec.alterstatusapi.exception.ResourceNotFoundException;
 import org.serratec.alterstatusapi.mapper.UsuarioMapper;
+import org.serratec.alterstatusapi.model.Cargo;
+import org.serratec.alterstatusapi.model.Squad;
 import org.serratec.alterstatusapi.model.Usuario;
 import org.serratec.alterstatusapi.repository.CargoRepository;
 import org.serratec.alterstatusapi.repository.SquadRepository;
 import org.serratec.alterstatusapi.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -54,8 +59,45 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
+	public List<Usuario> obterPaginado(Integer pagina, Integer qtdRegistros) throws Exception {
+		Pageable page = null;
+		List<Usuario> listUsuario = null;
+		List<Usuario> listUsuarioComPaginacao = null;
+		List<Usuario> listUsuarioVO = new ArrayList<>();
+
+		try {
+			if (null != pagina && null != qtdRegistros) {
+
+				page = PageRequest.of(pagina, qtdRegistros);
+				listUsuarioComPaginacao = clienteRepository.findAll(page).getContent();
+
+				for (Usuario lUsuario : listUsuarioComPaginacao) {
+					listUsuarioVO.add(lUsuario);
+				}
+
+			} else {
+				listUsuario = clienteRepository.findAll();
+
+				for (Usuario lUsuario : listUsuario) {
+					listUsuarioVO.add(lUsuario);
+				}
+			}
+		} catch (Exception e) {
+			throw new Exception("Não foi possível recuperar a lista de Usuarios ::" + e.getMessage());
+		}
+
+		return listUsuarioVO;
+	}
+
+	@Override
 	public Usuario obterPorId(Long id) throws ResourceNotFoundException {
+
+		if (id == null) {
+			throw new ResourceBadRequestException("Nenhum id foi definido");
+		}
+
 		Optional<Usuario> cliente = clienteRepository.findById(id);
+
 		if (cliente.isEmpty()) {
 			throw new ResourceNotFoundException("Não existe cliente com esse Id.");
 		}
@@ -65,11 +107,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public List<Usuario> obterPorUsername(String username) {
+
+		if (username == null) {
+			throw new ResourceBadRequestException("Username não foi definido");
+		}
+
 		List<Usuario> usuario = clienteRepository.findByUsernameContainingIgnoreCase(username);
+
 		if (usuario.isEmpty()) {
 			throw new ResourceNotFoundException("Não foi localizado nenhum usuário com o username: " + username);
 
 		}
+
 		return usuario;
 	}
 
@@ -94,6 +143,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario cadastrarArquivo(UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException {
+
+		if (dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "") {
+			throw new ResourceBadRequestException("Um dos campos não foi definido");
+		}
+
+		Usuario UsuarioVerificar = clienteRepository.findByUsername(dto.getUsername());
+
+		if (UsuarioVerificar != null) {
+			throw new ResourceBadRequestException("Username ja existe");
+		}
+
 		Usuario entity = clienteMapper.toEntity(dto);
 
 		entity.setDataCadastro(LocalDate.now());
@@ -107,14 +167,26 @@ public class UsuarioServiceImpl implements UsuarioService {
 		entity.setSenha(bCrypt.encode(dto.getSenha()));
 
 		entity = clienteRepository.save(entity);
+		entity.setId_usuario(entity.getId());
 
 		imagemService.cadastrar(entity, multipartFile);
 
 		return clienteRepository.save(obterImagem(entity, false));
 	}
-	
+
 	@Override
 	public Usuario cadastrar(UsuarioDTORequest dto) throws ResourceNotFoundException {
+
+		if (dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "") {
+			throw new ResourceBadRequestException("Um dos campos não foi definido");
+		}
+
+		Usuario UsuarioVerificar = clienteRepository.findByUsername(dto.getUsername());
+
+		if (UsuarioVerificar != null) {
+			throw new ResourceBadRequestException("Username ja existe");
+		}
+
 		Usuario entity = clienteMapper.toEntity(dto);
 
 		entity.setDataCadastro(LocalDate.now());
@@ -126,6 +198,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 
 		entity.setSenha(bCrypt.encode(dto.getSenha()));
+		entity.setId_usuario(entity.getId());
 
 		entity = clienteRepository.save(entity);
 
@@ -133,8 +206,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario atualizar(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
+	public Usuario atualizarArquivo(Long id, UsuarioDTORequest dto, MultipartFile multipartFile)
 			throws ResourceNotFoundException, IOException {
+
+		if (dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "" || id == null) {
+			throw new ResourceBadRequestException("Um dos campos não foi definido");
+		}
+
 		Usuario entity = this.obterPorId(id);
 
 		for (Usuario cliente : this.obterTodos()) {
@@ -167,7 +245,46 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
+	public Usuario atualizar(Long id, UsuarioDTORequest dto) throws ResourceNotFoundException {
+
+		if (dto.getNome() == "" || dto.getSenha() == "" || dto.getUsername() == "" || id == null) {
+			throw new ResourceBadRequestException("Um dos campos não foi definido");
+		}
+
+		Usuario entity = this.obterPorId(id);
+
+		for (Usuario cliente : this.obterTodos()) {
+			if (cliente.getUsername().equals(dto.getUsername())) {
+				throw new ResourceNotFoundException("Uma conta já foi cadastrada utilizando este username.");
+			}
+		}
+
+		if (dto.getUsername() != null) {
+			entity.setUsername(dto.getUsername());
+		}
+
+		if (dto.getSenha() != null) {
+			entity.setSenha(bCrypt.encode(dto.getSenha()));
+		}
+
+		if (dto.getNome() != null) {
+			entity.setNome(dto.getNome());
+		}
+
+		if (dto.getStatus() != null) {
+			entity.setStatus(dto.getStatus());
+		}
+
+		return clienteRepository.save(entity);
+	}
+
+	@Override
 	public void deletar(Long id) throws ResourceNotFoundException {
+
+		if (id == null) {
+			throw new ResourceBadRequestException("Nenhum id definido");
+		}
+
 		this.obterPorId(id); // verifica se o usuário existe antes de deletar
 
 		imagemService.removerImagem(id);
@@ -175,30 +292,62 @@ public class UsuarioServiceImpl implements UsuarioService {
 		clienteRepository.deleteById(id);
 	}
 
+	@Transactional
+	@Override
+	public void removerCargo(Long idUsuario) throws ResourceNotFoundException {
+
+		if (idUsuario == null) {
+			throw new ResourceBadRequestException("Nenhum id definido");
+		}
+
+		Usuario usuario = this.obterPorId(idUsuario); // verifica se o usuário existe antes de deletar
+
+		usuario.setCargo(null);
+
+		clienteRepository.save(usuario);
+	}
+
 	@Override
 	public Usuario relacionarUsuarioComSquad(Long usuario_id, Long squad_id) {
-		var usuario = clienteRepository.findById(usuario_id).get();
-		var squad = repositorioSquad.findById(squad_id).get();
 
-		usuario.relacionarComSquad(squad);
+		if (usuario_id == null || squad_id == null) {
+			throw new ResourceBadRequestException("Um dos id(s) não foi definido");
+		}
+
+		Usuario usuario = clienteRepository.findById(usuario_id).get();
+		Squad squad = repositorioSquad.findById(squad_id).get();
+
+		usuario.setCargo(null);
+		usuario.setId_squad(squad_id);
+		usuario.setSquad(squad);
 
 		return clienteRepository.save(usuario);
 	}
 
 	@Override
 	public Usuario relacionarUsuarioComCargo(Long usuario_id, Long cargo_id) {
-		var usuario = clienteRepository.findById(usuario_id).get();
-		var cargo = repositorioCargo.findById(cargo_id).get();
 
-		usuario.relacionarComCargo(cargo);
+		if (usuario_id == null || cargo_id == null) {
+			throw new ResourceBadRequestException("Um dos id(s) não foi definido");
+		}
+
+		Usuario usuario = clienteRepository.findById(usuario_id).get();
+		Cargo cargo = repositorioCargo.findById(cargo_id).get();
+
+		usuario.setId_cargo(cargo_id);
+		usuario.setCargo(cargo);
 
 		return clienteRepository.save(usuario);
 	}
 
 	@Override
-	public @ResponseBody ResponseEntity<Optional<Usuario>> atualizarEspecifico(@PathVariable Long id,
-			@RequestBody Map<Object, Object> campos) {
-		var UsuarioAtualizado = clienteRepository.findById(id);
+	public ResponseEntity<Optional<Usuario>> atualizarEspecifico(Long id, Map<Object, Object> campos) {
+
+		if (id == null || campos == null) {
+			throw new ResourceBadRequestException("Um dos campos não foi definido");
+		}
+
+		Optional<Usuario> UsuarioAtualizado = clienteRepository.findById(id);
 		// Map key is field name, v is value
 		campos.forEach((chave, valor) -> {
 			// use reflection to get field k on manager and set it to value k

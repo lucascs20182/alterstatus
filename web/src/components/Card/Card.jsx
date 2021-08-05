@@ -1,150 +1,167 @@
-import React from 'react'
-import Online from '../../components/Status/StatusOnline';
-import Offline from '../../components/Status/StatusOffline';
-import Ausente from '../../components/Status/StatusAusente';
-import Ocupado from '../../components/Status/StatusOcupado';
-import ButtonCard from '../Button/ButtonMenu'
-import user from '../../assets/user.svg'
-import fonts from '../../fonts/Fonts.css'
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect } from 'react'
+import ModalCadastrar from '../Modal/ModalCadastrar/ModalCadastrar';
+import ModalCriarPapel from '../Modal/ModalPapel/ModalPapel';
+import ModalMudarNomeDoSquad from '../Modal/ModalMudarNomeDoSquad/ModalMudarNomeDoSquad'
+
+import EditIcon from '@material-ui/icons/Edit';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import IconButton from '@material-ui/core/IconButton';
-import Modal from '../Modal/Modal'
+import ButtonCard from '../Button/ButtonMenu';
 import { PostAdd } from '@material-ui/icons';
+import fonts from '../../fonts/Fonts.css'
+import {
+  obterTokenDaStorage,
+  salvarSquadAtivaNaStorage
+} from '../../utils/Storage';
+
+import { obterDadosUsuario } from '../../services/ApiUsuario';
+import { obterDadosSquad } from '../../services/ApiSquad';
 
 
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    flex: 1,
-    display: 'flex',
-    flexWrap: "wrap",
-    margin: "auto",
-    justifyContent: "space-around",
-    alignItems: "center",
-    width: "90%",
-  }, 
-
-  root: {
-    display: 'table',
-    textAlign: "center",
-    marginRight: 10,
-    marginTop: 10,
-    backgroundColor: "#D6D6D6",
-    width: "170px",
-    height: "180px",
-    borderRadius: "2px",
-    boxShadow: "0px 1px 1px 1px rgba(00, 00, 25, 0.3)",
-  },
-
-  info: {
-    display: 'block',
-    maxWidth: "200px",
-    height: "200px",
-  },
-
-  avatar: {
-    backgroundColor: "#094B89",
-    clipPath: 'circle(26%)',
-    padding: "7px",
-    margin: 10,
-  },
-
-  user: {
-    width: "40px",
-    height: "38px",
-  },
-
-  nome: {
-    textAlign: "center",
-    marginBottom: 2,
-    marginTop: 2,
-    wordBreak: "break-word",
-    fontSize: 13,
-  },
-
-  cargo: {
-    textAlign: "center",
-    marginBottom: 2,
-    marginTop: 3,
-    wordBreak: "break-word",
-    fontSize: 13,
-  },
-
-  addPessoa: {
-    height: 35,
-    width: 35,
-    paddingTop: 6,
-    paddingLeft: 6,
-    paddingRight: 10,
-    paddingBottom: 6,
-    alignSelf: 'center',
-  },
-
-  addCargo: {
-    height: 35,
-    width: 35,
-    paddingTop: 6,
-    paddingLeft: 6,
-    paddingRight: 6,
-    paddingBottom: 6,
-    alignSelf: 'center',
-  },
-
-  status: {
-    textAlign: "center",
-    marginBottom: 2,
-    marginTop: 3,
-    wordBreak: "break-word",
-    fontSize: 13,
-  },
-
-  Button: {
-    marginRight: theme.spacing(2),
-  },
-}))
-
+import { useStyles } from './styles'
 
 export default function CardMembros(props) {
   const classes = useStyles();
+  const [usuarioLogado, setUsuarioLogado] = useState({});
+  const [squadAtual, setSquadAtual] = useState({});
+  const [usuariosNaSquad, setUsuariosNaSquad] = useState([]);
+  const [carregar, setCarregar] = useState(true);
 
-  // const {id, nome, cargo, status} = props.cards; 
+  const usuariosFiltrados = usuariosNaSquad.filter(function (e) {
+    const regexp = new RegExp(props.pesquisa, 'gi');
+    return e.nome.match(regexp) !== null || e.username.match(regexp) !== null;
+  })
+
+  useEffect(() => {
+    let [, idUsuario] = obterTokenDaStorage();
+
+    obterDadosUsuario(idUsuario)
+      .then((resposta) => {
+        const idSquad = resposta.data.idSquad;
+
+        setUsuarioLogado(resposta.data);
+
+        obterDadosSquad(idSquad)
+          .then((resposta) => {
+            // console.log(resposta.data);
+            setSquadAtual(resposta.data);
+            salvarSquadAtivaNaStorage(idSquad);
+            setUsuariosNaSquad(resposta.data.usuarios);
+            setCarregar(false);
+          })
+          .catch((erro) => {
+            alert("Erro! Verifique o console.");
+            console.error(erro);
+          })
+      })
+      .catch((erro) => {
+        alert("Erro! Verifique o console.");
+        console.error(erro);
+        // setCarregar(false);
+      })
+  }, []);
 
   return (
     <div>
-      <h3 style={{ textAlign: 'center' }}>
-      <IconButton className={classes.addCargo}
-          aria-label="show more"
-          aria-haspopup="true"
-          color="secondary"
-        >
-          <PostAdd />
-        </IconButton>
-        <IconButton className={classes.addPessoa}
-          aria-label="show more"
-          aria-haspopup="true"
-          color="secondary"
-        >
-          {/* passar PersonAddIcon como child
-          gera o bug/warning: validateDOMNesting(...) */}
-          <Modal><PersonAddIcon /></Modal>
-        </IconButton>
-        Projeto-aplicado-Alterdata-grupo-4-Front-Back
-      </h3>
-      <div className={classes.container}>
-        <div className={classes.root}>
-          <div className={classes.info}>
-            <div>
-              <ButtonCard/>
-              <h3 className={classes.avatar}><img className={classes.user} src={user} /></h3>
-            </div>
-            <h3 className={classes.nome}><Online />Guilherme.dsn.pack</h3>
-            <p className={classes.cargo}>cargo</p>
-            <p className={classes.status}>status</p>
+      {carregar ?
+        ''
+        :
+        <div>
+          <div className={classes.title}>
+            {/* icone de adicionar squad */}
+            <h2 className={classes.squadTitle} >
+              {squadAtual.nome}
+            </h2>
+
+          </div>
+
+          <div className={classes.buttons}>
+            <ModalCriarPapel >
+              <PostAdd color="secondary" />
+            </ModalCriarPapel>
+
+            {/* icone de adicionar usuario */}
+            <ModalCadastrar>
+              <PersonAddIcon color="secondary" style={{ marginRight: 5, }} />
+            </ModalCadastrar>
+
+            <ModalMudarNomeDoSquad>
+              <EditIcon color="secondary" style={{ marginRight: 5, fontSize: 22 }} />
+            </ModalMudarNomeDoSquad>
+
           </div>
         </div>
+      }
+
+      <div className={classes.container}>
+        {carregar ?
+          <div style={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
+            <CircularProgress />
+          </div>
+          :
+          props.pesquisa.length === 0 ?
+            usuariosNaSquad.map(usuario => (
+              <div className={classes.root} key={usuario.id}>
+
+                <div className={classes.info}>
+                  <div>
+                    <ButtonCard usuarioId={usuario.id} />
+                    <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} alt="Imagem dos membros" /></h3>
+                  </div>
+                  <h2 className={classes.nome}>{usuario.nome}</h2>
+                  {/* {console.log(usuario)} */}
+                  {/* Objects are not valid as a React child */}
+                  {usuario.cargo != null ?
+                    <>
+                      <p className={classes.subtitle} >Papel:</p>
+                      <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                    </>
+                    :
+                    <>
+                      <p className={classes.subtitle} >Papel:</p>
+                      <p className={classes.cargo}>Cargo indefinido</p>
+                    </>
+                  }
+
+                  {/* <p className={classes.cargo}>Bug no cargo ehhe</p> */}
+                  <p className={classes.subtitle}>Status:</p>
+                  <p className={classes.status}>{usuario.status}</p>
+                </div>
+              </div>
+            ))
+            :
+            usuariosFiltrados.length === 0 ?
+              'Nenhum usuário encontrado'
+              :
+              usuariosFiltrados.map(usuario => (
+                <div className={classes.root} key={usuario.id}>
+                  <div className={classes.info}>
+                    <div>
+                      <ButtonCard usuarioId={usuario.id} />
+                      <h3 className={classes.avatar}><img className={classes.user} src={usuario.urlImagem} alt="Imagem dos membros" /></h3>
+                    </div>
+                    <h2 className={classes.nome}>{usuario.nome}</h2>
+                    {/* {console.log(usuario)} */}
+                    {usuario.cargo != null ?
+                      <>
+                        <p className={classes.subtitle}>Papel:</p>
+                        <p className={classes.cargo}>{usuario.cargo.nome}</p>
+                      </>
+                      :
+                      <>
+                        <p className={classes.subtitle}>Papel:</p>
+                        <p className={classes.cargo}>Cargo indefinido</p>
+                      </>
+                    }
+                    {/* <p className={classes.cargo}>Bug no cargo ehhe</p> */}
+                    <p className={classes.subtitle}>Status:</p>
+                    <p className={classes.status}>{usuario.status}</p>
+                  </div>
+                </div>
+              ))
+        }
       </div>
     </div>
   );
 }
-

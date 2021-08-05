@@ -1,25 +1,12 @@
 import React from 'react';
+import { BrowserRouter } from "react-router-dom";
 import Routes from './routes/Routes'
-import { createTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#fff',
-    },
-    secondary: {
-      main: '#094B89',
-    },
-  },
-
-});
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <BrowserRouter>
       <Routes />
-    </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

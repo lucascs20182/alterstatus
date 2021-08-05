@@ -4,20 +4,18 @@ import java.io.IOException;
 
 import javax.transaction.Transactional;
 
-import org.serratec.alterstatusapi.exception.ResourceNotFoundException;
 import org.serratec.alterstatusapi.model.Imagem;
 import org.serratec.alterstatusapi.model.Usuario;
-import org.serratec.alterstatusapi.repository.ImagemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ImagemService {
 
 	@Transactional
 	public Imagem cadastrar(Usuario produtoEntity, MultipartFile multipartFile) throws IOException;
+
 	@Transactional
 	public Imagem obterImagem(Long id);
+
 	@Transactional
-	public Imagem removerImagem(Long id);
+	public void removerImagem(Long id);
 }

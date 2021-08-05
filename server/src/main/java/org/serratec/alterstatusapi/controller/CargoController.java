@@ -34,6 +34,14 @@ public class CargoController {
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
+	@GetMapping("/pagina/{pagina}/qtde/{qtdRegistros}")
+	public ResponseEntity<List<Cargo>> obterPaginado(@PathVariable("pagina") Integer pagina,
+			@PathVariable("qtdRegistros") Integer qtdRegistros) throws Exception {
+
+		return servicoCargo.obterPaginado(pagina, qtdRegistros);
+	}
+
+	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Cargo>> obterPorId(@PathVariable(value = "id") Long id) {
 		return servicoCargo.obterPorId(id);
@@ -52,9 +60,9 @@ public class CargoController {
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
-	@DeleteMapping
-	public ResponseEntity<?> deletar(@RequestBody Cargo cargo) {
-		return servicoCargo.deletar(cargo.getId_cargo());
+	@DeleteMapping("/{idCargo}")
+	public ResponseEntity<?> deletar(@PathVariable Long idCargo) {
+		return servicoCargo.deletar(idCargo);
 	}
 
 	@SecurityRequirement(name = "bearerAuth")
