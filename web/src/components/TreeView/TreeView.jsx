@@ -151,7 +151,7 @@ export default function GmailTreeView(props) {
       defaultExpandIcon={<ArrowRightIcon />}
       defaultEndIcon={<div style={{ width: 30 }} />}
     >
-      <StyledTreeItem nodeId="1" labelText="Squads" color="#094B89" labelIcon={GroupIcon} >
+      <StyledTreeItem nodeId="1" labelText="Equipe" color="#094B89" labelIcon={GroupIcon} >
         {carregar ?
           ''
           :
@@ -185,14 +185,14 @@ export default function GmailTreeView(props) {
         <ModalAlterarSquad >
           <div style={{ display: "flex", }}>
             <GroupIcon color="secondary" style={{ marginLeft: -15, }} />
-            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Alterar squad</p>
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Alterar equipe</p>
           </div>
         </ModalAlterarSquad>
 
         <ModalDeletarSquad >
           <div style={{ display: "flex", }}>
             <DeleteIcon style={{ color: "#FF0000", marginLeft: -15, }} />
-            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Deletar Squad</p>
+            <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "15px" }}>Deletar equipe</p>
           </div>
         </ModalDeletarSquad>
 

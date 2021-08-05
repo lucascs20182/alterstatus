@@ -81,12 +81,12 @@ export default function ModalDeletarSquad({ children }) {
       console.log(squadSelecionado);
     removerSquad(squadSelecionado) //Dando erro Bad Request 400, Pq meu deus do céu?
       .then((resposta) => {
-        alert("Squad Excluido!!");
+        alert("Equipe Excluido!!");
 
         history.go(0);
       })
       .catch((erro) => {
-        alert("Erro ao remover o Squad!");
+        alert("Erro ao remover o equipe!");
         console.error(erro);
       })
     } else{
@@ -115,6 +115,18 @@ export default function ModalDeletarSquad({ children }) {
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 className={classes.titleModal}>Atenção!!!</h3>
+<<<<<<< HEAD
+            <h4 className={classes.subtitleModal}>Você deseja deletar o equipe do Alterstate?</h4>
+          </center>
+          <DialogActions className={classes.dialogActions}>
+            <button className="buttonDeletar" onClick={handleSim} >
+              Sim
+            </button>
+            <button className="buttonConfirmar" onClick={handleClose} >
+              Não
+            </button>
+          </DialogActions>
+=======
             <h4 className={classes.subtitleModal}>Você deseja deletar o Squad do Alterstate?</h4>
 
 
@@ -148,6 +160,7 @@ export default function ModalDeletarSquad({ children }) {
                 Confirmar
               </button>
             </DialogActions>
+>>>>>>> f5d900206ea5c7bf58047ec1bc3147c837b019ad
         </form>
       </Dialog>
       </div>            

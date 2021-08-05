@@ -77,7 +77,7 @@ export default function ModalDesignarPapel({ children }) {
         setCargos(resposta.data.cargos);
       })
       .catch((erro) => {
-        alert("Erro ao obter squad! Verifique o console.");
+        alert("Erro ao obter equipe! Verifique o console.");
         console.error(erro);
       })
   }
