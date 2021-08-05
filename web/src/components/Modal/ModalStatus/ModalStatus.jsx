@@ -5,6 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
+import { editarStatus } from '../../../services/ApiUsuario'
 
 import { useStyles } from './Styles'
 
@@ -29,14 +30,13 @@ export default function ModalStatus({ children, usuarioId }) {
     
     editarStatus(status, usuarioId)
     .then((resposta)=> {
+      setOpen(false);
       history.go(0)
 
     })
     .catch( erro => { 
       console.log(erro);
       alert("Erro ao alterar status!")
-
-      
     })
 
   }
@@ -73,7 +73,7 @@ export default function ModalStatus({ children, usuarioId }) {
           </center>
 
           <DialogActions className={classes.dialogActions}>
-            <button className="buttonConfirmar" onClick={handleClose} >
+            <button className="buttonConfirmar" onClick={handleConfirmar} >
               Confirmar
             </button>
           </DialogActions>
