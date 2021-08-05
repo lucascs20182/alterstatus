@@ -44,7 +44,7 @@ export default function Home() {
       <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
         <CssBaseline />
         <AppBar />
-        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+        <Switch id="Modo dark" className="Modo-Dark-Switch" checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
       </ThemeProvider>
     </div>
   )

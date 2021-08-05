@@ -127,7 +127,7 @@ export default function ModalDeletarSquad({ children }) {
                     name: 'squad',
                   }}
                 >
-                  <option aria-label="None" value={-1}>Sem papel</option>
+                  <option aria-label="None" value={-1}>Sem equipe</option>
 
                   {squads ?
                     squads.map(squad => (
