@@ -33,7 +33,7 @@ export default function ModalTrocarSquad({ children, idSquad }) {
         // console.log(resposta);
       })
       .catch((erro) => {
-        alert("Erro ao alterar squad! Verifique o console.");
+        alert("Erro ao alterar equipe! Verifique o console.");
         console.error(erro);
       })
 
@@ -58,8 +58,8 @@ return (
       <form className={classes.form} onSubmit={e => e.preventDefault()}>
         <center>
           <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
-          <h3 className={classes.titleModal}>Trocar de Squad</h3>
-          <h4 className={classes.subtitleModal}>Você deseja mudar de squad?</h4>
+          <h3 className={classes.titleModal}>Trocar de equipe</h3>
+          <h4 className={classes.subtitleModal}>Você deseja mudar equipe?</h4>
         </center>
 
         <DialogActions className={classes.dialogActions}>

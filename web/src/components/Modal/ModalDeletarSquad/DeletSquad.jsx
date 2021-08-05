@@ -27,12 +27,12 @@ export default function ModalDeletarSquad({ children, idSquad }) {
 
     removerSquad(idSquad)
       .then((resposta) => {
-        alert("Squad Excluido!!");
+        alert("Equipe Excluido!!");
 
         history.go(0);
       })
       .catch((erro) => {
-        alert("Erro ao remover o Squad!");
+        alert("Erro ao remover o equipe!");
         console.error(erro);
       })
 
@@ -57,9 +57,8 @@ export default function ModalDeletarSquad({ children, idSquad }) {
           <center>
             <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
             <h3 className={classes.titleModal}>Atenção!!!</h3>
-            <h4 className={classes.subtitleModal}>Você deseja deletar o Squad do Alterstate?</h4>
+            <h4 className={classes.subtitleModal}>Você deseja deletar o equipe do Alterstate?</h4>
           </center>
-
           <DialogActions className={classes.dialogActions}>
             <button className="buttonDeletar" onClick={handleSim} >
               Sim

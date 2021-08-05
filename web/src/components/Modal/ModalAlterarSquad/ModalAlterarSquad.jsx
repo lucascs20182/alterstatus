@@ -59,7 +59,7 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
         setCargos(resposta.data.cargos);
       })
       .catch((erro) => {
-        alert("Erro ao obter squad! Verifique o console.");
+        alert("Erro ao obter o equipe! Verifique o console.");
         console.error(erro);
       })
   }
@@ -115,7 +115,7 @@ export default function ModalDesignarPapel({ children, usuarioId }) {
                   native
                   value={state.cargo}
                   onChange={handleChange}
-                  label="Squad"
+                  label="Equipe"
                   inputProps={{
                     name: 'cargo',
                   }}

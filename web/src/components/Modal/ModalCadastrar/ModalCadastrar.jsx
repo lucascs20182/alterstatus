@@ -74,7 +74,7 @@ export default function ModalCadastrar({ children }) {
             // console.log(resposta);
           })
           .catch((erro) => {
-            alert("Erro ao adicionar usuário na squad! Verifique o console.");
+            alert("Erro ao adicionar usuário na equipe! Verifique o console.");
             console.error(erro);
           })
 

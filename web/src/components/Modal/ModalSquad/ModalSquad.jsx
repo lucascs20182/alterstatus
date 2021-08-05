@@ -28,7 +28,7 @@ export default function ModalSquad({ children }) {
 
     criarSquad(nomeSquad)
       .then((resposta) => {
-        alert('Squad criado com sucesso!');
+        alert('Equipe criado com sucesso!');
 
         history.go(0);
         // setCarregar(false);
@@ -42,7 +42,7 @@ export default function ModalSquad({ children }) {
 
   return (
     <div>
-      <Tooltip title="Criar squad" arrow>
+      <Tooltip title="Criar equipe" arrow>
         <button className="buttonModal" type="submit" onClick={handleOpen}>
           {children}
         </button>
