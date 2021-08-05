@@ -139,8 +139,8 @@ export default function GmailTreeView(props) {
           props.squadsCadastradas.map(nome => (
             <ModalTrocarSquad >
               <div style={{ display: "flex", width: '100%' }}>
-                <GroupIcon color="secondary" style={{ paddingLeft: 35 }} />
-                <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>{nome}</p>
+                <GroupIcon color="secondary" style={{ marginLeft: 20}} />
+                <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px", wordBreak: "break-word",}}>{nome}</p>
               </div>
             </ModalTrocarSquad>
           ))
