@@ -8,7 +8,10 @@ import Button from '@material-ui/core/Button';
 import { useStyles } from './Styles'
 import '../styles.css';
 
-export default function ModalTrocarSquad({ children }) {
+import { mudarUsuarioDeSquad } from '../../../services/ApiUsuario';
+import { obterTokenDaStorage } from '../../../utils/Storage';
+
+export default function ModalTrocarSquad({ children, idSquad }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -21,44 +24,55 @@ export default function ModalTrocarSquad({ children }) {
   };
 
   const handleSim = () => {
-    console.log('bonjour');
+    const [, idUsuario] = obterTokenDaStorage();
+    console.log(idUsuario, idSquad);
 
-    handleClose();
-  }
+    mudarUsuarioDeSquad(idUsuario, idSquad)
+      .then((resposta) => {
+        history.go(0);
+        // console.log(resposta);
+      })
+      .catch((erro) => {
+        alert("Erro ao alterar squad! Verifique o console.");
+        console.error(erro);
+      })
 
-  return (
-    <div>
+    // handleClose();
+}
 
-      <Button disableElevation className="buttonModal" style={{ width: "100%", textTransform: 'none', }} onClick={handleOpen}>
-        {children}
-      </Button>
+return (
+  <div>
 
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        className={classes.dialog}
-      >
+    <Button disableElevation className="buttonModal" style={{ width: "100%", textTransform: 'none', }} onClick={handleOpen}>
+      {children}
+    </Button>
 
-        <form className={classes.form} onSubmit={e => e.preventDefault()}>
-          <center>
-            <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
-            <h3 className={classes.titleModal}>Trocar de Squad</h3>
-            <h4 className={classes.subtitleModal}>Você deseja mudar de squad?</h4>
-          </center>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+      className={classes.dialog}
+    >
 
-          <DialogActions className={classes.dialogActions}>
-            <button className="buttonDeletar" onClick={handleSim} >
-              Sim
-            </button>
-            <button className="buttonConfirmar" onClick={handleClose} >
-              Não
-            </button>
-          </DialogActions>
-        </form>
-      </Dialog>
+      <form className={classes.form} onSubmit={e => e.preventDefault()}>
+        <center>
+          <CloseIcon className={classes.fecharJanela} onClick={handleClose} />
+          <h3 className={classes.titleModal}>Trocar de Squad</h3>
+          <h4 className={classes.subtitleModal}>Você deseja mudar de squad?</h4>
+        </center>
 
-    </div>
-  );
+        <DialogActions className={classes.dialogActions}>
+          <button className="buttonDeletar" onClick={handleSim} >
+            Sim
+          </button>
+          <button className="buttonConfirmar" onClick={handleClose} >
+            Não
+          </button>
+        </DialogActions>
+      </form>
+    </Dialog>
+
+  </div>
+);
 }
