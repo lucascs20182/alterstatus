@@ -111,7 +111,7 @@ export default function PrimarySearchAppBar() {
 
     handleMenuClose();
 
-    history.push('/login');
+    history.go(0);
   }
 
   const handleMobileMenuOpen = (event) => {
