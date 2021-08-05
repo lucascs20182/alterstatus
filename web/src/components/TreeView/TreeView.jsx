@@ -156,7 +156,7 @@ export default function GmailTreeView(props) {
           ''
           :
           squads.map(squad => (
-            <ModalTrocarSquad idSquad={squad.id}>
+            <ModalTrocarSquad key={squad.id} idSquad={squad.id}>
               <div style={{ display: "flex", width: '100%' }}>
                 <GroupIcon color="secondary" style={{ marginLeft: 35 }} />
                 <p style={{ marginLeft: 10, marginBottom: "0px", marginTop: "0px", fontSize: "18px" }}>{squad.nome}</p>
