@@ -124,8 +124,8 @@ export default function SimpleModal({ children }) {
             <TextField
               className={classes.field}
               id="standard-password-input"
-              name="Password"
-              label="Password"
+              name="Senha"
+              label="Senha"
               variant="outlined"
               type="password"
               size="small"
