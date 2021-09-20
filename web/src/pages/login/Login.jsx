@@ -40,9 +40,6 @@ function Login() {
 
   return (
     <div className="container">
-      <header>
-        <img src={alterdataLogo} className="image-Login" />
-      </header>
       <div className="box">
         <img src={alterstateLogo} className="logo-Login" />
 

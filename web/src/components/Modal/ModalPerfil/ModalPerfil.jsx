@@ -175,9 +175,11 @@ export default function ModalPerfil({ children }) {
 
                 <TextField
                   className={classes.field}
+                  id="standard-password-input"
                   name="Senha"
                   label={'Nova senha'}
                   variant="outlined"
+                  type="password"
                   size="small"
                   color="secondary"
                   value={senha}

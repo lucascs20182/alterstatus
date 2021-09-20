@@ -67,8 +67,7 @@ export default function ModalCriarPapel({ children }) {
         setSuccess(true);
       })
       .catch((erro) => {
-        alert("Erro ao remover usuário! Verifique o console.");
-        console.error(erro);
+        alert("Erro ao criar papel! Verifique o console.");
       })
   }
 
