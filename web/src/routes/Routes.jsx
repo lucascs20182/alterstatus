@@ -17,14 +17,14 @@ const RotaPrivada = ({ component: Component, ...rest }) => (
     props => isAuthenticated() ?
       <Component {...props} />
       :
-      <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+      <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
   }
   />
 );
 
 const Rotas = () => (
   <Switch>
-    <Route exact path="/" component={Login} />
+    <Route exact path="/login" component={Login} />
 
     {/**
        * ThemeProvider não é reconhecido pelo Switch
@@ -36,10 +36,10 @@ const Rotas = () => (
        * 
        * Mas verificar se algum bug foi gerado
        */}
-    <RotaPrivada path="/home" component={Home} />
+    <RotaPrivada path="/" component={Home} />
 
     {/* Redireciona erros 404s para Home */}
-    <Redirect to='/home' />
+    <Redirect to='/' />
   </Switch>
 );
 

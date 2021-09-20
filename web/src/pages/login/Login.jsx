@@ -29,7 +29,7 @@ function Login() {
         const { Authorization, idUsuario } = resposta.data;
         salvarTokenNaStorage(Authorization, idUsuario);
         setCarregar(false);
-        history.push('/home');
+        history.push('/');
       })
       .catch((erro) => {
         console.error(erro);
