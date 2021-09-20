@@ -1,4 +1,4 @@
-import api from './api';
+import api from './Api';
 
 export function cadastrarCargo(nomeCargo, idSquad) {
     const body = {

@@ -1,4 +1,4 @@
-import api from './api';
+import api from './Api';
 
 export function obterSquads() {
     return new Promise((resolve, reject) => {
